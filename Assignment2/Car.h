@@ -8,16 +8,32 @@ class Car
 {
 public:
 	Car();
-	Car(std::string id, vector<string> startRoute, int carArrival);
+	Car(string id, vector<string> route, int arrival);
+	Car(Car &other);
 	~Car();
+	Car & operator=(const Car& C);
+
+	string getID();
+	vector<string> getRoute();
+	int getArrival();
+	int getCondition();
+	int getLocation();
+	int getspeed();
+
+	void setID(string id);
+	void setRoute(vector<string> route);
+	void setArrival(int arrival);
+	void setCondition(int condition);
+	void setLocation(int location);
+	void setspeed(int speed);
 
 private:
-	std::string ID;
-	vector<std::string> route;
-	int arrival;
-	int condition;
-	int locationInRoad;
-	int speed;
+	string _ID;
+	vector<string> _route;
+	int _arrival;
+	int _condition;
+	int _locationInRoad;
+	int _speed;
 };
 
 
