@@ -1,8 +1,7 @@
 #pragma once
 #include "Event.h"
 
-class AddCarEvent :
-	public Event
+class AddCarEvent : public Event
 {
 public:
 	AddCarEvent();
@@ -21,6 +20,5 @@ public:
 
 private:
 	vector<string> _routeToAdd;
-	
 };
 

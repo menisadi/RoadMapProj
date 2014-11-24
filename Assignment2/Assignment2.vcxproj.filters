@@ -39,7 +39,16 @@
     <ClInclude Include="TrafficSimulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Report.h">
+    <ClInclude Include="Reports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CarReport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JunctionReport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoadReport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -33,6 +33,7 @@ private:
 	int _condition;
 	int _locationInRoad;
 	int _speed;
+	//HISTORY <time,road,location>
 };
 
 

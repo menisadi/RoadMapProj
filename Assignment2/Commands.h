@@ -1,14 +1,27 @@
-#ifndef _COMMANDS_H_
-#define _COMMANDS_H_
+#pragma once
+#include <vector>
+#include <string>
 
-// THIS IS THE DECLARATION FILE OF THE CLASS Roads (Roads.h) 
-  class Commands
-  {
-  private:
-      
-  public:
-    
-     
-  };   
-  
-  #endif //_COMMANDS_H_
+using namespace std;
+
+class Commands
+{
+	private:
+		int _type;
+		int _time;
+	public:
+		Commands();
+		Commands(Commands &other);
+		Commands(int type, int time);
+		virtual ~Commands();
+		Commands & operator=(const Commands &CommandsRightArg);
+
+		int getType();
+		int getTime();
+
+		void setType(int type);
+		void setTime(int time);
+};
+
+
+
