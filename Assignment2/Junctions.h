@@ -1,28 +1,34 @@
 #ifndef _JUNCTIONS_H_
 #define _JUNCTIONS_H_
 
+#include <vector>
+#include <string>
+#include "Roads.h"
+
+using namespace std;
+
 // THIS IS THE DECLARATION FILE OF THE CLASS Junctions (Junctions.h) 
   class Junctions
   {
   private:
-     String idJunction_;
-     Vactor roadsInJunction_; 
+     string idJunction_;
+     vector<Roads> roadsInJunction_; 
 	 int timeSlice_;	 
   public:
      Junctions();
-     Junctions(const String idJunctionVal, int timeSliceVal);
+     Junctions(const string idJunctionVal, int timeSliceVal);
      Junctions(const Junctions& copyJunctions);
      virtual ~Junctions();
      Junctions& operator=(const Junctions &JunctionsRightArg);
      
-     String getID() const;
+     string getID() const;
      int getTimeSlice() const;
      
-     setTimeSlice(int timeSliceVal);
+     void setTimeSlice(int timeSliceVal);
 	 
 	 Roads popFirstRoadInJunction();
-     pushNewRoadToJunction(Roads& newRoadsRef);
-	 trafficManagementWithinJunction();
+     void pushNewRoadToJunction(Roads& newRoadsRef);
+	 void trafficManagementWithinJunction();
 	 
   };   
   

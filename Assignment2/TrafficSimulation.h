@@ -5,7 +5,7 @@
   class TrafficSimulation
   {
   private:
-	 Vactor Event_;
+	 vactor<> Event_;
 	 Vactor Commands_;
      Vactor Roads_;  
 	 Vactor Cars_;

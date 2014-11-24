@@ -1,35 +1,42 @@
 #ifndef _ROADS_H_
 #define _ROADS_H_
+  
+#include <vector>
+#include <string>
+#include "Car.h"
+
+using namespace std;
+
 
 // THIS IS THE DECLARATION FILE OF THE CLASS Roads (Roads.h) 
   class Roads
   {
   private:
-     String baginJnc_;
-     String endJnc_;
+     string baginJnc_;
+     string endJnc_;
      int length_;
      int numOfCarInside;
-     Vactor carsInRoad_;  
+     vector<Car> carsInRoad_;  
   public:
      Roads();
-     Roads(const String baginJncVal, String endJncVal, int lengthVal);
+     Roads(const string baginJncVal, string endJncVal, int lengthVal);
      Roads(const Roads& copyRoad);
      virtual ~Roads();
      Roads& operator=(const Roads &RoadsRightArg);
      
-     String getID() const;
+     string getID() const;
      int getlength() const;
      int getNumOfCarInside() const;
      
-     setBaginJnc(String baginJncVal);
-     setEndJnc(String endJncVal);
-     setLength(int lengthVal);
-     updateNumOfCarInside(int numOfCarInsideVal);
+	 void setBaginJnc(string baginJncVal);
+     void setEndJnc(string endJncVal);
+     void setLength(int lengthVal);
+     void updateNumOfCarInside(int numOfCarInsideVal);
 	 
 	 Car popFirstCarInRoad();
-     pushNewCarToRoad(car& newCarRef);
-	 baseSpeedUpdate();
-	 carSpeedUpdate();
+     void pushNewCarToRoad(Car& newCarRef);
+	 void baseSpeedUpdate();
+	 void carSpeedUpdate();
   };   
   
   #endif //_ROADS_H_
