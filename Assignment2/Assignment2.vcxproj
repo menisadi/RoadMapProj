@@ -41,9 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\workspace\boost_1_55_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\workspace\boost_1_55_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -84,9 +86,11 @@
     <ClInclude Include="CarReport.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="ini.h" />
     <ClInclude Include="JunctionReport.h" />
     <ClInclude Include="Junctions.h" />
     <ClInclude Include="Reports.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="RoadReport.h" />
     <ClInclude Include="Roads.h" />
     <ClInclude Include="TrafficSimulation.h" />
@@ -95,6 +99,13 @@
     <ClCompile Include="AddCarEvent.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CarFaulttEvent.cpp" />
+    <ClCompile Include="ini.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Assignment2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Events.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
