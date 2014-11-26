@@ -55,7 +55,7 @@ void IniClass::readEvents(vector<Event> allEvents) {
 		{
 			typeNumber = 1;
 			int faultTime = property->second.data;
-			allEvents.push_back(CarFaulttEvent(carName, faultTime, eventTime));
+			allEvents.push_back(new CarFaulttEvent(carName, faultTime, eventTime));
 		}
 	}
 	cout << "Finished events" << endl;
@@ -86,7 +86,7 @@ void IniClass::readCommands(vector<Commands> allCommands)
 			{
 				typeNumber = 1;
 				string carId = property->second.data;
-				// allCommands.push_back(CarReport());
+				// allCommands.push_back(new CarReport());
 			}
 			else if (CommandsType[0] == 'r')
 			{
@@ -94,15 +94,36 @@ void IniClass::readCommands(vector<Commands> allCommands)
 				string startJunction = property->second.data;
 				property++;
 				string startJunction = property->second.data;
-				// allCommands.push_back(CarReport());
+				// allCommands.push_back(new CarReport());
 			}
 			else if (CommandsType[0] == 'j')
 			{
 				typeNumber = 3;
 				string junctionId = property->second.data;
-				// allCommands.push_back(CarReport());
+				// allCommands.push_back(new CarReport());
 			}
 		}		
+	}
+	cout << "Finished Commands" << endl;
+}
+
+void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> roads)
+{
+	cout << "Starting to read road map" << endl;
+	boost::property_tree::ptree pt;
+	boost::property_tree::ini_parser::read_ini("RoadMap.ini", pt);
+	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++)
+	{
+		string startJunction = section->first;
+		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.begin(); property++)
+		{
+			string endJunction = property->first.data;
+			int length = property->second.data;
+			Roads newRoad = new Roads(startJunction, endJunction, length,0,0,0,0);
+			Roads* pointerToRoad = &newRoad;
+			//....
+		}
+
 	}
 	cout << "Finished Commands" << endl;
 }
