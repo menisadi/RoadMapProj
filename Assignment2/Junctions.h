@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "Roads.h"
+class Roads;
 
 using namespace std;
 
@@ -12,8 +12,8 @@ using namespace std;
   {
   private:
      string idJunction_;
-     vector<Roads> roadsInJunction_; 
-	 vector<int> timeSlice_;	
+     //vector<Roads> roadsInJunction_; 
+	// vector<int> timeSlice_;	
   public:
      Junctions();
      Junctions(const string idJunctionVal, int timeSliceVal);

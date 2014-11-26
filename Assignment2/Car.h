@@ -7,17 +7,17 @@ class Car
 {
 public:
 	Car();
-	Car(string id, vector<string> route, int arrival);
-	Car(Car &other);
+	Car(string id, vector<string> newRoute, int arrival,int condition,int locationInRoad,int speed);
+	Car(const Car &other);
 	~Car();
 	Car & operator=(const Car& C);
 
-	string getID();
-	vector<string> getRoute();
-	int getArrival();
-	int getCondition();
-	int getLocation();
-	int getspeed();
+	string getID() const;
+	vector<string> getRoute() const;
+	int getArrival() const;
+	int getCondition() const;
+	int getLocation() const;
+	int getspeed() const;
 
 	void setID(string id);
 	void setRoute(vector<string> route);
@@ -25,6 +25,9 @@ public:
 	void setCondition(int condition);
 	void setLocation(int location);
 	void setspeed(int speed);
+	
+	Car* Car::copy() const;
+	void Car::clear();
 
 private:
 	string _ID;

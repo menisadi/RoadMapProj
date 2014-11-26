@@ -59,16 +59,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AddCarEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CarFaulttEvent.cpp">
+    <ClCompile Include="TrafficSimulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Car.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ini.cpp">
+    <ClCompile Include="Junctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Roads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

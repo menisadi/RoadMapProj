@@ -19,8 +19,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -96,10 +96,10 @@
     <ClInclude Include="TrafficSimulation.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AddCarEvent.cpp" />
     <ClCompile Include="Car.cpp" />
-    <ClCompile Include="CarFaulttEvent.cpp" />
-    <ClCompile Include="ini.cpp" />
+    <ClCompile Include="Junctions.cpp" />
+    <ClCompile Include="Roads.cpp" />
+    <ClCompile Include="TrafficSimulation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment2.rc" />

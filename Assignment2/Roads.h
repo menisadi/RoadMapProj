@@ -3,7 +3,7 @@
   
 #include <vector>
 #include <string>
-#include "Car.h"
+class Car;
 
 using namespace std;
 
@@ -16,7 +16,7 @@ using namespace std;
      string endJnc_;
      int length_;
      int numOfCarInside;
-     vector<Car> carsInRoad_;  
+     //vector<Car> carsInRoad_;  
   public:
      Roads();
      Roads(const string baginJncVal, string endJncVal, int lengthVal);

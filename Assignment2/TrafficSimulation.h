@@ -1,24 +1,36 @@
+// THIS IS THE DECLARATION FILE OF THE CLASS TrafficSimulation (TrafficSimulation.h) 
 #ifndef _TRAFFICSIMULATION_H_
 #define _TRAFFICSIMULATION_H_
 
-// THIS IS THE DECLARATION FILE OF THE CLASS TrafficSimulation (TrafficSimulation.h) 
+#include <map>
+#include <string>
+#include "Car.h"
+#include "Roads.h"
+#include "Junctions.h"
+#include <iostream>
+
+
+using namespace std;
+
   class TrafficSimulation
   {
   private:
-	 vactor<> Event_;
-	 Vactor Commands_;
-     Vactor Roads_;  
-	 Vactor Cars_;
-	 int SimulationTime;
+	  //Data base//
+	 // map<string,Car> CarsMap_;
+	 // map<string,Roads> RoadsMap_;
+	 // map<string,Junctions> JunctionsMap_;
+	 
+	  int SimulationTime_;
+
   public:
      TrafficSimulation();
-     TrafficSimulation(????);
+     TrafficSimulation(int SimulationTimeNew);
      TrafficSimulation(const TrafficSimulation& copyTrafficSimulation);
      virtual ~TrafficSimulation();
      TrafficSimulation& operator=(const TrafficSimulation &TrafficSimulationRightArg);
 	 
-	 initTrafficSimulation();
-	 simulationManagement();
+	 void initTrafficSimulation();
+	 void simulationManagement();
 	 
   };   
   
