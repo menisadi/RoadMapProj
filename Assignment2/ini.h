@@ -3,17 +3,28 @@
 
 #include <iostream>
 #include <string>
+#include "AddCarEvent.h"
+#include "CarFaulttEvent.h"
+#include "Commands.h"
+#include "CarReport.h"
+
+#include <boost/property_tree/ini_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/lexical_cast.hpp>
 
 using namespace std;
 
 class IniClass{
 private:
-
+	vector<string> IniClass::split(string toSplit);
 public:
 	IniClass();
 	virtual ~IniClass();
-	void read1() const;
-	void read2() const;
+
+	void IniClass::readEvents(vector<Event> allEvents);
+	void IniClass::readCommands(vector<Commands> allCommands);
+	void IniClass::readConfiguration();
+	void IniClass::readRoadMap();
 };
 
 #endif /* INI_H_ */
