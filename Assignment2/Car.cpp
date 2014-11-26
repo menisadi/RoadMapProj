@@ -1,14 +1,15 @@
 #include "Car.h"
 
-Car::Car():_arrival(0),_condition(0),_locationInRoad(0),_speed(0){
+Car::Car():_arrival(0),_condition(0),_locationInRoad(0),_speed(0){  //is it necccery??
 }
 
-Car::Car(string id, vector<string> &newRoute , int arrival,int condition,int locationInRoad,int speed):_ID(id),_arrival(arrival),_condition(condition),_locationInRoad(locationInRoad),_speed(speed){	
+Car::Car(string id,vector<string> newRoute , int arrival,int condition,int locationInRoad,int speed):_ID(id),_route(newRoute),_arrival(arrival),_condition(condition),_locationInRoad(locationInRoad),_speed(speed){	
+//_route=newRoute; //memory ???? deep copy?? mayby call defualt constrctor twice?
 }
 
 Car::Car(const Car& other){
 	_ID=other.getID();
-	 _route = newRoute;
+	 _route = other.getRoute();
 	_arrival=other.getArrival();
 	_condition=other.getCondition();
 	_locationInRoad=other.getLocation();
@@ -23,6 +24,7 @@ Car & Car::operator=(const Car& C){
     clear();            // delete the original Car  
 
     _ID=temp->getID();
+	 _route =temp->getRoute();	//memory ???? deep copy??
 	_arrival=temp->getArrival();
 	_condition=temp->getCondition();
 	_locationInRoad=temp->getLocation();
@@ -50,7 +52,9 @@ Car* Car::copy() const{
 string Car::getID() const{
 	return _ID;
 }
-vector<string> getRoute() const;
+vector<string> Car::getRoute() const{
+	return _route;
+}
 int Car::getArrival() const{
 	return _arrival;
 }
@@ -68,7 +72,9 @@ int Car::getspeed() const{
 void Car::setID(string id){
 	_ID=id;
 }
-void setRoute(vector<string> route);
+void Car::setRoute(vector<string> newRoute){
+	 _route = newRoute;	//memory ???? deep copy??
+}
 void Car::setArrival(int arrival){
 	_arrival=arrival;
 }

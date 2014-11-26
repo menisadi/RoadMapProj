@@ -1,3 +1,4 @@
+// THIS IS THE DECLARATION FILE OF THE CLASS Roads (Roads.h) 
 #ifndef _ROADS_H_
 #define _ROADS_H_
   
@@ -7,31 +8,35 @@ class Car;
 
 using namespace std;
 
-
-// THIS IS THE DECLARATION FILE OF THE CLASS Roads (Roads.h) 
-  class Roads
+ class Roads
   {
   private:
      string baginJnc_;
      string endJnc_;
      int length_;
-     int numOfCarInside;
-     //vector<Car> carsInRoad_;  
+     int numOfCarInside_;
+     vector<Car> carsInRoad_;  
   public:
      Roads();
-     Roads(const string baginJncVal, string endJncVal, int lengthVal);
+     Roads(const string baginJncVal, string endJncVal, int lengthVal, vector<Car> carsInRoadVal);
      Roads(const Roads& copyRoad);
      virtual ~Roads();
      Roads& operator=(const Roads &RoadsRightArg);
+
+	 Roads* Roads::copy() const;
+	 void Roads::clear();
      
-     string getID() const;
+     string getBaginJnc() const;
+	 string getEndJnc() const;
      int getlength() const;
      int getNumOfCarInside() const;
+	 vector<Car> getCarsInRoad() const;
      
 	 void setBaginJnc(string baginJncVal);
      void setEndJnc(string endJncVal);
      void setLength(int lengthVal);
-     void updateNumOfCarInside(int numOfCarInsideVal);
+     void updateNumOfCarInside(vector<Car> &carsInRoadVal);
+
 	 
 	 Car popFirstCarInRoad();
      void pushNewCarToRoad(Car& newCarRef);
