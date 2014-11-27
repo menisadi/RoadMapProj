@@ -2,7 +2,7 @@
 
 TrafficSimulation::TrafficSimulation(){}
 TrafficSimulation::TrafficSimulation(int simulationTimeNewVal,int maxSpeedVal ,int defultTimeSliceVal ,int maxTimeSliceVal ,int minTimeSliceVal):_SimulationTime(simulationTimeNewVal),_maxSpeed(maxSpeedVal),_defultTimeSlice(defultTimeSliceVal),_maxTimeSlice(maxTimeSliceVal),_minTimeSlice(minTimeSliceVal){}
-TrafficSimulation::TrafficSimulation(int maxSpeedVal ,int defultTimeSliceVal ,int maxTimeSliceVal ,int minTimeSliceVal):_maxSpeed(maxSpeedVal),_defultTimeSlice(defultTimeSliceVal),_maxTimeSlice(maxTimeSliceVal),_minTimeSlice(minTimeSliceVal){}
+TrafficSimulation::TrafficSimulation(int maxSpeedVal ,int defultTimeSliceVal ,int maxTimeSliceVal ,int minTimeSliceVal):_SimulationTime(0),_maxSpeed(maxSpeedVal),_defultTimeSlice(defultTimeSliceVal),_maxTimeSlice(maxTimeSliceVal),_minTimeSlice(minTimeSliceVal){}
 TrafficSimulation::TrafficSimulation(const TrafficSimulation& copyTrafficSimulation){}
 TrafficSimulation::~TrafficSimulation(){}
 //TrafficSimulation& TrafficSimulation::operator=(const TrafficSimulation &TrafficSimulationRightArg){}
@@ -25,57 +25,53 @@ void initTrafficSimulation()
 }
 void simulationManagement()
 {
-	//1. Execute Events
-		//1.1 Output reports
-		//1.2 Update car History
-	//2. Execute Commands
-	//3. Advance cars in roads
-	//4. Advance cars in junctions
+	//Data base// 
+	map<string,Car*> CarsMap;  //The data base Is under the class of roads and here it's need to be Pointer*!
+	map<string, Roads> RoadsMap;
+	map<string,Junctions> JunctionsMap;
+	TrafficSimulation TS1(100,5,10,1);
+
+	
+	//** Just for test  - take the place of Boost Func**//
+	Junctions j1("j1");
+	Junctions j2("j2");
+	Junctions j3("j3");
+	Junctions j4("j4");
+	Junctions j5("j5");
+	JunctionsMap[j1.getIdJunction()] = j1;
+	JunctionsMap[j2.getIdJunction()] = j2;
+	JunctionsMap[j3.getIdJunction()] = j3;
+	JunctionsMap[j4.getIdJunction()] = j4;
+	JunctionsMap[j5.getIdJunction()] = j5;
+	Roads R13("j1j3","j1","j3",50);
+	Roads R14("j1j4","j1","j5",20);
+	Roads R15("j1j5","j1","j5",50);
+	Roads R31("j3j1","j3","j1",70);
+	Roads R52("j5j2","j5","j2",50);
+	Roads R43("j4j3","j4","j3",90);
+	RoadsMap[R13.getId()] = R13;
+	RoadsMap[R14.getId()] = R14;
+	RoadsMap[R15.getId()] = R15;
+	RoadsMap[R31.getId()] = R31;
+	RoadsMap[R52.getId()] = R52;
+	RoadsMap[R43.getId()] = R43;
+	Car C1("C1",0001);
+	Car C2("C2",0002);
+	Car C3("C3",0003);
+	Car C4("C4",0004);
+	Car C5("C5",0005);
+	
+	
+
+	//** Just for test **//
+
 }
 
 
 int main(void)
 
 {
-	//Data base// 
-	map<string,Car*> CarsMap;  //The data base Is under the class of roads and here it's need to be Pointer*!
-	map<string, Roads> RoadsMap;
-	map<string,Junctions> JunctionsMap;
-
-	//** Just for test  - take the place of Boost Func**//
-
-	//const char *testRouteinit[] = {"j1", "j2", "j3"};
-	//vector<string> testRoute(testRouteinit, end(testRouteinit)); 
-
-	Junctions j1("j1");
-	Junctions j2("j2");
-	Junctions j3("j3");
-	Junctions j4("j4");
-	Junctions j5("j5");
-	Roads R1("j1j3","j1","j3",50);
-	Roads R1("j1j4","j1","j5",20);
-	Roads R1("j1j5","j1","j5",50);
-	Roads R1("j3j1","j3","j1",70);
-	Roads R1("j5j2","j5","j2",50);
-	Roads R1("j4j3","j4","j3",90);
-
-   //  Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal);
-
-	//Roads R1;
-
-	Car C1;
-	Car C2;
-
-	//const char *testRouteinit2[] = {"j2", "j3"};
-	//vector<string> testRoute2(testRouteinit2, end(testRouteinit2)); 
-	//Car C2("C2",testRoute2,6,0,10,2);
-
-	
-
-	//** Just for test **//
-
-	//CarsMap.insert(std::pair<string,Car>(C2.getID(),C2));
-	//CarsMap[C1.getID()] = C1;
+	void simulationManagement();
 
 
 	//for( map<string, Car>::iterator ii=CarsMap.begin(); ii!=CarsMap.end(); ++ii)
@@ -85,6 +81,10 @@ int main(void)
 	   //cout << (*ii).second.getID() << ": " << (*ii).second.getLocation() << endl;
 	    //cout << "hi" << endl;
    //}
+
+
+
+
 
 	 cout << "hi" << endl;
 	return 0;
