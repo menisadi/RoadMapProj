@@ -1,43 +1,56 @@
+#ifndef _CAR_H_
+#define _CAR_H_
+
 #include <vector>
 #include <string>
 
 using namespace std;
+class Roads;
 
 class Car
 {
 public:
 	Car();
-	Car(string id, vector<string> newRoute, int arrival,int condition,int locationInRoad,int speed);
+	Car(string idVal, vector<Roads*> routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,string currentRoadVal,string historyVal);
 	Car(const Car &other);
 	~Car();
 	Car & operator=(const Car& C);
 
 	string getID() const;
-	vector<string> getRoute() const;
+	vector<Roads*> getRoute() const;
 	int getArrival() const;
 	int getCondition() const;
 	int getLocation() const;
 	int getspeed() const;
+	string getCurrentRoad() const;
+	string getHistory() const;
 
 	void setID(string id);
-	void setRoute(vector<string> route);
+	void setRoute(vector<Roads*> route);
 	void setArrival(int arrival);
 	void setCondition(int condition);
 	void setLocation(int location);
 	void setspeed(int speed);
+	void setCurrentRoad(string currentRoad);
+	void setHistory(string history);
 	
-	Car* Car::copy() const;
-	void Car::clear();
+	void Car::copy(const Car& other);
+
+	void initRouteFromStringINI(string RouteStringINI);
+	void updateMyRoad();
+	void updateHistory();
+
 
 private:
 	string _ID;
-	vector<string> _route;
+	vector<Roads*> _route;
 	int _arrival;
 	int _condition;
 	int _locationInRoad;
 	int _speed;
-	//HISTORY <time,road,location>
+	string _currentRoad;
+	string _history;
 };
 
 
-
+  #endif //_CAR_H_

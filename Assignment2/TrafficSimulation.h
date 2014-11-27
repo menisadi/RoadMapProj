@@ -4,9 +4,9 @@
 
 #include <map>
 #include <string>
-#include "Car.h"
-#include "Roads.h"
-#include "Junctions.h"
+//#include "Car.h"
+//#include "Roads.h"
+//#include "Junctions.h"
 #include <iostream>
 
 
@@ -15,11 +15,6 @@ using namespace std;
   class TrafficSimulation
   {
   private:
-	  //Data base//
-	 // map<string,Car> CarsMap_;
-	 // map<string,Roads> RoadsMap_;
-	 // map<string,Junctions> JunctionsMap_;
-	 
 	  int SimulationTime_;
 
   public:

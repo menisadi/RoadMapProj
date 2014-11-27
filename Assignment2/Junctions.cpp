@@ -1,60 +1,49 @@
 #include "Junctions.h"
 
 Junctions::Junctions(){}
-Junctions:: Junctions(const string idJunctionVal, vector<Roads> roadsInJunctionVal,vector<int> timeSliceVal):idJunction_(idJunctionVal),timeSlice_(timeSliceVal){}
+Junctions:: Junctions(const string idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal){}
+
 Junctions::Junctions(const Junctions& copyJunctions){
-	idJunction_=copyJunctions.getIdJunction();
-	// roadsInJunction_ = copyJunctions.getRoadsInJunction();
-	timeSlice_=copyJunctions.getTimeSlice();
+	copy(copyJunctions);
 }
-Junctions:: ~Junctions(){}
+Junctions:: ~Junctions(){
+	//for( vector<Roads*>::iterator ii=_roadsInJunction.begin(); ii!=_roadsInJunction.end(); ++ii)
+	//	delete (*ii);
+}
 Junctions& Junctions::operator=(const Junctions &JunctionsRightArg){
-	Junctions *temp = JunctionsRightArg.copy();        // make temp point to a copy of C               
-    clear();            // delete the original Car  
-
-    idJunction_=temp->getIdJunction();
-	// roadsInJunction_ = temp->getRoadsInJunction();
-	timeSlice_=temp->getTimeSlice();
-
-	delete(temp);
-
+  copy(JunctionsRightArg);
   return *this;
 }
 
-void Junctions::clear(){	
-}
-Junctions* Junctions::copy() const{    //Built just like the function, copy,in class of car / !Unnecessary duplication
-	if (0 == this) {
-		return 0;
-	}
-	else {
-		Junctions *newJunction = new Junctions(*this);
-		return newJunction;
-	}
+void Junctions::copy(const Junctions& copyJunctions){   
+	_idJunction=copyJunctions.getIdJunction();
+	 _roadsInJunction = copyJunctions.getRoadsInJunction();
+	_timeSlice=copyJunctions.getTimeSlice();
 }
 
      
 string Junctions::getIdJunction() const{
-	return idJunction_;
+	return _idJunction;
 }
-//vector<Roads> Junctions::getRoadsInJunction() const{
-//return roadsInJunction_;
-//}
+
+vector<Roads*> Junctions::getRoadsInJunction() const{
+return _roadsInJunction;								 //meybe return *??
+}
 vector<int> Junctions::getTimeSlice() const{
-	return timeSlice_;
+	return _timeSlice;
 }
      
 void Junctions::setID(string idJunctionVal){
-	idJunction_=idJunctionVal;
+	_idJunction=idJunctionVal;
 }
 void Junctions::setTimeSlice(vector<int> timeSliceVal){
-	 timeSlice_ = timeSliceVal;	//memory ???? deep copy??
+	 _timeSlice = timeSliceVal;	//memory ???? deep copy??
 }
-//void Junctions::setRoadsInJunction(vector<Roads> roadsInJunction){
-//	roadsInJunction_=roadsInJunction;//memory ???? deep copy??
-//}
+void Junctions::setRoadsInJunction(vector<Roads*> roadsInJunction){  
+	_roadsInJunction=roadsInJunction;
+}
 
 	 
-//Roads Junctions::popFirstRoadInJunction(){}
-void Junctions::pushNewRoadToJunction(Roads& newRoadsRef){}
-void Junctions::trafficManagementWithinJunction(){}
+//void Junctions::initRoadsFromStringINI(){}
+//void Junctions::initTimeSliceFromStringINI(){}
+//void Junctions::greenLightManagement(){}
