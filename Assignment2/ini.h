@@ -10,6 +10,7 @@
 #include "CarReport.h"
 #include "Junctions.h"
 #include "Roads.h"
+#include "TrafficSimulation.h"
 
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -27,7 +28,7 @@ public:
 	void IniClass::readEvents(vector<Event> allEvents);
 	void IniClass::readCommands(vector<Commands> allCommands);
 	void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> roads);
-	void IniClass::readConfiguration(); 
+	void IniClass::readConfiguration(TrafficSimulation simulation);
 };
 
 #endif /* INI_H_ */

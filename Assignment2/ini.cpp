@@ -131,3 +131,17 @@ void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> 
 	}
 	cout << "Finished to read road map" << endl;
 }
+
+void IniClass::readConfiguration(TrafficSimulation simulation)
+{
+	cout << "Starting to read configuration" << endl;
+	boost::property_tree::ptree pt;
+	boost::property_tree::ini_parser::read_ini("Configuration.ini", pt);
+	
+	int MAX_SPEED = pt.get<int>("Configuration.MAX_SPEED");
+	int DEFAULT_TIME_SLICE = pt.get<int>("Configuration.DEFAULT_TIME_SLICE");
+	int MAX_TIME_SLICE = pt.get<int>("Configuration.MAX_TIME_SLICE");
+	int MIN_TIME_SLICE = pt.get<int>("Configuration.MIN_TIME_SLICE");
+
+	
+}
