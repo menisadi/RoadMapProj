@@ -1,21 +1,23 @@
 #include "TrafficSimulation.h"
 
-TrafficSimulation::TrafficSimulation():SimulationTime_(0){}
+TrafficSimulation::TrafficSimulation(){}
+TrafficSimulation::TrafficSimulation(int simulationTimeNewVal,int maxSpeedVal ,int defultTimeSliceVal ,int maxTimeSliceVal ,int minTimeSliceVal):_SimulationTime(simulationTimeNewVal),_maxSpeed(maxSpeedVal),_defultTimeSlice(defultTimeSliceVal),_maxTimeSlice(maxTimeSliceVal),_minTimeSlice(minTimeSliceVal){}
+TrafficSimulation::TrafficSimulation(int maxSpeedVal ,int defultTimeSliceVal ,int maxTimeSliceVal ,int minTimeSliceVal):_maxSpeed(maxSpeedVal),_defultTimeSlice(defultTimeSliceVal),_maxTimeSlice(maxTimeSliceVal),_minTimeSlice(minTimeSliceVal){}
+TrafficSimulation::TrafficSimulation(const TrafficSimulation& copyTrafficSimulation){}
+TrafficSimulation::~TrafficSimulation(){}
+//TrafficSimulation& TrafficSimulation::operator=(const TrafficSimulation &TrafficSimulationRightArg){}
 
-TrafficSimulation::TrafficSimulation(int SimulationTimeNew):SimulationTime_(SimulationTimeNew){}
+int TrafficSimulation::getSimulationTimeNew(){return _SimulationTime;}
+int TrafficSimulation::getMaxSpeedVal(){return _maxSpeed;}
+int TrafficSimulation::getDefultTimeSlice(){return _defultTimeSlice;}
+int TrafficSimulation::getMaxTimeSlice(){return _maxTimeSlice;}
+int TrafficSimulation::getMinTimeSlice(){return _minTimeSlice;}
 
-TrafficSimulation::TrafficSimulation(const TrafficSimulation& copyTrafficSimulation)
-{
-}
-
-TrafficSimulation::~TrafficSimulation()
-{
-}
-
-//TrafficSimulation& TrafficSimulation::operator=(const TrafficSimulation &TrafficSimulationRightArg)
-//{
-	
-//}
+void TrafficSimulation::setSimulationTimeNew(int simulationTimeNewVal){_SimulationTime=simulationTimeNewVal;}
+void TrafficSimulation::setMaxSpeed(int maxSpeedVal){_maxSpeed=maxSpeedVal;}
+void TrafficSimulation::setDefultTimeSlice(int defultTimeSliceVal){_defultTimeSlice=defultTimeSliceVal;}
+void TrafficSimulation::setMaxTimeSlice(int maxTimeSliceVal){_maxSpeed=maxTimeSliceVal;}
+void TrafficSimulation::setMinTimeSlice(int minTimeSliceVal){_minTimeSlice=minTimeSliceVal;}
 
 void initTrafficSimulation()
 {
