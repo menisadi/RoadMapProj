@@ -55,7 +55,7 @@ void IniClass::readEvents(vector<Event> allEvents) {
 		{
 			typeNumber = 1;
 			int faultTime = property->second.data;
-			allEvents.push_back(new CarFaulttEvent(carName, faultTime, eventTime));
+			allEvents.push_back(CarFaulttEvent(carName, faultTime, eventTime));
 		}
 	}
 	cout << "Finished events" << endl;
@@ -107,7 +107,7 @@ void IniClass::readCommands(vector<Commands> allCommands)
 	cout << "Finished Commands" << endl;
 }
 
-void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> roads)
+void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> roads, int defaultTimeSlice)
 {
 	cout << "Starting to read road map" << endl;
 	boost::property_tree::ptree pt;
@@ -116,6 +116,7 @@ void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> 
 	{
 		string startJunction = section->first;
 		vector<Roads*> roadsInJunction;
+		vector<int> timeSlices;
 		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.begin(); property++)
 		{
 			string endJunction = property->first.data;
@@ -125,8 +126,9 @@ void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> 
 			Roads* pointerToRoad = &newRoad;
 			roads.insert(pair<string, Roads>(roadId,newRoad));
 			roadsInJunction.push_back(pointerToRoad);
+			timeSlices.push_back(defaultTimeSlice);
 		}
-		Junctions newJunction(startJunction, roadsInJunction, timeSlice); // insert default timeSlices
+		Junctions newJunction(startJunction, roadsInJunction, timeSlices);
 		junctions.insert(pair<string, Junctions>(startJunction,newJunction));
 	}
 	cout << "Finished to read road map" << endl;
