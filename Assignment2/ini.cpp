@@ -115,15 +115,19 @@ void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> 
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++)
 	{
 		string startJunction = section->first;
+		vector<Roads*> roadsInJunction;
 		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.begin(); property++)
 		{
 			string endJunction = property->first.data;
 			int length = property->second.data;
-			Roads newRoad = new Roads(startJunction, endJunction, length,0,0,0,0);
+			string roadId = startJunction + "," + endJunction;
+			Roads newRoad(roadId, startJunction, endJunction, length, 0, 0, 0, 0); // check if fits constructor
 			Roads* pointerToRoad = &newRoad;
-			//....
+			roads.insert(pair<string, Roads>(roadId,newRoad));
+			roadsInJunction.push_back(pointerToRoad);
 		}
-
+		Junctions newJunction(startJunction, roadsInJunction, timeSlice); // insert default timeSlices
+		junctions.insert(pair<string, Junctions>(startJunction,newJunction));
 	}
-	cout << "Finished Commands" << endl;
+	cout << "Finished to read road map" << endl;
 }
