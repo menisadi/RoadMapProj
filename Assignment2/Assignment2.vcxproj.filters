@@ -68,6 +68,9 @@
     <ClCompile Include="Roads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ini.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment2.rc">

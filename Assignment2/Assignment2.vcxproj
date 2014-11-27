@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="ini.cpp" />
     <ClCompile Include="Junctions.cpp" />
     <ClCompile Include="Roads.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
