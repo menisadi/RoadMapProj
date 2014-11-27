@@ -13,7 +13,7 @@ using namespace std;
   {
   public:
      Roads();
-     Roads(const string IdVal,string baginJncVal, string endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
+     Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
      Roads(const Roads& copyRoad);
      virtual ~Roads();
      Roads& operator=(const Roads &RoadsRightArg);
@@ -30,9 +30,9 @@ using namespace std;
 	 vector<Car> getCemeteryOfcars() const;
 	 int getBaseSpeed() const;
      
-	 void setId(string IdVal);
-	 void setBaginJnc(string baginJncVal);
-     void setEndJnc(string endJncVal);
+	 void setId(const string& IdVal);
+	 void setBaginJnc(const string& baginJncVal);
+     void setEndJnc(const string& endJncVal);
      void setLength(int lengthVal);
      void updateNumOfCarInside();
 	 void setCarsInRoad(vector<Car> carsInRoadVal);

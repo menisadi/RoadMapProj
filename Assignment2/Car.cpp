@@ -3,7 +3,7 @@
 Car::Car(){
 }
 
-Car::Car(string idVal, vector<Roads*> routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,string currentRoadVal,string historyVal):_ID(idVal),_route(routeVal),_arrival(arrivalVal),_condition(conditionVal),_locationInRoad(locationInRoadVal),_speed(speedVal),_currentRoad(currentRoadVal),_history(historyVal){	
+Car::Car(const string& idVal, vector<Roads*> routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,const string& currentRoadVal,const string& historyVal):_ID(idVal),_route(routeVal),_arrival(arrivalVal),_condition(conditionVal),_locationInRoad(locationInRoadVal),_speed(speedVal),_currentRoad(currentRoadVal),_history(historyVal){	
 }
 
 Car::Car(const Car& other){
@@ -57,7 +57,7 @@ string Car::getHistory() const{
 }
 
 
-void Car::setID(string id){
+void Car::setID(const string& id){
 	_ID=id;
 }
 void Car::setRoute(vector<Roads*> newRoute){
@@ -75,10 +75,10 @@ void Car::setLocation(int location){
 void Car::setspeed(int speed){
 	_speed=speed;
 }
-void Car::setCurrentRoad(string currentRoad){
+void Car::setCurrentRoad(const string& currentRoad){
 	_currentRoad=currentRoad;
 }
-void Car::setHistory(string history){
+void Car::setHistory(const string& history){
 	_history=history;
 }
 

@@ -35,24 +35,34 @@ void simulationManagement()
 int main(void)
 
 {
-	//Data base//
-	//map<string,Car> CarsMap;  
-	//map<string,Car*> CarsMap;  //The data base Is under the class of roads and here it's need to be Pointer*!
-	//map<string, Roads> RoadsMap;
-	//map<string,Junctions> JunctionsMap;
+	//Data base// 
+	map<string,Car*> CarsMap;  //The data base Is under the class of roads and here it's need to be Pointer*!
+	map<string, Roads> RoadsMap;
+	map<string,Junctions> JunctionsMap;
 
 	//** Just for test  - take the place of Boost Func**//
 
 	//const char *testRouteinit[] = {"j1", "j2", "j3"};
 	//vector<string> testRoute(testRouteinit, end(testRouteinit)); 
-	//Car C1;
+
+	Junctions j1("j1");
+	Junctions j2("j2");
+	Junctions j3("j3");
+	Junctions j4("j4");
+	Junctions j5("j5");
+	//Roads R1();
+//  Roads(const string IdVal,string baginJncVal, string endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
+
+	//Roads R1;
+
+	Car C1;
+	Car C2;
 
 	//const char *testRouteinit2[] = {"j2", "j3"};
 	//vector<string> testRoute2(testRouteinit2, end(testRouteinit2)); 
 	//Car C2("C2",testRoute2,6,0,10,2);
 
-	//Junctions J1;
-	//Roads R1;
+	
 
 	//** Just for test **//
 

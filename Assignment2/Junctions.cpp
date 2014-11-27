@@ -1,7 +1,8 @@
 #include "Junctions.h"
 
 Junctions::Junctions(){}
-Junctions:: Junctions(const string idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal){}
+Junctions:: Junctions(const string& idJunctionVal){}
+Junctions:: Junctions(const string& idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal){}
 
 Junctions::Junctions(const Junctions& copyJunctions){
 	copy(copyJunctions);
@@ -33,7 +34,7 @@ vector<int> Junctions::getTimeSlice() const{
 	return _timeSlice;
 }
      
-void Junctions::setID(string idJunctionVal){
+void Junctions::setID(const string& idJunctionVal){
 	_idJunction=idJunctionVal;
 }
 void Junctions::setTimeSlice(vector<int> timeSliceVal){

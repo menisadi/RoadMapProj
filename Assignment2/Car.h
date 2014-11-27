@@ -11,7 +11,7 @@ class Car
 {
 public:
 	Car();
-	Car(string idVal, vector<Roads*> routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,string currentRoadVal,string historyVal);
+	Car(const string& idVal, vector<Roads*> routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,const string& currentRoadVal,const string& historyVal);
 	Car(const Car &other);
 	~Car();
 	Car & operator=(const Car& C);
@@ -25,18 +25,18 @@ public:
 	string getCurrentRoad() const;
 	string getHistory() const;
 
-	void setID(string id);
+	void setID(const string& id);
 	void setRoute(vector<Roads*> route);
 	void setArrival(int arrival);
 	void setCondition(int condition);
 	void setLocation(int location);
 	void setspeed(int speed);
-	void setCurrentRoad(string currentRoad);
-	void setHistory(string history);
+	void setCurrentRoad(const string& currentRoad);
+	void setHistory(const string& history);
 	
 	void Car::copy(const Car& other);
 
-	void initRouteFromStringINI(string RouteStringINI);
+	void initRouteFromStringINI(const string& RouteStringINI);
 	void updateMyRoad();
 	void updateHistory();
 

@@ -2,7 +2,7 @@
 
 Roads::Roads(){}
 
-Roads::Roads(string IdVal,string baginJncVal, string endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal):_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(numOfCarInsideVal),_baseSpeed(baseSpeedVal){// missing ",_carsInRoad(carsInRoadVal) , _CemeteryOfcars(CemeteryOfcarsVal)
+Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal):_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(numOfCarInsideVal),_baseSpeed(baseSpeedVal){// missing ",_carsInRoad(carsInRoadVal) , _CemeteryOfcars(CemeteryOfcarsVal)
 }
 
 
@@ -53,13 +53,13 @@ int Roads::getBaseSpeed() const{
 	return _baseSpeed;
 }
  
-void Roads::setId(string IdVal){
+void Roads::setId(const string& IdVal){
 	_Id=IdVal;
 }
-void Roads::setBaginJnc(string baginJncVal){
+void Roads::setBaginJnc(const string& baginJncVal){
 	_baginJnc=baginJncVal;
 }
-void Roads::setEndJnc(string endJncVal){
+void Roads::setEndJnc(const string& endJncVal){
 	_endJnc=endJncVal;
 }
 void Roads::setLength(int lengthVal){

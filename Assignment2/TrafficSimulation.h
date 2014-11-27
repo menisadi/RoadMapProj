@@ -4,11 +4,14 @@
 
 #include <map>
 #include <string>
-//#include "Car.h"
-//#include "Roads.h"
-//#include "Junctions.h"
 #include <iostream>
+#include "Car.h"
+#include "Junctions.h"
+#include "Roads.h"
 
+//class Roads;
+//class Car;
+//class Junctions;
 
 using namespace std;
 

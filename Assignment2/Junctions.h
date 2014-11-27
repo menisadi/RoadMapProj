@@ -13,7 +13,8 @@ using namespace std;
 
   public:
      Junctions();
-     Junctions(const string idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal);
+	 Junctions(const string& idJunctionVal);
+     Junctions(const string& idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal);
      Junctions(const Junctions& copyJunctions);
      virtual ~Junctions();
      Junctions& operator=(const Junctions &JunctionsRightArg);
@@ -24,7 +25,7 @@ using namespace std;
 	 vector<Roads*> getRoadsInJunction() const; //meybe Roads& ?
      vector<int> getTimeSlice() const;
      
-	 void setID(string idJunctionVal);
+	 void setID(const string& idJunctionVal);
      void setTimeSlice(vector<int> timeSliceVal);
 	 void setRoadsInJunction(vector<Roads*> roadsInJunction); 
 
