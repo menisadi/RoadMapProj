@@ -89,6 +89,7 @@
     <ClInclude Include="ini.h" />
     <ClInclude Include="JunctionReport.h" />
     <ClInclude Include="Junctions.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="Reports.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RoadReport.h" />
@@ -99,6 +100,7 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="ini.cpp" />
     <ClCompile Include="Junctions.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Roads.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
   </ItemGroup>
