@@ -1,20 +1,26 @@
 #include "Main.h"
 
+map<string, Roads>* RoadsMap = new map<string, Roads>();;
+map<string, Junctions>* JunctionsMap = new map<string, Junctions>();
+TrafficSimulation* TS1 = new TrafficSimulation(0,0,0,0,0);
+vector<Event>* events1 = new vector<Event>();
+
 void simulationInit()
 {
 	//*Data base*//
-	map<string, Roads>* RoadsMap = new map<string, Roads>();
-	map<string,Junctions>* JunctionsMap = new map<string,Junctions>();
-	TrafficSimulation TS1(100,5,10,1);
-	//cout << TS1.getMaxTimeSlice << endl;
+	IniClass ic;
+	ic.readRoadMap(JunctionsMap, RoadsMap, 150); //&JunctionsMap, &RoadsMap,
+	ic.readConfiguration(TS1);
+	ic.readEvents(events1);
 	//call Phars class (&RoadsMap,$JunctionsMap,TS1)
 }
-
 
 int main(void)
 {
 	simulationInit();	
-	
+	// cout << TS1->getMaxTimeSlice() << endl;
+	// cout << JunctionsMap << endl;
+	// cout << TS1->getMaxSpeedVal << endl;
 	return 0;
 }
 
