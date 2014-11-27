@@ -98,6 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="CarFaulttEvent.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="ini.cpp" />
     <ClCompile Include="Junctions.cpp" />
     <ClCompile Include="Main.cpp" />

@@ -13,7 +13,7 @@ class Event
 		Event(Event &other);
 		Event(int type, int time, const string& carId);
 		virtual ~Event();
-		Event & operator=(Event &eventRightArg);
+		Event & operator=(const Event &eventRightArg);
 		
 		virtual void performEvent() = 0;
 

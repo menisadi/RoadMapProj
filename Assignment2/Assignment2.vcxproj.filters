@@ -1,96 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="ini.cpp" />
+    <ClCompile Include="Junctions.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Roads.cpp" />
+    <ClCompile Include="TrafficSimulation.cpp" />
+    <ClCompile Include="CarFaulttEvent.cpp" />
+    <ClCompile Include="Event.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AddCarEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CarFaulttEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Junctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TrafficSimulation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Reports.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CarReport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="JunctionReport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoadReport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Roads.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="ini.h">
-=======
-    <ClInclude Include="Main.h">
->>>>>>> ec21442187392de5f4142367da093606a292f0af
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="AddCarEvent.h" />
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="CarFaulttEvent.h" />
+    <ClInclude Include="CarReport.h" />
+    <ClInclude Include="Commands.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="ini.h" />
+    <ClInclude Include="JunctionReport.h" />
+    <ClInclude Include="Junctions.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Reports.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RoadReport.h" />
+    <ClInclude Include="Roads.h" />
+    <ClInclude Include="TrafficSimulation.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TrafficSimulation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Junctions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Roads.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="ini.cpp">
-=======
-    <ClCompile Include="Main.cpp">
->>>>>>> ec21442187392de5f4142367da093606a292f0af
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ResourceCompile Include="Assignment2.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Assignment2.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Events.ini">
-      <Filter>Resource Files</Filter>
-    </None>
+    <None Include="Events.ini" />
   </ItemGroup>
 </Project>

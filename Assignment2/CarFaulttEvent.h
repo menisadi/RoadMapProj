@@ -1,12 +1,13 @@
-#pragma once
+#ifndef _CARFAULTTEVENT_H_
+#define _CARFAULTTEVENT_H_
+
 #include "Event.h"
-class CarFaulttEvent :
-	public Event
-{
+
+class CarFaulttEvent:public Event{
 public:
 	CarFaulttEvent();
 	CarFaulttEvent(CarFaulttEvent &other);
-	CarFaulttEvent(string carId, int timeOfFault, int startTime);
+	CarFaulttEvent(const string& carId, int timeOfFault, int startTime);
 	virtual ~CarFaulttEvent();
 	CarFaulttEvent & operator=(const CarFaulttEvent &E);
 
@@ -20,7 +21,6 @@ public:
 
 private:
 	int _timeOfFault;
-
-
 };
 
+#endif
