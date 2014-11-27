@@ -1,3 +1,6 @@
+#ifndef _CAR_H_
+#define _CAR_H_
+
 #include <vector>
 #include <string>
 
@@ -50,4 +53,4 @@ private:
 };
 
 
-
+  #endif //_CAR_H_

@@ -4,8 +4,8 @@
   
 #include <vector>
 #include <string>
-//#include "Car.h"
-class Car;
+#include "Car.h"
+#include "Junctions.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ using namespace std;
   {
   public:
      Roads();
-     Roads(const string baginJncVal, string endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
+     Roads(const string IdVal,string baginJncVal, string endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
      Roads(const Roads& copyRoad);
      virtual ~Roads();
      Roads& operator=(const Roads &RoadsRightArg);
@@ -21,6 +21,7 @@ using namespace std;
 	 void Roads::copy(const Roads &copyRoad);
 	 //void Roads::clear();
      
+	 string getId() const;
      string getBaginJnc() const;
 	 string getEndJnc() const;
      int getlength() const;
@@ -29,6 +30,7 @@ using namespace std;
 	 vector<Car> getCemeteryOfcars() const;
 	 int getBaseSpeed() const;
      
+	 void setId(string IdVal);
 	 void setBaginJnc(string baginJncVal);
      void setEndJnc(string endJncVal);
      void setLength(int lengthVal);
@@ -44,6 +46,7 @@ using namespace std;
 	 void killCarInTheEnd(Car& oldCarRef);
 	 
   private:
+	 string _Id;
      string _baginJnc;
      string _endJnc;
      int _length;

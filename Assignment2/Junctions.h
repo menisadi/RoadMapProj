@@ -19,7 +19,6 @@ using namespace std;
      Junctions& operator=(const Junctions &JunctionsRightArg);
 
 	void Junctions::copy(const Junctions& copyJunctions);
-	//void Junctions::clear();
      
      string getIdJunction() const;
 	 vector<Roads*> getRoadsInJunction() const; //meybe Roads& ?

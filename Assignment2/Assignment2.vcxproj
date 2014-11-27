@@ -86,7 +86,6 @@
     <ClInclude Include="CarReport.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="ini.h" />
     <ClInclude Include="JunctionReport.h" />
     <ClInclude Include="Junctions.h" />
     <ClInclude Include="Reports.h" />
