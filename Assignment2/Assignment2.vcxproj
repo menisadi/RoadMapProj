@@ -41,11 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\data\cppLib\boost_1_55_0;$(IncludePath)</IncludePath>
+    <IncludePath>C:\workspace\boost_1_55_0;C:\data\cppLib\boost_1_55_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\workspace\boost_1_55_0;$(IncludePath)</IncludePath>
+    <IncludePath>C:\workspace\boost_1_55_0;C:\workspace\boost_1_55_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,6 +86,7 @@
     <ClInclude Include="CarReport.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="ini.h" />
     <ClInclude Include="JunctionReport.h" />
     <ClInclude Include="Junctions.h" />
     <ClInclude Include="Reports.h" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="ini.cpp" />
     <ClCompile Include="Junctions.cpp" />
     <ClCompile Include="Roads.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
