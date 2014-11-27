@@ -12,6 +12,8 @@ class Car
 public:
 	Car();
 	Car(const string& idVal, vector<Roads*> routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,const string& currentRoadVal,const string& historyVal);
+	Car(const string& idVal, vector<Roads*> routeVal, int arrivalVal);
+	Car(const string& idVal, int arrivalVal);
 	Car(const Car &other);
 	~Car();
 	Car & operator=(const Car& C);

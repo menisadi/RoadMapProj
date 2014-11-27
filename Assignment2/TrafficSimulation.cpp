@@ -52,8 +52,14 @@ int main(void)
 	Junctions j3("j3");
 	Junctions j4("j4");
 	Junctions j5("j5");
-	//Roads R1();
-//  Roads(const string IdVal,string baginJncVal, string endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
+	Roads R1("j1j3","j1","j3",50);
+	Roads R1("j1j4","j1","j5",20);
+	Roads R1("j1j5","j1","j5",50);
+	Roads R1("j3j1","j3","j1",70);
+	Roads R1("j5j2","j5","j2",50);
+	Roads R1("j4j3","j4","j3",90);
+
+   //  Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal);
 
 	//Roads R1;
 
