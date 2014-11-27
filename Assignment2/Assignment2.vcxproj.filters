@@ -2,25 +2,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
-    <ClCompile Include="ini.cpp" />
     <ClCompile Include="Junctions.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Roads.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
-    <ClCompile Include="CarFaulttEvent.cpp" />
-    <ClCompile Include="Event.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddCarEvent.h" />
     <ClInclude Include="Car.h" />
-    <ClInclude Include="CarFaulttEvent.h" />
     <ClInclude Include="CarReport.h" />
     <ClInclude Include="Commands.h" />
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="ini.h" />
     <ClInclude Include="JunctionReport.h" />
     <ClInclude Include="Junctions.h" />
-    <ClInclude Include="Main.h" />
     <ClInclude Include="Reports.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RoadReport.h" />
@@ -29,8 +21,5 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment2.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Events.ini" />
   </ItemGroup>
 </Project>
