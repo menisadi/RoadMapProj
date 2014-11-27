@@ -17,19 +17,37 @@ using namespace std;
 
   class TrafficSimulation
   {
-  private:
-	  int SimulationTime_;
+  
 
   public:
      TrafficSimulation();
-     TrafficSimulation(int SimulationTimeNew);
+     TrafficSimulation(int simulationTimeNewVal  ,int maxSpeedVal ,int defultTimeSliceVal ,int maxTimeSliceVal ,int minTimeSliceVal);
+	 TrafficSimulation(int maxSpeedVal ,int defultTimeSliceVal ,int maxTimeSliceVal ,int minTimeSliceVal);
      TrafficSimulation(const TrafficSimulation& copyTrafficSimulation);
      virtual ~TrafficSimulation();
      TrafficSimulation& operator=(const TrafficSimulation &TrafficSimulationRightArg);
+
+	 int getSimulationTimeNew();
+	 int getMaxSpeedVal();
+	 int getDefultTimeSlice();
+	 int getMaxTimeSlice();
+	 int getMinTimeSlice();
+
+	 void setSimulationTimeNew(int simulationTimeNewVal);
+	 void setMaxSpeed(int maxSpeedVal);
+	 void setDefultTimeSlice(int defultTimeSliceVal);
+	 void setMaxTimeSlice(int maxTimeSliceVal);
+	 void setMinTimeSlice(int minTimeSliceVal);
 	 
 	 void initTrafficSimulation();
 	 void simulationManagement();
-	 
+
+  private:
+	  int _SimulationTime;
+	  int _maxSpeed;
+	  int _defultTimeSlice;
+	  int _maxTimeSlice;
+	  int _minTimeSlice;
   };   
   
   #endif //_TRAFFICSIMULATION_H_

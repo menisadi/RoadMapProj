@@ -14,7 +14,8 @@ using namespace std;
   public:
      Roads();
      Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
-     Roads(const Roads& copyRoad);
+     Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal);
+	 Roads(const Roads& copyRoad);
      virtual ~Roads();
      Roads& operator=(const Roads &RoadsRightArg);
 
