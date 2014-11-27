@@ -45,6 +45,7 @@ using namespace std;
 	 void baseSpeedUpdate();
 	 void carSpeedUpdate();
 	 void killCarInTheEnd(Car& oldCarRef);
+	 void advanceCarsInRoad();
 	 
   private:
 	 string _Id;
