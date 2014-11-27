@@ -4,7 +4,9 @@
 
 #include <vector>
 #include <string>
-class Roads;
+#include <iostream>
+#include "Roads.h"
+//class Roads;
 
 using namespace std;
 
@@ -32,7 +34,7 @@ using namespace std;
 	 
 	 void initRoadsFromStringINI();
 	 void initTimeSliceFromStringINI();
-	 void greenLightManagement();
+	 void advanceCarsInJunctions();
 
 	 private:
      string _idJunction;

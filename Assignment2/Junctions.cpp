@@ -43,8 +43,18 @@ void Junctions::setTimeSlice(vector<int> timeSliceVal){
 void Junctions::setRoadsInJunction(vector<Roads*> roadsInJunction){  
 	_roadsInJunction=roadsInJunction;
 }
+void Junctions::advanceCarsInJunctions(){
+	 
+	std::vector<Roads*>::iterator itR =_roadsInJunction.begin();
+	Car carGoesGreen = (*itR)->popFirstCarInRoad();
+	Roads theNextRoad = *carGoesGreen.popFirstRoadsInRoute();
+//	std::vector<Roads>::iterator itC =carGoesGreen.getRoute.begin();
+	//Roads tmpRoad = *itC;
+	//carGoesGreen.getRoute.pop_back();
+	//return tmpRoad;
 
+}
 	 
 //void Junctions::initRoadsFromStringINI(){}
 //void Junctions::initTimeSliceFromStringINI(){}
-//void Junctions::greenLightManagement(){}
+

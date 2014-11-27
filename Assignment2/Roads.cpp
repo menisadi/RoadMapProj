@@ -79,7 +79,12 @@ void Roads::setBaseSpeed(int basespeedVal){
 }
 
 	 
-//Car Roads::popFirstCarInRoad(){}
+Car Roads::popFirstCarInRoad(){
+	std::vector<Car>::iterator it =_carsInRoad.end();
+	Car tmpCar = *it;
+	_carsInRoad.pop_back();
+	return tmpCar;
+}					
 //void Roads::pushNewCarToRoad(Car& newCarRef){}
 //void Roads::killCarInTheEnd(Car& oldCarRef){}
 //void Roads::carSpeedUpdate(){}
@@ -96,13 +101,13 @@ void Roads::advanceCarsInRoad(){
 	int counterFaultyCarsInTheSameLine=0;
 
 	for(std::vector<Car>::iterator itCurrentCar = _carsInRoad.begin(); itCurrentCar != _carsInRoad.end(); ++itCurrentCar){
-		if (itCurrentCar->getLocation!=TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
+		if (itCurrentCar->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
 		if ( itCurrentCar->getCondition() == 0)
 		{
-			int speedCalculation = (_baseSpeed)/(ceil(2*(counterFaultyCars-counterFaultyCarsInTheSameLine)));
+			int speedCalculation = int(ceil((_baseSpeed)/(2*(counterFaultyCars-counterFaultyCarsInTheSameLine))));
 			itCurrentCar->setspeed(speedCalculation);
 
-			int locationCalculation = itCurrentCar->getLocation + speedCalculation;
+			int locationCalculation = itCurrentCar->getLocation() + speedCalculation;
 			if (locationCalculation <= _length)
 				itCurrentCar->setLocation(locationCalculation);
 			else
@@ -111,11 +116,11 @@ void Roads::advanceCarsInRoad(){
 		else
 		{
 			++counterFaultyCars;
-			if (itCurrentCar->getLocation==TheLastFaultyCarLocation)
+			if (itCurrentCar->getLocation()==TheLastFaultyCarLocation)
 				++counterFaultyCarsInTheSameLine;
 			else
 			{
-				itCurrentCar->getLocation=TheLastFaultyCarLocation;
+				itCurrentCar->setLocation(TheLastFaultyCarLocation);
 				counterFaultyCarsInTheSameLine=1;
 			}
 		}

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _COMMANDS_H_
+#define _COMMANDS_H_
+
 #include <vector>
 #include <string>
 
@@ -22,6 +24,6 @@ class Commands
 		void setType(int type);
 		void setTime(int time);
 };
-
+#endif
 
 

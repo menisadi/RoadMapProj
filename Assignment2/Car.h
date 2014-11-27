@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+//#include "Roads.h"
 
 using namespace std;
 class Roads;
@@ -37,7 +38,8 @@ public:
 	void setHistory(const string& history);
 	
 	void Car::copy(const Car& other);
-
+	 
+	Roads* popFirstRoadsInRoute();
 	void initRouteFromStringINI(const string& RouteStringINI);
 	void updateMyRoad();
 	void updateHistory();

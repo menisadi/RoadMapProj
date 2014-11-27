@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _EVENT_H_
+#define _EVENT_H_
+
 #include <vector>
 #include <string>
 
@@ -9,9 +11,9 @@ class Event
 	public:
 		Event();
 		Event(Event &other);
-		Event(int type, int time, string carId);
+		Event(int type, int time, const string& carId);
 		virtual ~Event();
-		Event & operator=(const Event &E);
+		Event & operator=(Event &eventRightArg);
 		
 		virtual void performEvent() = 0;
 
@@ -20,7 +22,7 @@ class Event
 		string getCarId();
 		void setType(int type);
 		void setTime(int time);
-		void setCarId(string carId);
+		void setCarId(const string& carId);
 
 
 	private:
@@ -29,3 +31,4 @@ class Event
 		string _carId;
 };
 
+#endif
