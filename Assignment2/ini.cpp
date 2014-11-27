@@ -29,7 +29,7 @@ vector<string> IniClass::split(string toSplit)
 	return splitted;
 }
 
-void IniClass::readEvents(vector<Event> allEvents) {
+void IniClass::readEvents(vector<Event>*& allEvents) {
 	cout << "Starting to read events" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
@@ -37,30 +37,31 @@ void IniClass::readEvents(vector<Event> allEvents) {
 	{
 		string eventName = section->first;
 		boost::property_tree::ptree::const_iterator property = section->second.begin();
-		string eventType = property->second.data;
+		string eventType = property->second.data();
 		property++;
-		int eventTime = property->second.data;
+		int eventTime = boost::lexical_cast<int>(property->second.data());
 		property++;
-		string carName = property->second.data;
+		string carName = property->second.data();
 		property++;
 		int typeNumber;
 		if (eventType[4] == 'a')
 		{
 			typeNumber = 0;
-			string carRoute = property->second.data;
+			string carRoute = property->second.data();
 			vector<string> routeVector(split(carRoute));
-			allEvents.push_back(AddCarEvent(carName, routeVector, eventTime));
+			allEvents->push_back(AddCarEvent(carName, routeVector, eventTime));
 		}
 		else
 		{
 			typeNumber = 1;
-			int faultTime = property->second.data;
-			allEvents.push_back(CarFaulttEvent(carName, faultTime, eventTime));
+			int faultTime = boost::lexical_cast<int>(property->second.data());
+			allEvents->push_back(CarFaulttEvent(carName, faultTime, eventTime));
 		}
 	}
 	cout << "Finished events" << endl;
 }
 
+/*
 void IniClass::readCommands(vector<Commands> allCommands)
 {
 	cout << "Starting to read Commands" << endl;
@@ -106,8 +107,9 @@ void IniClass::readCommands(vector<Commands> allCommands)
 	}
 	cout << "Finished Commands" << endl;
 }
+*/
 
-void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> roads, int defaultTimeSlice)
+void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads, int defaultTimeSlice)
 {
 	cout << "Starting to read road map" << endl;
 	boost::property_tree::ptree pt;
@@ -115,26 +117,28 @@ void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> 
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++)
 	{
 		string startJunction = section->first;
-		vector<Roads*> roadsInJunction;
+		vector<Roads*>* roadsInJunction = new vector<Roads*>();
 		vector<int> timeSlices;
-		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.begin(); property++)
+		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.end(); property++)
 		{
-			string endJunction = property->first.data;
-			int length = property->second.data;
+			string endJunction = property->first.data();
+			int length = boost::lexical_cast<int>(property->second.data());
 			string roadId = startJunction + "," + endJunction;
-			Roads newRoad(roadId, startJunction, endJunction, length); // check if fits constructor
-			Roads* pointerToRoad = &newRoad;
-			roads.insert(pair<string, Roads>(roadId,newRoad));
-			roadsInJunction.push_back(pointerToRoad);
+			Roads* pointerToRoad = new Roads(roadId, startJunction, endJunction, length);
+			// Roads newRoad(roadId, startJunction, endJunction, length);
+			// Roads* pointerToRoad = &newRoad;
+			roads->insert(pair<string, Roads>(roadId, *pointerToRoad));
+			roadsInJunction->push_back(pointerToRoad);
 			timeSlices.push_back(defaultTimeSlice);
 		}
-		Junctions newJunction(startJunction, roadsInJunction, timeSlices);
-		junctions.insert(pair<string, Junctions>(startJunction,newJunction));
+		Junctions newJunction(startJunction, *roadsInJunction, timeSlices);
+		junctions->insert(pair<string, Junctions>(startJunction,newJunction));
+		delete roadsInJunction;
 	}
 	cout << "Finished to read road map" << endl;
 }
 
-void IniClass::readConfiguration(TrafficSimulation simulation)
+void IniClass::readConfiguration(TrafficSimulation*& simulation)
 {
 	cout << "Starting to read configuration" << endl;
 	boost::property_tree::ptree pt;
@@ -144,6 +148,9 @@ void IniClass::readConfiguration(TrafficSimulation simulation)
 	int DEFAULT_TIME_SLICE = pt.get<int>("Configuration.DEFAULT_TIME_SLICE");
 	int MAX_TIME_SLICE = pt.get<int>("Configuration.MAX_TIME_SLICE");
 	int MIN_TIME_SLICE = pt.get<int>("Configuration.MIN_TIME_SLICE");
-	// insert into simulation's fiealds
-	
+	simulation->setMaxSpeed(MAX_SPEED);
+	simulation->setDefultTimeSlice(DEFAULT_TIME_SLICE);
+	simulation->setMaxTimeSlice(MAX_TIME_SLICE);
+	simulation->setMinTimeSlice(MIN_TIME_SLICE);
+	cout << "Finished to read configuration" << endl;
 }

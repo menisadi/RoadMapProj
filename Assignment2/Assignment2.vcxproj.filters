@@ -54,7 +54,11 @@
     <ClInclude Include="Roads.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="ini.h">
+=======
     <ClInclude Include="Main.h">
+>>>>>>> ec21442187392de5f4142367da093606a292f0af
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +75,11 @@
     <ClCompile Include="Roads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="ini.cpp">
+=======
     <ClCompile Include="Main.cpp">
+>>>>>>> ec21442187392de5f4142367da093606a292f0af
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
