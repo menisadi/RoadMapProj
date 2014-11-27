@@ -1,7 +1,7 @@
 #include "Junctions.h"
 
 Junctions::Junctions(){}
-Junctions:: Junctions(const string& idJunctionVal){}
+Junctions:: Junctions(const string& idJunctionVal):_idJunction(idJunctionVal){}
 Junctions:: Junctions(const string& idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal){}
 
 Junctions::Junctions(const Junctions& copyJunctions){
