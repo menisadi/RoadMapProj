@@ -1,59 +1,41 @@
 #include "Car.h"
 
-Car::Car():_arrival(0),_condition(0),_locationInRoad(0),_speed(0){  //is it necccery??
+Car::Car(){
 }
 
-Car::Car(string id,vector<string> newRoute , int arrival,int condition,int locationInRoad,int speed):_ID(id),_route(newRoute),_arrival(arrival),_condition(condition),_locationInRoad(locationInRoad),_speed(speed){	
-//_route=newRoute; //memory ???? deep copy?? mayby call defualt constrctor twice?
+Car::Car(string idVal, vector<Roads*> routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,string currentRoadVal,string historyVal):_ID(idVal),_route(routeVal),_arrival(arrivalVal),_condition(conditionVal),_locationInRoad(locationInRoadVal),_speed(speedVal),_currentRoad(currentRoadVal),_history(historyVal){	
 }
 
 Car::Car(const Car& other){
-	_ID=other.getID();
-	 _route = other.getRoute();
-	_arrival=other.getArrival();
-	_condition=other.getCondition();
-	_locationInRoad=other.getLocation();
-	_speed=other.getspeed();
+		copy(other);
 }
 
 Car::~Car(){
+	//for( vector<Roads*>::iterator ii=_route.begin(); ii!=_route.end(); ++ii)
+	//	delete (*ii);
 }
 
 Car & Car::operator=(const Car& C){    
-    Car *temp = C.copy();        // make temp point to a copy of C               
-    clear();            // delete the original Car  
-
-    _ID=temp->getID();
-	 _route =temp->getRoute();	//memory ???? deep copy??
-	_arrival=temp->getArrival();
-	_condition=temp->getCondition();
-	_locationInRoad=temp->getLocation();
-	_speed=temp->getspeed();
-
-	delete(temp);
-
+  copy(C);
   return *this;
 }
 
-void Car::clear(){	
+void Car::copy(const Car& other){
+		_ID=other.getID();
+		_route = other.getRoute();
+		_arrival=other.getArrival();
+		_condition=other.getCondition();
+		_locationInRoad=other.getLocation();
+		_speed=other.getspeed();
+		_currentRoad=other.getCurrentRoad();
+		_history=other.getHistory();
 }
-
-Car* Car::copy() const{
-	if (0 == this) {
-		return 0;
-	}
-	else {
-		Car *newCar = new Car(*this);
-		return newCar;
-	}
-}
-
 
 string Car::getID() const{
 	return _ID;
 }
-vector<string> Car::getRoute() const{
-	return _route;
+vector<Roads*> Car::getRoute() const{
+	return _route;						//meybe return *??
 }
 int Car::getArrival() const{
 	return _arrival;
@@ -67,13 +49,19 @@ int Car::getLocation() const{
 int Car::getspeed() const{
 	return _speed;
 }
+string Car::getCurrentRoad() const{
+	return _currentRoad;
+}
+string Car::getHistory() const{
+	return _history;
+}
 
 
 void Car::setID(string id){
 	_ID=id;
 }
-void Car::setRoute(vector<string> newRoute){
-	 _route = newRoute;	//memory ???? deep copy??
+void Car::setRoute(vector<Roads*> newRoute){
+	 _route = newRoute;	
 }
 void Car::setArrival(int arrival){
 	_arrival=arrival;
@@ -87,3 +75,13 @@ void Car::setLocation(int location){
 void Car::setspeed(int speed){
 	_speed=speed;
 }
+void Car::setCurrentRoad(string currentRoad){
+	_currentRoad=currentRoad;
+}
+void Car::setHistory(string history){
+	_history=history;
+}
+
+//void initRouteFromStringINI(string RouteStringINI){}
+//void updateMyRoad(){}
+//void updateHistory(){}

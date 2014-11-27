@@ -4,44 +4,53 @@
   
 #include <vector>
 #include <string>
+//#include "Car.h"
 class Car;
 
 using namespace std;
 
  class Roads
   {
-  private:
-     string baginJnc_;
-     string endJnc_;
-     int length_;
-     int numOfCarInside_;
-     vector<Car> carsInRoad_;  
   public:
      Roads();
-     Roads(const string baginJncVal, string endJncVal, int lengthVal, vector<Car> carsInRoadVal);
+     Roads(const string baginJncVal, string endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
      Roads(const Roads& copyRoad);
      virtual ~Roads();
      Roads& operator=(const Roads &RoadsRightArg);
 
-	 Roads* Roads::copy() const;
-	 void Roads::clear();
+	 void Roads::copy(const Roads &copyRoad);
+	 //void Roads::clear();
      
      string getBaginJnc() const;
 	 string getEndJnc() const;
      int getlength() const;
      int getNumOfCarInside() const;
 	 vector<Car> getCarsInRoad() const;
+	 vector<Car> getCemeteryOfcars() const;
+	 int getBaseSpeed() const;
      
 	 void setBaginJnc(string baginJncVal);
      void setEndJnc(string endJncVal);
      void setLength(int lengthVal);
-     void updateNumOfCarInside(vector<Car> &carsInRoadVal);
+     void updateNumOfCarInside();
+	 void setCarsInRoad(vector<Car> carsInRoadVal);
+	 void setCemeteryOfcars(vector<Car> CemeteryOfcarsVal);
+	 void setBaseSpeed(int basespeedVal);
 
-	 
 	 Car popFirstCarInRoad();
-     void pushNewCarToRoad(Car& newCarRef);
+     void pushNewCarToRoad(Car& newCarRef); //meybe pointer*?
 	 void baseSpeedUpdate();
 	 void carSpeedUpdate();
+	 void killCarInTheEnd(Car& oldCarRef);
+	 
+  private:
+     string _baginJnc;
+     string _endJnc;
+     int _length;
+     int _numOfCarInside;
+     vector<Car> _carsInRoad;  
+	 vector<Car> _CemeteryOfcars; 
+	 int _baseSpeed;
   };   
   
   #endif //_ROADS_H_
