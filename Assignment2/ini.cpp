@@ -121,7 +121,7 @@ void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> 
 			string endJunction = property->first.data;
 			int length = property->second.data;
 			string roadId = startJunction + "," + endJunction;
-			Roads newRoad(roadId, startJunction, endJunction, length, 0, 0, 0, 0); // check if fits constructor
+			Roads newRoad(roadId, startJunction, endJunction, length); // check if fits constructor
 			Roads* pointerToRoad = &newRoad;
 			roads.insert(pair<string, Roads>(roadId,newRoad));
 			roadsInJunction.push_back(pointerToRoad);
@@ -142,6 +142,6 @@ void IniClass::readConfiguration(TrafficSimulation simulation)
 	int DEFAULT_TIME_SLICE = pt.get<int>("Configuration.DEFAULT_TIME_SLICE");
 	int MAX_TIME_SLICE = pt.get<int>("Configuration.MAX_TIME_SLICE");
 	int MIN_TIME_SLICE = pt.get<int>("Configuration.MIN_TIME_SLICE");
-
+	// insert into simulation's fiealds
 	
 }

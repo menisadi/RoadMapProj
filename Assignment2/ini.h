@@ -29,6 +29,7 @@ public:
 	void IniClass::readCommands(vector<Commands> allCommands);
 	void IniClass::readRoadMap(map<string, Junctions> junctions, map<string, Roads> roads);
 	void IniClass::readConfiguration(TrafficSimulation simulation);
+
 };
 
 #endif /* INI_H_ */
