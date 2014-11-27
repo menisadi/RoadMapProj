@@ -44,14 +44,17 @@ void Junctions::setRoadsInJunction(vector<Roads*> roadsInJunction){
 	_roadsInJunction=roadsInJunction;
 }
 void Junctions::advanceCarsInJunctions(){
-	 
-	std::vector<Roads*>::iterator itR =_roadsInJunction.begin();
-	Car carGoesGreen = (*itR)->popFirstCarInRoad();
-	Roads theNextRoad = *carGoesGreen.popFirstRoadsInRoute();
-//	std::vector<Roads>::iterator itC =carGoesGreen.getRoute.begin();
-	//Roads tmpRoad = *itC;
-	//carGoesGreen.getRoute.pop_back();
-	//return tmpRoad;
+	
+	std::vector<int>::iterator itSliceTime =_timeSlice.begin();
+	if(*itSliceTime >0 ){}
+
+	//**Move car(first on vector) from source road(first on vector) to destination road**//
+	std::vector<Roads*>::iterator itsourceRoad =_roadsInJunction.begin();
+	Car *carGoesGreen = new Car((*itsourceRoad)->popFirstCarInRoad());
+	Roads* theNextRoad = carGoesGreen->popFirstRoadsInRoute();
+	theNextRoad->pushNewCarToRoad(*carGoesGreen);
+	//****//
+
 
 }
 	 
