@@ -2,19 +2,30 @@
 
 
 CarFaulttEvent::CarFaulttEvent(){}
-CarFaulttEvent::CarFaulttEvent(CarFaulttEvent &other){}
-CarFaulttEvent::CarFaulttEvent(const string& carId, int timeOfFault, int startTime):Event(0,timeOfFault, carId),_timeOfFault(timeOfFault){}
+CarFaulttEvent::CarFaulttEvent(CarFaulttEvent &other) :Event(other)
+{
+	_timeOfFault = other._timeOfFault;
+}
+	
+CarFaulttEvent::CarFaulttEvent(const string& carId, int timeOfFault, int startTime) : Event(0, startTime, carId), _timeOfFault(timeOfFault){}
 CarFaulttEvent::~CarFaulttEvent(){}
 CarFaulttEvent& CarFaulttEvent::operator=(const CarFaulttEvent& E){
 	 Event::operator=(E);
+	 _timeOfFault = E.getTimeOfFault;
 	 return *this;
 }
 
 void CarFaulttEvent::performEvent(){}
 	
 //getters
-int CarFaulttEvent::getTimeOfFault(){}
+int CarFaulttEvent::getTimeOfFault()
+{
+	return _timeOfFault;
+}
 
 //setters
-void CarFaulttEvent::setTimeOfFault(int timeOfFault){}
+void CarFaulttEvent::setTimeOfFault(int timeOfFault)
+{
+	_timeOfFault = timeOfFault;
+}
 

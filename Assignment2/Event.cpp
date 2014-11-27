@@ -5,10 +5,10 @@ Event::Event(Event &other){}
 
 Event::Event(int typeVal, int timeVal, const string& carIdVal):_type(typeVal),_time(timeVal),_carId(carIdVal){}
 Event::~Event(){}
-Event & Event::operator=(constEvent &eventRightArg){
-	_type=eventRightArg.getType();
-	_time=eventRightArg.getTime();
-	_carId=eventRightArg.getCarId();
+Event & Event::operator=(const Event &eventRightArg){
+	_type=eventRightArg._type;
+	_time=eventRightArg._time;
+	_carId=eventRightArg._carId;
 	return *this;
 }
 		
