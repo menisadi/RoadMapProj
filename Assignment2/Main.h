@@ -10,6 +10,8 @@
 #include "Roads.h"
 #include "TrafficSimulation.h"
 #include "ini.h"
+//class IniClass;
+class Event;
 using namespace std;
 
 void simulationManagement();

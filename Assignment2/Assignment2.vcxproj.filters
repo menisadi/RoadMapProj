@@ -8,8 +8,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="CarFaulttEvent.cpp" />
     <ClCompile Include="Event.cpp" />
-    <ClCompile Include="ini.cpp" />
     <ClCompile Include="AddCarEvent.cpp" />
+    <ClCompile Include="ini.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddCarEvent.h" />
@@ -24,8 +24,9 @@
     <ClInclude Include="Roads.h" />
     <ClInclude Include="TrafficSimulation.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="ini.h" />
     <ClInclude Include="CarFaulttEvent.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="ini.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment2.rc" />
