@@ -10,7 +10,6 @@
 #include "Roads.h"
 #include "TrafficSimulation.h"
 #include "ini.h"
-
 using namespace std;
 
 void simulationManagement();

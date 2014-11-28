@@ -11,7 +11,7 @@ CarFaulttEvent::CarFaulttEvent(const string& carId, int timeOfFault, int startTi
 CarFaulttEvent::~CarFaulttEvent(){}
 CarFaulttEvent& CarFaulttEvent::operator=(const CarFaulttEvent& E){
 	 Event::operator=(E);
-	 _timeOfFault = E.getTimeOfFault;
+	 _timeOfFault = E.getTimeOfFault();
 	 return *this;
 }
 

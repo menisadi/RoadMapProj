@@ -18,7 +18,7 @@ AddCarEvent& AddCarEvent::operator=(const AddCarEvent& E){
 void AddCarEvent::performEvent()
 {
 	Car* newCar = new Car(Event::getCarId(), _routeToAdd, Event::getTime());
-	if (_routeToAdd.size > 0)
+	if (_routeToAdd.size() > 0)
 	{
 		_routeToAdd[0]->pushNewCarToRoad(*newCar);
 		_routeToAdd[0]->updateNumOfCarInside();

@@ -66,7 +66,7 @@ void Roads::setLength(int lengthVal){
 	_length=lengthVal;
 }
 void Roads::updateNumOfCarInside(){
-	_numOfCarInside = _carsInRoad.size
+	_numOfCarInside = _carsInRoad.size();
 }
 void Roads::setCarsInRoad(vector<Car> carsInRoadVal){
 	_carsInRoad=carsInRoadVal;

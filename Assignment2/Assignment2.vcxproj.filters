@@ -5,6 +5,11 @@
     <ClCompile Include="Junctions.cpp" />
     <ClCompile Include="Roads.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="CarFaulttEvent.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="ini.cpp" />
+    <ClCompile Include="AddCarEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddCarEvent.h" />
@@ -18,8 +23,16 @@
     <ClInclude Include="RoadReport.h" />
     <ClInclude Include="Roads.h" />
     <ClInclude Include="TrafficSimulation.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="ini.h" />
+    <ClInclude Include="CarFaulttEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration.ini" />
+    <None Include="Events.ini" />
+    <None Include="RoadMap.ini" />
   </ItemGroup>
 </Project>
