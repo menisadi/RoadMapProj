@@ -8,10 +8,15 @@ vector<Event*>* events1;
 void simulationInit()
 {
 	//*Data base*//
-	IniClass ic;
+	 IniClass ic;
 	 ic.readRoadMap(JunctionsMap, RoadsMap, 150); //&JunctionsMap, &RoadsMap,
 	 ic.readConfiguration(TS1);
 	 ic.readEvents(events1,RoadsMap);
+
+	 (*events1)[1]->performEvent();
+	 events1->pop_back();
+	 (*events1)[0]->performEvent();
+	 events1->pop_back();
 }
 
 int main(void)

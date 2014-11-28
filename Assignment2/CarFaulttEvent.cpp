@@ -7,7 +7,7 @@ CarFaulttEvent::CarFaulttEvent(CarFaulttEvent &other) :Event(other)
 	_timeOfFault = other._timeOfFault;
 }
 	
-CarFaulttEvent::CarFaulttEvent(const string& carId, int timeOfFault, int startTime) : Event(0, startTime, carId), _timeOfFault(timeOfFault){}
+CarFaulttEvent::CarFaulttEvent(const string& carId, int timeOfFault, int startTime) : Event(1, startTime, carId), _timeOfFault(timeOfFault){}
 CarFaulttEvent::~CarFaulttEvent(){}
 CarFaulttEvent& CarFaulttEvent::operator=(const CarFaulttEvent& E){
 	 Event::operator=(E);
