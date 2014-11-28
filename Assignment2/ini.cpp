@@ -3,7 +3,7 @@
 IniClass::IniClass(){}
 
 IniClass::~IniClass() {}
-/*
+
 vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 {
 	vector<Roads*> splitted;
@@ -14,6 +14,7 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	string nameOfRoad;
 	
 	tmpStr = toSplit;
+	tmpStr.append(",");
 	indexStart = 0;
 	indexMiddle = tmpStr.find_first_of(',') + 1;
 	indexEnd = 0;
@@ -28,8 +29,8 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	}
 	return splitted;
 }
-*//*
-void IniClass::readEvents(vector<Event>*& allEvents, map<string, Roads>*& allRoads) {
+
+void IniClass::readEvents(vector<Event*>*& allEvents, map<string, Roads>*& allRoads) {
 	cout << "Starting to read events" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
@@ -49,13 +50,15 @@ void IniClass::readEvents(vector<Event>*& allEvents, map<string, Roads>*& allRoa
 			typeNumber = 0;
 			string carRoute = property->second.data();
 			vector<Roads*> routeVector(split(carRoute,allRoads));
-			allEvents->push_back(AddCarEvent(carName, routeVector, eventTime));
+			AddCarEvent* tmp=new AddCarEvent(carName, routeVector, eventTime) ;
+			allEvents->push_back(tmp);
+			cout << ""<<endl;
 		}
 		else
 		{
 			typeNumber = 1;
 			int faultTime = boost::lexical_cast<int>(property->second.data());
-			allEvents->push_back(CarFaulttEvent(carName, faultTime, eventTime));
+			allEvents->push_back(new CarFaulttEvent(carName, faultTime, eventTime));
 		}
 	}
 	cout << "Finished events" << endl;

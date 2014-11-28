@@ -3,16 +3,15 @@
 map<string, Roads>* RoadsMap;
 map<string, Junctions>* JunctionsMap;
 TrafficSimulation* TS1;
-vector<Event>* events1;
+vector<Event*>* events1;
 
 void simulationInit()
 {
 	//*Data base*//
 	IniClass ic;
-	// ic.readRoadMap(JunctionsMap, RoadsMap, 150); //&JunctionsMap, &RoadsMap,
-	// ic.readConfiguration(TS1);
-	// ic.readEvents(events1);
-	//call Phars class (&RoadsMap,$JunctionsMap,TS1)
+	 ic.readRoadMap(JunctionsMap, RoadsMap, 150); //&JunctionsMap, &RoadsMap,
+	 ic.readConfiguration(TS1);
+	 ic.readEvents(events1,RoadsMap);
 }
 
 int main(void)
@@ -20,7 +19,7 @@ int main(void)
 	RoadsMap = new map<string, Roads>();;
 	JunctionsMap = new map<string, Junctions>();
 	TS1 = new TrafficSimulation(0, 0, 0, 0, 0);
-	events1 = new vector<Event>();
+	events1 = new vector<Event*>();
 
 	simulationInit();	
 	// cout << TS1->getMaxTimeSlice() << endl;
