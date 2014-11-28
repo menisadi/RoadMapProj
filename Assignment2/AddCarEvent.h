@@ -5,7 +5,7 @@ class AddCarEvent : public Event
 {
 public:
 	AddCarEvent();
-	AddCarEvent(string carId,vector<string> carRoute,int carArrival);
+	AddCarEvent(const string& carId, vector<string> routeToAdd, int startTime);
 	AddCarEvent(AddCarEvent &other);
 	virtual ~AddCarEvent();
 	AddCarEvent & operator=(const AddCarEvent &E);
@@ -13,10 +13,10 @@ public:
 	void performEvent();
 
 	//getters
-	vector<std::string> getRoute();
+	vector<std::string> getCarRoute();
 
 	//setters
-	void setRoute(vector<string> route);
+	void AddCarEvent::setCarRoute(vector<std::string> route);
 
 private:
 	vector<string> _routeToAdd;
