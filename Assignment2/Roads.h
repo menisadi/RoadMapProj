@@ -6,6 +6,7 @@
 #include <string>
 #include "Car.h"
 #include "Junctions.h"
+#include "GlobalVar.h"
 
 
 using namespace std;

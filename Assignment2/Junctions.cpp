@@ -67,7 +67,7 @@ void Junctions::replaceRoadinJunction(int conterStasticCarPass, int MaxTimeSlice
 		}
 }
 
-void Junctions::advanceCarsInJunctions(TrafficSimulation TS){
+void Junctions::advanceCarsInJunctions(){
 		/* Advance in junction:
 		1---if time slice left is 0, replace road and update next time slice for that road by if any cars passed at that time (by the rules in the assignment)
 		2---find car in the new road (or old if time slice was > 0)
@@ -77,7 +77,7 @@ void Junctions::advanceCarsInJunctions(TrafficSimulation TS){
 	int conterStasticCarPass=0;
 	if(_roadsInJunction.size()>0){
 		if(_timeSlice[0]<0 ){
-			replaceRoadinJunction(conterStasticCarPass,TS.getMaxTimeSlice(),TS.getMinTimeSlice());
+			replaceRoadinJunction(conterStasticCarPass,global_maxTimeSlice,global_minTimeSlice);
 			conterStasticCarPass=0;
 		}
 		MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad();

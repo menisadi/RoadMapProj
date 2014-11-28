@@ -4,7 +4,7 @@ Roads::Roads(){}
 
 Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal):_Id(IdVal),_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(numOfCarInsideVal),_baseSpeed(baseSpeedVal){// missing ",_carsInRoad(carsInRoadVal) , _CemeteryOfcars(CemeteryOfcarsVal)
 }
-Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal):_Id(IdVal),_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal){}
+Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal):_Id(IdVal),_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(0){Roads::baseSpeedUpdate();}
 
 Roads::Roads(const Roads& copyRoad){
 	copy(copyRoad);
@@ -92,7 +92,13 @@ void Roads::pushNewCarToRoad(Car newCarVal){
 //void Roads::carSpeedUpdate(){}
 
 void Roads::baseSpeedUpdate(){
-	_baseSpeed=_length/_numOfCarInside;
+	if(_numOfCarInside>0)
+		_baseSpeed=int(ceil(_length/_numOfCarInside));
+	else
+		_baseSpeed=_length;
+
+	if(_baseSpeed>global_maxSpeed)
+		_baseSpeed=global_maxSpeed;
 }
 
 void Roads::advanceCarsInRoad(){

@@ -2,6 +2,7 @@
 #ifndef _TRAFFICSIMULATION_H_
 #define _TRAFFICSIMULATION_H_
 
+#include "GlobalVar.h"
 //#include <map>
 //#include <string>
 //#include <iostream>
@@ -41,6 +42,8 @@ using namespace std;
 	 
 	 void initTrafficSimulation();
 	 void simulationManagement();
+
+	 
 
   private:
 	  int _SimulationTime;

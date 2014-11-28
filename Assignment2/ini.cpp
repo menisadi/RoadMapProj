@@ -30,7 +30,7 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	return splitted;
 }
 
-void IniClass::readEvents(vector<Event*>*& allEvents, map<string, Roads>*& allRoads) {
+void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads) {
 	cout << "Starting to read events" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
@@ -49,16 +49,20 @@ void IniClass::readEvents(vector<Event*>*& allEvents, map<string, Roads>*& allRo
 		{
 			typeNumber = 0;
 			string carRoute = property->second.data();
-			vector<Roads*> routeVector(split(carRoute,allRoads));
+			//vector<Roads*> routeVector(split(carRoute,allRoads));
+			vector<Roads*>* routeVector=new vector<Roads*>(split(carRoute,allRoads));
 			AddCarEvent* tmp=new AddCarEvent(carName, routeVector, eventTime) ;
-			allEvents->push_back(tmp);
+			//eventsInTimeOrder->push_back(tmp);
+			(*eventsInTimeOrder)[eventTime]=tmp;
+
 			cout << ""<<endl;
 		}
 		else
 		{
 			typeNumber = 1;
 			int faultTime = boost::lexical_cast<int>(property->second.data());
-			allEvents->push_back(new CarFaulttEvent(carName, faultTime, eventTime));
+			//allEvents->push_back(new CarFaulttEvent(carName, faultTime, eventTime));
+			(*eventsInTimeOrder)[eventTime]=new CarFaulttEvent(carName, faultTime, eventTime);
 		}
 	}
 	cout << "Finished events" << endl;
@@ -112,19 +116,20 @@ void IniClass::readCommands(vector<Commands> allCommands)
 }
 */
 
-void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads, int defaultTimeSlice)
+void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads)
 {
 	cout << "Starting to read road map" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("RoadMap.ini", pt);
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++)
 	{
-		string startJunction = section->first;
+		string endJunction = section->first;
+		string startJunction;
 		vector<Roads*>* roadsInJunction = new vector<Roads*>();
 		vector<int> timeSlices;
 		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.end(); property++)
 		{
-			string endJunction = property->first.data();
+			startJunction = property->first.data();
 			int length = boost::lexical_cast<int>(property->second.data());
 			string roadId = startJunction + "," + endJunction;
 			Roads* pointerToRoad = new Roads(roadId, startJunction, endJunction, length);
@@ -132,16 +137,17 @@ void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads
 			// Roads* pointerToRoad = &newRoad;
 			roads->insert(pair<string, Roads>(roadId, *pointerToRoad));
 			roadsInJunction->push_back(pointerToRoad);
-			timeSlices.push_back(defaultTimeSlice);
+			timeSlices.push_back(global_defultTimeSlice);
 		}
-		Junctions newJunction(startJunction, *roadsInJunction, timeSlices);
-		junctions->insert(pair<string, Junctions>(startJunction,newJunction));
+		Junctions newJunction(endJunction, *roadsInJunction, timeSlices);
+		junctions->insert(pair<string, Junctions>(endJunction,newJunction));
 		delete roadsInJunction;
 	}
 	cout << "Finished to read road map" << endl;
 }
 
-void IniClass::readConfiguration(TrafficSimulation*& simulation)
+//void IniClass::readConfiguration(TrafficSimulation*& simulation)
+void IniClass::readConfiguration()
 {
 	cout << "Starting to read configuration" << endl;
 	boost::property_tree::ptree pt;
@@ -151,9 +157,17 @@ void IniClass::readConfiguration(TrafficSimulation*& simulation)
 	int DEFAULT_TIME_SLICE = pt.get<int>("Configuration.DEFAULT_TIME_SLICE");
 	int MAX_TIME_SLICE = pt.get<int>("Configuration.MAX_TIME_SLICE");
 	int MIN_TIME_SLICE = pt.get<int>("Configuration.MIN_TIME_SLICE");
+	global_maxSpeed=MAX_SPEED;
+	global_defultTimeSlice=DEFAULT_TIME_SLICE;
+	global_maxTimeSlice=MAX_TIME_SLICE; 
+	global_minTimeSlice=MIN_TIME_SLICE;
+	
+	/*
 	simulation->setMaxSpeed(MAX_SPEED);
 	simulation->setDefultTimeSlice(DEFAULT_TIME_SLICE);
 	simulation->setMaxTimeSlice(MAX_TIME_SLICE);
 	simulation->setMinTimeSlice(MIN_TIME_SLICE);
+	*/
+	
 	cout << "Finished to read configuration" << endl;
 }

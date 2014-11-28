@@ -10,7 +10,7 @@
 #include "CarReport.h"
 #include "Junctions.h"
 #include "Roads.h"
-#include "TrafficSimulation.h"
+#include "GlobalVar.h"
 
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -25,10 +25,10 @@ public:
 	IniClass();
 	virtual ~IniClass();
 
-	void readEvents(vector<Event*>*& allEvents, map<string, Roads>*& allRoads);
+	void readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads);
 	void readCommands(vector<Commands> allCommands);
-	void readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads, int defaultTimeSlice);
-	void readConfiguration(TrafficSimulation*& simulation);
+	void readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads);
+	void readConfiguration();
 	
 };
 

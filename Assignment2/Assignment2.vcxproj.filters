@@ -10,6 +10,7 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="AddCarEvent.cpp" />
     <ClCompile Include="ini.cpp" />
+    <ClCompile Include="GlobalVar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddCarEvent.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="CarFaulttEvent.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="ini.h" />
+    <ClInclude Include="GlobalVar.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment2.rc" />

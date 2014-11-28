@@ -86,6 +86,7 @@
     <ClInclude Include="CarReport.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="GlobalVar.h" />
     <ClInclude Include="ini.h" />
     <ClInclude Include="JunctionReport.h" />
     <ClInclude Include="Junctions.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="Junctions.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Roads.cpp" />
+    <ClCompile Include="GlobalVar.cpp" />
     <ClCompile Include="TrafficSimulation.cpp" />
   </ItemGroup>
   <ItemGroup>
