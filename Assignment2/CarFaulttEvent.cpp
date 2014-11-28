@@ -22,7 +22,7 @@ void CarFaulttEvent::performEvent()
 }
 	
 //getters
-int CarFaulttEvent::getTimeOfFault()
+int CarFaulttEvent::getTimeOfFault() const
 {
 	return _timeOfFault;
 }

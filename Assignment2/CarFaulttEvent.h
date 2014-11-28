@@ -14,7 +14,7 @@ public:
 	void performEvent();
 	
 	//getters
-	int getTimeOfFault();
+	int getTimeOfFault() const;
 
 	//setters
 	void setTimeOfFault(int timeOfFault);
