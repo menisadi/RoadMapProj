@@ -66,7 +66,7 @@ void Roads::setLength(int lengthVal){
 	_length=lengthVal;
 }
 void Roads::updateNumOfCarInside(){
-		//_numOfCarInside=_carsInRoad.size;	/// ! not work
+	_numOfCarInside = _carsInRoad.size
 }
 void Roads::setCarsInRoad(vector<Car> carsInRoadVal){
 	_carsInRoad=carsInRoadVal;
@@ -85,8 +85,8 @@ Car Roads::popFirstCarInRoad(){
 	_carsInRoad.pop_back();
 	return tmpCar;
 }					
-void Roads::pushNewCarToRoad(Car& newCarRef){
-	_carsInRoad.push_back(newCarRef);
+void Roads::pushNewCarToRoad(Car newCarVal){
+	_carsInRoad.push_back(newCarVal);
 }
 //void Roads::killCarInTheEnd(Car& oldCarRef){}
 //void Roads::carSpeedUpdate(){}

@@ -4,9 +4,9 @@ IniClass::IniClass(){}
 
 IniClass::~IniClass() {}
 
-vector<string> IniClass::split(string toSplit)
+vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 {
-	vector<string> splitted;
+	vector<Roads*> splitted;
 	size_t indexStart = 0;
 	size_t indexMiddle = 0;
 	size_t indexEnd = 0;
@@ -22,14 +22,14 @@ vector<string> IniClass::split(string toSplit)
 	{
 		indexEnd = tmpStr.find_first_of(',', indexMiddle) + 1;
 		nameOfRoad = tmpStr.substr(indexStart, (indexEnd - indexStart) - 1);
-		splitted.push_back(nameOfRoad);
+		splitted.push_back(&(allRoads->find(nameOfRoad)->second));				
 		indexStart = indexMiddle;
 		indexMiddle = indexEnd;
 	}
 	return splitted;
 }
 
-void IniClass::readEvents(vector<Event>*& allEvents) {
+void IniClass::readEvents(vector<Event>*& allEvents, map<string, Roads>*& allRoads) {
 	cout << "Starting to read events" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
@@ -48,7 +48,7 @@ void IniClass::readEvents(vector<Event>*& allEvents) {
 		{
 			typeNumber = 0;
 			string carRoute = property->second.data();
-			vector<string> routeVector(split(carRoute));
+			vector<Roads*> routeVector(split(carRoute,allRoads));
 			allEvents->push_back(AddCarEvent(carName, routeVector, eventTime));
 		}
 		else

@@ -15,7 +15,11 @@ CarFaulttEvent& CarFaulttEvent::operator=(const CarFaulttEvent& E){
 	 return *this;
 }
 
-void CarFaulttEvent::performEvent(){}
+void CarFaulttEvent::performEvent()
+{
+	// find car
+	// change his condition to be _timeOfFault
+}
 	
 //getters
 int CarFaulttEvent::getTimeOfFault()

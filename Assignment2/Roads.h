@@ -42,7 +42,7 @@ using namespace std;
 	 void setBaseSpeed(int basespeedVal);
 
 	 Car popFirstCarInRoad();
-     void pushNewCarToRoad(Car& newCarRef); //meybe pointer*?
+     void pushNewCarToRoad(Car newCarVal); //meybe pointer*?
 	 void baseSpeedUpdate();
 	 void carSpeedUpdate();
 	 void killCarInTheEnd(Car& oldCarRef);

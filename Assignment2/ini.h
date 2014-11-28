@@ -20,12 +20,12 @@ using namespace std;
 
 class IniClass{
 private:
-	vector<string> IniClass::split(string toSplit);
+	vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads);
 public:
 	IniClass();
 	virtual ~IniClass();
 
-	void readEvents(vector<Event>*& allEvents);
+	void IniClass::readEvents(vector<Event>*& allEvents, map<string, Roads>*& allRoads) {
 	void readCommands(vector<Commands> allCommands);
 	void readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads, int defaultTimeSlice);
 	void readConfiguration(TrafficSimulation*& simulation);
