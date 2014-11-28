@@ -43,21 +43,46 @@ void Junctions::setTimeSlice(vector<int> timeSliceVal){
 void Junctions::setRoadsInJunction(vector<Roads*> roadsInJunction){  
 	_roadsInJunction=roadsInJunction;
 }
-void Junctions::advanceCarsInJunctions(){
-	
-	std::vector<int>::iterator itSliceTime =_timeSlice.begin();
-	if(*itSliceTime >0 ){}
-
-	//**Move car(first on vector) from source road(first on vector) to destination road**//
-	std::vector<Roads*>::iterator itsourceRoad =_roadsInJunction.begin();
-	Car *carGoesGreen = new Car((*itsourceRoad)->popFirstCarInRoad());
-	Roads* theNextRoad = carGoesGreen->popFirstRoadsInRoute();
-	theNextRoad->pushNewCarToRoad(*carGoesGreen);
-	//****//
-
-
+void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad(){
+		if(_roadsInJunction[0]->getCarsInRoad().size() > 0){									        //if there is cars in this road?
+			if(_roadsInJunction[0]->getCarsInRoad()[0].getLocation() == _roadsInJunction[0]->getlength()){//there is cars wait for pass?{		
+				std::vector<Roads*>::iterator itsourceRoad =_roadsInJunction.begin();
+				Car *carGoesGreen = new Car(_roadsInJunction[0]->popFirstCarInRoad());
+				Roads* theNextRoad = carGoesGreen->popFirstRoadsInRoute();
+				theNextRoad->pushNewCarToRoad(*carGoesGreen);
+			}
+		}
+		
+		
 }
-	 
-//void Junctions::initRoadsFromStringINI(){}
-//void Junctions::initTimeSliceFromStringINI(){}
+
+void Junctions::replaceRoadinJunction(int conterStasticCarPass, int MaxTimeSlice, int MinTimeSlice){
+		if(conterStasticCarPass==0)
+			_timeSlice[0]=max(_timeSlice[0]-1,MaxTimeSlice);
+		else if (conterStasticCarPass==_roadsInJunction[0]->getlength())
+			_timeSlice[0]=min(_timeSlice[0]+1,MaxTimeSlice);
+		else{
+			swap(_timeSlice[0], _timeSlice[_timeSlice.size()-1]);
+			swap(_roadsInJunction[0], _roadsInJunction[_roadsInJunction.size()-1]);
+		}
+}
+
+void Junctions::advanceCarsInJunctions(TrafficSimulation TS){
+		/* Advance in junction:
+		1---if time slice left is 0, replace road and update next time slice for that road by if any cars passed at that time (by the rules in the assignment)
+		2---find car in the new road (or old if time slice was > 0)
+		3---if car found push it.
+		4---reduce time slice for that road.
+		*/
+	int conterStasticCarPass=0;
+	if(_roadsInJunction.size()>0){
+		if(_timeSlice[0]<0 ){
+			replaceRoadinJunction(conterStasticCarPass,TS.getMaxTimeSlice(),TS.getMinTimeSlice());
+			conterStasticCarPass=0;
+		}
+		MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad();
+		--_timeSlice[0];
+		++conterStasticCarPass;	
+	}
+}
 
