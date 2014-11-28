@@ -25,11 +25,11 @@ public:
 	IniClass();
 	virtual ~IniClass();
 
-	void IniClass::readEvents(vector<Event>*& allEvents, map<string, Roads>*& allRoads) {
+	void readEvents(vector<Event>*& allEvents, map<string, Roads>*& allRoads);
 	void readCommands(vector<Commands> allCommands);
 	void readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads, int defaultTimeSlice);
 	void readConfiguration(TrafficSimulation*& simulation);
-
+	
 };
 
 #endif /* INI_H_ */

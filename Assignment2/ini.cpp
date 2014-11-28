@@ -3,7 +3,7 @@
 IniClass::IniClass(){}
 
 IniClass::~IniClass() {}
-
+/*
 vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 {
 	vector<Roads*> splitted;
@@ -28,7 +28,7 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	}
 	return splitted;
 }
-
+*//*
 void IniClass::readEvents(vector<Event>*& allEvents, map<string, Roads>*& allRoads) {
 	cout << "Starting to read events" << endl;
 	boost::property_tree::ptree pt;
