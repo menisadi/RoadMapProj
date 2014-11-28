@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "Roads.h"
+#include "TrafficSimulation.h"
 //class Roads;
 
 using namespace std;
@@ -31,10 +32,9 @@ using namespace std;
      void setTimeSlice(vector<int> timeSliceVal);
 	 void setRoadsInJunction(vector<Roads*> roadsInJunction); 
 
-	 
-	 void initRoadsFromStringINI();
-	 void initTimeSliceFromStringINI();
-	 void advanceCarsInJunctions();
+	 void advanceCarsInJunctions(TrafficSimulation TS);
+	 void MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad();
+	 void replaceRoadinJunction(int conterStasticCarPass, int MaxTimeSlice,int MinTimeSlice);
 
 	 private:
      string _idJunction;

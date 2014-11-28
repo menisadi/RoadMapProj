@@ -43,6 +43,7 @@ public:
 	void initRouteFromStringINI(const string& RouteStringINI);
 	void updateMyRoad();
 	void updateHistory();
+	
 
 
 private:
