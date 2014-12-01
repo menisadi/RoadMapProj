@@ -112,7 +112,7 @@ void Roads::advanceCarsInRoad(){
 		if (itCurrentCar->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
 		if ( itCurrentCar->getCondition() == 0)
 		{
-			int speedCalculation = int(ceil((_baseSpeed)/(2*(counterFaultyCars-counterFaultyCarsInTheSameLine))));
+			int speedCalculation = int(ceil((_baseSpeed)/(pow(2,(counterFaultyCars-counterFaultyCarsInTheSameLine)))));
 			itCurrentCar->setspeed(speedCalculation);
 
 			int locationCalculation = itCurrentCar->getLocation() + speedCalculation;
