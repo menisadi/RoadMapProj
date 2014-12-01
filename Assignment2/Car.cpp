@@ -83,8 +83,8 @@ void Car::setHistory(const string& history){
 	_history=history;
 }
 Roads* Car::popFirstRoadsInRoute(){
-	std::vector<Roads*>::iterator it =_route->end();
-	Roads* tmpRoad = *it;
+	// std::vector<Roads*>::iterator it =_route->end();	
+	Roads* tmpRoad = (_route->back());
 	_route->pop_back();
 	return  tmpRoad;
 }

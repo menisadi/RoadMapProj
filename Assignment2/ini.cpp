@@ -136,6 +136,7 @@ void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads
 			// Roads newRoad(roadId, startJunction, endJunction, length);
 			// Roads* pointerToRoad = &newRoad;
 			roads->insert(pair<string, Roads>(roadId, *pointerToRoad));
+			pointerToRoad = &((roads->find(roadId))->second);
 			roadsInJunction->push_back(pointerToRoad);
 			timeSlices.push_back(global_defultTimeSlice);
 		}
