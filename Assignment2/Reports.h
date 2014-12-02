@@ -16,8 +16,16 @@ class Reports : public Commands
 	int time_;
       
   public:
+	Reports();
+	Reports(string Id, int time);
+	Reports(Reports &other);
+	Reports& operator=(const Reports &R);
 	virtual void writeReport()=0;
-     
+
+	string getId();
+	int getTime();
+	void setId(string newId);
+	void setTime(int newTime);
   };   
   
   #endif //_REPORTS_H_

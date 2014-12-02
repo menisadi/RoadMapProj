@@ -8,6 +8,8 @@
 #include "CarFaulttEvent.h"
 #include "Commands.h"
 #include "CarReport.h"
+#include "RoadReport.h"
+#include "JunctionReport.h"
 #include "Junctions.h"
 #include "Roads.h"
 #include "GlobalVar.h"
@@ -26,7 +28,7 @@ public:
 	virtual ~IniClass();
 
 	void readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads);
-	void readCommands(vector<Commands> allCommands);
+	void readCommands(vector<Reports*>*& allReports);
 	void readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads);
 	void readConfiguration();
 	
