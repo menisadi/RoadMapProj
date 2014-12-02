@@ -58,7 +58,7 @@ void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Road
 			//eventsInTimeOrder->push_back(tmp);
 			(*eventsInTimeOrder)[eventTime]=tmp;
 
-			cout << ""<<endl;
+			// cout << ""<<endl;
 		}
 		else
 		{
@@ -71,8 +71,8 @@ void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Road
 	cout << "Finished events" << endl;
 }
 
-/*
-void IniClass::readCommands(vector<Commands> allCommands)
+
+void IniClass::readCommands(vector<Reports*>*& allReports)
 {
 	cout << "Starting to read Commands" << endl;
 	boost::property_tree::ptree pt;
@@ -86,7 +86,10 @@ void IniClass::readCommands(vector<Commands> allCommands)
 		int CommandsTime = property->second.data;
 		int typeNumber;
 		if (CommandsType[0] == 't')
-			typeNumber = 0; // enter commandTime into the overall timer
+		{
+			typeNumber = 0;
+			global_inputSimulationTime = CommandsTime;
+		}
 		else
 		{
 			property++;
@@ -97,27 +100,27 @@ void IniClass::readCommands(vector<Commands> allCommands)
 			{
 				typeNumber = 1;
 				string carId = property->second.data;
-				// allCommands.push_back(new CarReport());
+				allReports->push_back(new CarReport(CommandsName, CommandsTime, carId));
 			}
 			else if (CommandsType[0] == 'r')
 			{
 				typeNumber = 2;
 				string startJunction = property->second.data;
 				property++;
-				string startJunction = property->second.data;
-				// allCommands.push_back(new CarReport());
+				string endJunction = property->second.data;
+				allReports->push_back(new RoadReport(CommandsName,CommandsTime,startJunction,endJunction));
 			}
 			else if (CommandsType[0] == 'j')
 			{
 				typeNumber = 3;
 				string junctionId = property->second.data;
-				// allCommands.push_back(new CarReport());
+				allReports->push_back(new JunctionReport(CommandsName, CommandsTime, junctionId));
 			}
 		}		
 	}
 	cout << "Finished Commands" << endl;
 }
-*/
+
 
 void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads)
 {

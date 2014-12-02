@@ -13,13 +13,18 @@ using namespace std;
 class CarReport : public Reports
   {
   private:
-	 string baginJnc_;
-     string endJnc_;
 	 string carId_;
       
   public:
-	virtual void writeReport()=0;
-     
+	CarReport();
+	CarReport(string reportId, int time, string carId);
+	CarReport(CarReport &other);
+	virtual ~CarReport();
+	CarReport & operator=(const CarReport &R);
+	virtual void writeReport();
+
+	string getCarId();
+	void setCarId(string newCarId);
   };   
   
   #endif //CARREPORT_H_

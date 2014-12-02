@@ -16,8 +16,15 @@ class JunctionReport : public Reports
 	 string idJunction_;
       
   public:
-	virtual void writeReport()=0;
-     
+	  JunctionReport();
+	  JunctionReport(string reportId, int time, string idJunction);
+	  JunctionReport(JunctionReport &other);
+	  virtual ~JunctionReport();
+	  JunctionReport & operator=(const JunctionReport &R);
+	  virtual void writeReport();
+
+	  string getIdJunction();
+	  void setIdJunction(string newIdJunction);
   };   
   
   #endif //JUNCTIONREPORT_H_
