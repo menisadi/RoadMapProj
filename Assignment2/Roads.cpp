@@ -88,7 +88,8 @@ Car Roads::popFirstCarInRoad(){
 }					
 void Roads::pushNewCarToRoad(Car newCarVal){
 	++_numOfCarInside;
-	_carsInRoad.push_back(newCarVal);
+	_carsInRoad.push_back(Car(newCarVal));
+	//~newCarVal();
 }
 //void Roads::killCarInTheEnd(Car& oldCarRef){}
 //void Roads::carSpeedUpdate(){}

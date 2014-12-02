@@ -39,7 +39,7 @@ void simulationManagement()
 
 int main(void)
 {
-	global_inputSimulationTime=5;
+	global_inputSimulationTime=20;
 	simulationInit();
 	for(global_SimulationTime = 1; global_SimulationTime <= global_inputSimulationTime ; ++global_SimulationTime )
 		simulationManagement();

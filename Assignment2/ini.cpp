@@ -27,6 +27,9 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 		indexStart = indexMiddle;
 		indexMiddle = indexEnd;
 	}
+	std::rotate(splitted.begin(),
+            splitted.end()-1, // this will be the new first element
+            splitted.end());
 	return splitted;
 }
 

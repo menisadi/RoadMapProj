@@ -74,7 +74,10 @@ void Car::setLocation(int location){
 	_locationInRoad=location;
 }
 void Car::setspeed(int speed){
-	_speed=speed;
+	if(speed>=global_maxSpeed)
+		_speed=global_maxSpeed;
+	else
+		_speed=speed;
 }
 void Car::setCurrentRoad(const string& currentRoad){
 	_currentRoad=currentRoad;

@@ -48,8 +48,13 @@ void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad
 			if(_roadsInJunction[0]->getCarsInRoad()[0].getLocation() == _roadsInJunction[0]->getlength()){//there is cars wait for pass?{		
 				std::vector<Roads*>::iterator itsourceRoad =_roadsInJunction.begin();
 				Car *carGoesGreen = new Car(_roadsInJunction[0]->popFirstCarInRoad());
-				Roads* theNextRoad = carGoesGreen->popFirstRoadsInRoute();
-				theNextRoad->pushNewCarToRoad(*carGoesGreen);
+				if(carGoesGreen->getRoute()->size()>0){//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					Roads* theNextRoad = carGoesGreen->popFirstRoadsInRoute();
+					carGoesGreen->setLocation(0);
+					theNextRoad->pushNewCarToRoad(*carGoesGreen);
+				}
+				//	delete all ptr!!
+				cout<< ""<<endl;
 			}
 		}
 		

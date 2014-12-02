@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "GlobalVar.h"
 //#include "Roads.h"
 
 using namespace std;
