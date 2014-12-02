@@ -21,7 +21,7 @@ void simulationManagement()
 {
 	//1. Execute Events
 		map<int, Event*>::iterator itEvents = eventsInTimeOrder->begin(); 
-		while( (*itEvents).first == global_SimulationTime ){
+		while( (!(eventsInTimeOrder->empty())) && ((*itEvents).first == global_SimulationTime )){
 				((*itEvents).second)->performEvent();
 				eventsInTimeOrder->erase(itEvents);
 				itEvents = eventsInTimeOrder->begin();
