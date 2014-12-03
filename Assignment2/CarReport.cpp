@@ -18,15 +18,10 @@ CarReport::~CarReport(){}
 
 void CarReport::writeReport(boost::property_tree::ptree &tree)
 {
-	// boost::property_tree::ptree pt;
-	//string reportId = Reports::getId();
-	// string check = Reports::getId();
 	tree.put(Reports::getId().append(".car ID"), carId_);
-	// Overwrites the value
-	tree.put(Reports::getId().append(".history"), global_SimulationTime);
-	// Adds a second node with the new value.
-	tree.put(Reports::getId().append(".fault time left"), global_SimulationTime);
-	// tree.put("a.try", 2);
+	//string history = (*CarMap)[carId_]->getHistory();
+	//tree.put(Reports::getId().append(".history"), history);
+	//tree.put(Reports::getId().append(".fault time left"), (*CarMap)[carId_]->getCondition());
 }
 
 string CarReport::getCarId(){ return carId_; }
