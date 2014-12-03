@@ -1,16 +1,16 @@
 #include "Main.h"
 
 //Global var
-map<string, Roads>* RoadsMap;
-map<string, Junctions>* JunctionsMap;
+map<string, Roads*>* RoadsMap;
+map<string, Junctions*>* JunctionsMap;
 map<int, Event*>* eventsInTimeOrder;
-map<string, Car*>* CarMap;
+//map<string, Car*>* CarMap;
 
 void simulationInit()
 {
-	CarMap = new map<string, Car*>();
-	RoadsMap = new map<string, Roads>();
-	JunctionsMap = new map<string, Junctions>();
+	//CarMap = new map<string, Car*>();
+	RoadsMap = new map<string, Roads*>();
+	JunctionsMap = new map<string, Junctions*>();
 	eventsInTimeOrder = new map<int, Event*>();
 	IniClass ic;
 	ic.readConfiguration();
@@ -31,11 +31,11 @@ void simulationManagement()
 	//1.2 Update car History
 	//2. Execute Commands
 	//3. Advance cars in roads
-		for( map<string, Roads>::iterator itRoads=RoadsMap->begin(); itRoads!=RoadsMap->end(); ++itRoads)  //i stop here! Note: So far the vehicles are in. Should check out the following functions from here on also need to add the issue of reports and operating history of the event Car Damaged
-			(*itRoads).second.advanceCarsInRoad();
+		for( map<string, Roads*>::iterator itRoads=RoadsMap->begin(); itRoads!=RoadsMap->end(); ++itRoads)  
+			(*itRoads).second->advanceCarsInRoad();
 	//4. Advance cars in junctions
-		for( map<string, Junctions>::iterator itJunctions =JunctionsMap->begin(); itJunctions!=JunctionsMap->end(); ++itJunctions)
-			(*itJunctions).second.advanceCarsInJunctions();
+		for( map<string, Junctions*>::iterator itJunctions =JunctionsMap->begin(); itJunctions!=JunctionsMap->end(); ++itJunctions)
+			(*itJunctions).second->advanceCarsInJunctions();
 }
 
 int main(void)

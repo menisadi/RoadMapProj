@@ -18,7 +18,7 @@ AddCarEvent& AddCarEvent::operator=(const AddCarEvent& E){
 void AddCarEvent::performEvent()
 {
 	Car* newCar = new Car(Event::getCarId(), _routeToAdd, Event::getTime());
-	CarMap->insert(pair<string, Car*>(newCar->getID(), newCar));              //!!!!!!!!!!!!!!!!!!!! lost ptr
+	//CarMap->insert(pair<string, Car*>(newCar->getID(), newCar));              //!!!!!!!!!!!!!!!!!!!! lost ptr
 	int sizeOfRouteVector = _routeToAdd->size();
 	newCar->setCurrentRoad((*_routeToAdd)[sizeOfRouteVector-1]->getId());
 	if (sizeOfRouteVector > 0)

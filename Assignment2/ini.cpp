@@ -4,7 +4,7 @@ IniClass::IniClass(){}
 
 IniClass::~IniClass() {}
 
-vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
+vector<Roads*> IniClass::split(string toSplit, map<string, Roads*>*& allRoads)
 {
 	vector<Roads*> splitted;
 	size_t indexStart = 0;
@@ -23,7 +23,7 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	{
 		indexEnd = tmpStr.find_first_of(',', indexMiddle) + 1;
 		nameOfRoad = tmpStr.substr(indexStart, (indexEnd - indexStart) - 1);
-		splitted.push_back(&(allRoads->find(nameOfRoad)->second));				
+		splitted.push_back(allRoads->find(nameOfRoad)->second);				
 		indexStart = indexMiddle;
 		indexMiddle = indexEnd;
 	}
@@ -31,7 +31,7 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	return splitted;
 }
 
-void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads) {
+void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads*>*& allRoads) {
 	cout << "Starting to read events" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
@@ -120,7 +120,7 @@ void IniClass::readCommands(vector<Reports*>*& allReports)
 }
 */
 
-void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads)
+void IniClass::readRoadMap(map<string, Junctions*>*& junctions, map<string, Roads*>*& roads)
 {
 	cout << "Starting to read road map" << endl;
 	boost::property_tree::ptree pt;
@@ -139,13 +139,13 @@ void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads
 			Roads* pointerToRoad = new Roads(roadId, startJunction, endJunction, length);
 			// Roads newRoad(roadId, startJunction, endJunction, length);
 			// Roads* pointerToRoad = &newRoad;
-			roads->insert(pair<string, Roads>(roadId, *pointerToRoad));
-			pointerToRoad = &((roads->find(roadId))->second);
+			roads->insert(pair<string, Roads*>(roadId, pointerToRoad));
+			pointerToRoad = (roads->find(roadId))->second;
 			roadsInJunction->push_back(pointerToRoad);
 			timeSlices.push_back(global_defultTimeSlice);
 		}
-		Junctions newJunction(endJunction, *roadsInJunction, timeSlices);
-		junctions->insert(pair<string, Junctions>(endJunction,newJunction));
+		Junctions* newJunction = new Junctions(endJunction, *roadsInJunction, timeSlices);
+		junctions->insert(pair<string, Junctions*>(endJunction,newJunction));
 		delete roadsInJunction;
 	}
 	cout << "Finished to read road map" << endl;
