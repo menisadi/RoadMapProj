@@ -31,13 +31,8 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads*>*& allRoads)
 	return splitted;
 }
 
-<<<<<<< HEAD
-void IniClass::readEvents(multimap<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads) {
+void IniClass::readEvents(multimap<int, Event*>*& eventsInTimeOrder, map<string, Roads*>*& allRoads) {
 	std::cout << "Starting to read events" << endl;
-=======
-void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads*>*& allRoads) {
-	cout << "Starting to read events" << endl;
->>>>>>> 966049b3dd340a1c017c573375a03c7db67182a9
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++) 

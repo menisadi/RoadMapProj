@@ -20,7 +20,7 @@ void CarReport::writeReport(boost::property_tree::ptree &tree)
 {
 	// boost::property_tree::ptree pt;
 	//string reportId = Reports::getId();
-	string check = Reports::getId();
+	// string check = Reports::getId();
 	tree.put(Reports::getId().append(".car ID"), carId_);
 	// Overwrites the value
 	tree.put(Reports::getId().append(".history"), global_SimulationTime);
