@@ -54,9 +54,8 @@ void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Road
 			vector<Roads*>* routeVector=new vector<Roads*>(split(carRoute,allRoads));
 			AddCarEvent* tmp=new AddCarEvent(carName, routeVector, eventTime) ;
 			//eventsInTimeOrder->push_back(tmp);
-			(*eventsInTimeOrder)[eventTime]=tmp;
-
-			// cout << ""<<endl;
+			(*eventsInTimeOrder)[eventTime]=tmp;   //!!!!!!!!!!!!!!!!!!!!!need to be map dable index
+			 cout << ""<<endl;
 		}
 		else
 		{
@@ -144,7 +143,7 @@ void IniClass::readRoadMap(map<string, Junctions*>*& junctions, map<string, Road
 		}
 		Junctions* newJunction = new Junctions(endJunction, roadsInJunction, timeSlices);
 		junctions->insert(pair<string, Junctions*>(endJunction,newJunction));
-		delete roadsInJunction;
+		//delete roadsInJunction;
 	}
 	cout << "Finished to read road map" << endl;
 }
