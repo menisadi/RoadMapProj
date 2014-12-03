@@ -16,7 +16,7 @@ using namespace std;
   {
   public:
      Roads();
-     Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal);
+     Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car*>* carsInRoadVal, vector<Car*>* CemeteryOfcarsVal,int baseSpeedVal);
      Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal);
 	 Roads(const Roads& copyRoad);
      virtual ~Roads();
@@ -30,8 +30,8 @@ using namespace std;
 	 string getEndJnc() const;
      int getlength() const;
      int getNumOfCarInside() const;
-	 vector<Car> getCarsInRoad() const;
-	 vector<Car> getCemeteryOfcars() const;
+	 vector<Car*>* getCarsInRoad() const;
+	 vector<Car*>* getCemeteryOfcars() const;
 	 int getBaseSpeed() const;
      
 	 void setId(const string& IdVal);
@@ -39,15 +39,15 @@ using namespace std;
      void setEndJnc(const string& endJncVal);
      void setLength(int lengthVal);
      void updateNumOfCarInside();
-	 void setCarsInRoad(vector<Car> carsInRoadVal);
-	 void setCemeteryOfcars(vector<Car> CemeteryOfcarsVal);
+	 void setCarsInRoad(vector<Car*>* carsInRoadVal);
+	 void setCemeteryOfcars(vector<Car*>* CemeteryOfcarsVal);
 	 void setBaseSpeed(int basespeedVal);
 
-	 Car popFirstCarInRoad();
-     void pushNewCarToRoad(Car newCarVal); //meybe pointer*?
+	 Car* popFirstCarInRoad();
+     void pushNewCarToRoad(Car* newCarVal); //meybe pointer*?
 	 void baseSpeedUpdate();
 	 void carSpeedUpdate();
-	 void killCarInTheEnd(Car oldCarRef);
+	 void killCarInTheEnd(Car* oldCarRef);
 	 void advanceCarsInRoad();
 	 
   private:
@@ -56,8 +56,8 @@ using namespace std;
      string _endJnc;
      int _length;
      int _numOfCarInside;
-     vector<Car> _carsInRoad;  
-	 vector<Car> _CemeteryOfcars; 
+     vector<Car*>* _carsInRoad;  
+	 vector<Car*>* _CemeteryOfcars; 
 	 int _baseSpeed;
   };   
   

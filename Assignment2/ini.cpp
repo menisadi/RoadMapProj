@@ -4,7 +4,7 @@ IniClass::IniClass(){}
 
 IniClass::~IniClass() {}
 
-vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
+vector<Roads*> IniClass::split(string toSplit, map<string, Roads*>*& allRoads)
 {
 	vector<Roads*> splitted;
 	size_t indexStart = 0;
@@ -23,7 +23,7 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	{
 		indexEnd = tmpStr.find_first_of(',', indexMiddle) + 1;
 		nameOfRoad = tmpStr.substr(indexStart, (indexEnd - indexStart) - 1);
-		splitted.push_back(&(allRoads->find(nameOfRoad)->second));				
+		splitted.push_back(allRoads->find(nameOfRoad)->second);				
 		indexStart = indexMiddle;
 		indexMiddle = indexEnd;
 	}
@@ -31,8 +31,13 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	return splitted;
 }
 
+<<<<<<< HEAD
 void IniClass::readEvents(multimap<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads) {
 	std::cout << "Starting to read events" << endl;
+=======
+void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads*>*& allRoads) {
+	cout << "Starting to read events" << endl;
+>>>>>>> 966049b3dd340a1c017c573375a03c7db67182a9
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++) 
@@ -130,7 +135,7 @@ void IniClass::readCommands(multimap<int, Reports*>*& allReports)
 }
 
 
-void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads)
+void IniClass::readRoadMap(map<string, Junctions*>*& junctions, map<string, Roads*>*& roads)
 {
 	std::cout << "Starting to read road map" << endl;
 	boost::property_tree::ptree pt;
@@ -140,22 +145,20 @@ void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads
 		string endJunction = section->first;
 		string startJunction;
 		vector<Roads*>* roadsInJunction = new vector<Roads*>();
-		vector<int> timeSlices;
+		vector<int>* timeSlices = new vector<int>();
 		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.end(); property++)
 		{
 			startJunction = property->first.data();
 			int length = boost::lexical_cast<int>(property->second.data());
 			string roadId = startJunction + "," + endJunction;
 			Roads* pointerToRoad = new Roads(roadId, startJunction, endJunction, length);
-			// Roads newRoad(roadId, startJunction, endJunction, length);
-			// Roads* pointerToRoad = &newRoad;
-			roads->insert(pair<string, Roads>(roadId, *pointerToRoad));
-			pointerToRoad = &((roads->find(roadId))->second);
+			roads->insert(pair<string, Roads*>(roadId, pointerToRoad));
+			pointerToRoad = (roads->find(roadId))->second;
 			roadsInJunction->push_back(pointerToRoad);
-			timeSlices.push_back(global_defultTimeSlice);
+			timeSlices->push_back(global_defultTimeSlice);
 		}
-		Junctions newJunction(endJunction, *roadsInJunction, timeSlices);
-		junctions->insert(pair<string, Junctions>(endJunction,newJunction));
+		Junctions* newJunction = new Junctions(endJunction, roadsInJunction, timeSlices);
+		junctions->insert(pair<string, Junctions*>(endJunction,newJunction));
 		delete roadsInJunction;
 	}
 	std::cout << "Finished to read road map" << endl;

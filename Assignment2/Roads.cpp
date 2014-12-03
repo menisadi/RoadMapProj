@@ -2,9 +2,13 @@
 
 Roads::Roads(){}
 
-Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car> carsInRoadVal, vector<Car> CemeteryOfcarsVal,int baseSpeedVal):_Id(IdVal),_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(numOfCarInsideVal),_baseSpeed(baseSpeedVal){// missing ",_carsInRoad(carsInRoadVal) , _CemeteryOfcars(CemeteryOfcarsVal)
+Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal, int lengthVal, int numOfCarInsideVal, vector<Car*>* carsInRoadVal, vector<Car*>* CemeteryOfcarsVal,int baseSpeedVal):_Id(IdVal),_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(numOfCarInsideVal),_baseSpeed(baseSpeedVal){// missing ",_carsInRoad(carsInRoadVal) , _CemeteryOfcars(CemeteryOfcarsVal)
 }
-Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal):_Id(IdVal),_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(0){Roads::baseSpeedUpdate();}
+Roads::Roads(const string& IdVal,const string& baginJncVal, const string& endJncVal,int lengthVal):_Id(IdVal),_baginJnc(baginJncVal),_endJnc(endJncVal),_length(lengthVal),_numOfCarInside(0){
+	Roads::baseSpeedUpdate();
+	 _carsInRoad = new vector<Car*>();
+	  _CemeteryOfcars = new vector<Car*>(); 
+}
 
 Roads::Roads(const Roads& copyRoad){
 	copy(copyRoad);
@@ -43,10 +47,10 @@ int Roads::getlength() const{
 int Roads::getNumOfCarInside() const{
 	return _numOfCarInside;
 }
-vector<Car> Roads::getCarsInRoad() const{
+vector<Car*>* Roads::getCarsInRoad() const{
 	return _carsInRoad;
 }
-vector<Car> Roads::getCemeteryOfcars() const{
+vector<Car*>* Roads::getCemeteryOfcars() const{
 	return _CemeteryOfcars;
 }
 int Roads::getBaseSpeed() const{
@@ -66,12 +70,12 @@ void Roads::setLength(int lengthVal){
 	_length=lengthVal;
 }
 void Roads::updateNumOfCarInside(){
-	_numOfCarInside = _carsInRoad.size();
+	_numOfCarInside = _carsInRoad->size();
 }
-void Roads::setCarsInRoad(vector<Car> carsInRoadVal){
+void Roads::setCarsInRoad(vector<Car*>* carsInRoadVal){
 	_carsInRoad=carsInRoadVal;
 }
-void Roads::setCemeteryOfcars(vector<Car> CemeteryOfcarsVal){
+void Roads::setCemeteryOfcars(vector<Car*>* CemeteryOfcarsVal){
 	_CemeteryOfcars=CemeteryOfcarsVal;
 }
 void Roads::setBaseSpeed(int basespeedVal){
@@ -79,22 +83,24 @@ void Roads::setBaseSpeed(int basespeedVal){
 }
 
 	 
-Car Roads::popFirstCarInRoad(){
+Car* Roads::popFirstCarInRoad(){
 	// std::vector<Car>::iterator it =_carsInRoad.back();
-	Car tmpCar = _carsInRoad.back();
+	Car* tmpCar = _carsInRoad->back();
 	//Car tmpCar = CarMaps
-	_carsInRoad.pop_back();
+	_carsInRoad->pop_back();
 	--_numOfCarInside;
 	return tmpCar;
 }					
-void Roads::pushNewCarToRoad(Car newCarVal){
+void Roads::pushNewCarToRoad(Car* newCarVal){
 	++_numOfCarInside;
-	_carsInRoad.push_back(Car(newCarVal));
+	_carsInRoad->push_back(newCarVal);  //it's copy!!!!!!!!!!!!???? not good
+	cout<<  "" <<endl;
 	//~newCarVal();
 }
-void Roads::killCarInTheEnd(Car oldCarRef){
-	cout <<"id="+oldCarRef.getID() + " " +  oldCarRef.getHistory() << endl;   ///for Test!
-	_CemeteryOfcars.push_back(Car(oldCarRef));
+void Roads::killCarInTheEnd(Car* oldCarRef){
+	cout <<"id="+oldCarRef->getID() + " " +  oldCarRef->getHistory() << endl;   ///for Test!
+	//_CemeteryOfcars->push_back(oldCarRef);
+	_CemeteryOfcars->push_back(oldCarRef);
 }
 //void Roads::carSpeedUpdate(){}
 
@@ -115,30 +121,30 @@ void Roads::advanceCarsInRoad(){
 	int TheLastFaultyCarLocation=-1;
 	int counterFaultyCarsInTheSameLine=0;
 
-	for(std::vector<Car>::iterator itCurrentCar = _carsInRoad.begin(); itCurrentCar != _carsInRoad.end(); ++itCurrentCar){
-		if (itCurrentCar->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
-		if ( itCurrentCar->getCondition() == 0)
+	for(std::vector<Car*>::iterator itCurrentCar = _carsInRoad->begin(); itCurrentCar != _carsInRoad->end(); ++itCurrentCar){
+		if ((*itCurrentCar)->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
+		if ( (*itCurrentCar)->getCondition() == 0)
 		{
 			int speedCalculation = int(ceil((_baseSpeed)/(pow(2,(counterFaultyCars-counterFaultyCarsInTheSameLine)))));
-			itCurrentCar->setspeed(speedCalculation);
+			(*itCurrentCar)->setspeed(speedCalculation);
 
-			int locationCalculation = itCurrentCar->getLocation() + speedCalculation;
+			int locationCalculation = (*itCurrentCar)->getLocation() + speedCalculation;
 			if (locationCalculation <= _length)
-				itCurrentCar->setLocation(locationCalculation);
+				(*itCurrentCar)->setLocation(locationCalculation);
 			else
-				itCurrentCar->setLocation(_length);
+				(*itCurrentCar)->setLocation(_length);
 		}
 		else
 		{
 			++counterFaultyCars;
-			if (itCurrentCar->getLocation()==TheLastFaultyCarLocation)
+			if ((*itCurrentCar)->getLocation()==TheLastFaultyCarLocation)
 				++counterFaultyCarsInTheSameLine;
 			else
 			{
-				itCurrentCar->setLocation(TheLastFaultyCarLocation);
+				(*itCurrentCar)->setLocation(TheLastFaultyCarLocation);
 				counterFaultyCarsInTheSameLine=1;
 			}
 		}
-		itCurrentCar->updateHistory();
+		(*itCurrentCar)->updateHistory();
 	}
 }

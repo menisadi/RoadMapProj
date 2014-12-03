@@ -17,7 +17,7 @@ using namespace std;
   public:
      Junctions();
 	 Junctions(const string& idJunctionVal);
-     Junctions(const string& idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal);
+     Junctions(const string& idJunctionVal, vector<Roads*>* roadsInJunctionVal,vector<int>* timeSliceVal);
      Junctions(const Junctions& copyJunctions);
      virtual ~Junctions();
      Junctions& operator=(const Junctions &JunctionsRightArg);
@@ -25,12 +25,12 @@ using namespace std;
 	void Junctions::copy(const Junctions& copyJunctions);
      
      string getIdJunction() const;
-	 vector<Roads*> getRoadsInJunction() const; //meybe Roads& ?
-     vector<int> getTimeSlice() const;
+	 vector<Roads*>* getRoadsInJunction() const; //meybe Roads& ?
+     vector<int>* getTimeSlice() const;
      
 	 void setID(const string& idJunctionVal);
-     void setTimeSlice(vector<int> timeSliceVal);
-	 void setRoadsInJunction(vector<Roads*> roadsInJunction); 
+     void setTimeSlice(vector<int>* timeSliceVal);
+	 void setRoadsInJunction(vector<Roads*>* roadsInJunction); 
 
 	 void advanceCarsInJunctions();
 	 void MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad();
@@ -38,8 +38,8 @@ using namespace std;
 
 	 private:
      string _idJunction;
-     vector<Roads*> _roadsInJunction; 
-	 vector<int> _timeSlice;
+     vector<Roads*>* _roadsInJunction; 
+	 vector<int>* _timeSlice;
 	 
   };   
   

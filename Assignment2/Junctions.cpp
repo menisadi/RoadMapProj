@@ -2,7 +2,7 @@
 
 Junctions::Junctions(){}
 Junctions:: Junctions(const string& idJunctionVal):_idJunction(idJunctionVal){}
-Junctions:: Junctions(const string& idJunctionVal, vector<Roads*> roadsInJunctionVal,vector<int> timeSliceVal):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal){}
+Junctions:: Junctions(const string& idJunctionVal, vector<Roads*>* roadsInJunctionVal,vector<int>* timeSliceVal):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal){}
 
 Junctions::Junctions(const Junctions& copyJunctions){
 	copy(copyJunctions);
@@ -27,36 +27,37 @@ string Junctions::getIdJunction() const{
 	return _idJunction;
 }
 
-vector<Roads*> Junctions::getRoadsInJunction() const{
+vector<Roads*>* Junctions::getRoadsInJunction() const{
 return _roadsInJunction;								 //meybe return *??
 }
-vector<int> Junctions::getTimeSlice() const{
+vector<int>* Junctions::getTimeSlice() const{
 	return _timeSlice;
 }
      
 void Junctions::setID(const string& idJunctionVal){
 	_idJunction=idJunctionVal;
 }
-void Junctions::setTimeSlice(vector<int> timeSliceVal){
+void Junctions::setTimeSlice(vector<int>* timeSliceVal){
 	 _timeSlice = timeSliceVal;	//memory ???? deep copy??
 }
-void Junctions::setRoadsInJunction(vector<Roads*> roadsInJunction){  
+void Junctions::setRoadsInJunction(vector<Roads*>* roadsInJunction){  
 	_roadsInJunction=roadsInJunction;
 }
 void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad(){
-		if(_roadsInJunction[0]->getCarsInRoad().size() > 0){									        //if there is cars in this road?
-			if(_roadsInJunction[0]->getCarsInRoad()[0].getLocation() == _roadsInJunction[0]->getlength()){//there is cars wait for pass?{		
-				std::vector<Roads*>::iterator itsourceRoad =_roadsInJunction.begin();
-				Car *carGoesGreen = new Car(_roadsInJunction[0]->popFirstCarInRoad());
+	if(((*_roadsInJunction)[0]->getCarsInRoad()->size() > 0)){													//if there is cars in this road?
+			if((*(*_roadsInJunction)[0]->getCarsInRoad())[0]->getLocation()==(*_roadsInJunction)[0]->getlength()){  //there is cars wait for pass?
+				std::vector<Roads*>::iterator itsourceRoad =(*_roadsInJunction).begin();
+				//Car *carGoesGreen = new Car(_roadsInJunction[0]->popFirstCarInRoad());
+				Car *carGoesGreen =(*_roadsInJunction)[0]->popFirstCarInRoad();
 				carGoesGreen->setLocation(0);
-				if(carGoesGreen->getRoute()->size()>0){//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if(carGoesGreen->getRoute()->size()>0){
 					Roads* theNextRoad = carGoesGreen->popFirstRoadsInRoute();
 					carGoesGreen->setCurrentRoad(theNextRoad->getId());
-					theNextRoad->pushNewCarToRoad(*carGoesGreen);
+					theNextRoad->pushNewCarToRoad(carGoesGreen);
 				}
 				else{
 					carGoesGreen->setCurrentRoad("END");
-					_roadsInJunction[0]->killCarInTheEnd(*carGoesGreen);
+					(*_roadsInJunction)[0]->killCarInTheEnd(carGoesGreen);
 				}
 				//	delete all ptr!!
 				cout<< ""<<endl;
@@ -68,12 +69,12 @@ void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad
 
 void Junctions::replaceRoadinJunction(int conterStasticCarPass, int MaxTimeSlice, int MinTimeSlice){
 		if(conterStasticCarPass==0)
-			_timeSlice[0]=max(_timeSlice[0]-1,MaxTimeSlice);
-		else if (conterStasticCarPass==_roadsInJunction[0]->getlength())
-			_timeSlice[0]=min(_timeSlice[0]+1,MaxTimeSlice);
+			(*_timeSlice)[0]=max((*_timeSlice)[0]-1,MaxTimeSlice);
+		else if (conterStasticCarPass==(*_roadsInJunction)[0]->getlength())
+			(*_timeSlice)[0]=min((*_timeSlice)[0]+1,MaxTimeSlice);
 		else{
-			swap(_timeSlice[0], _timeSlice[_timeSlice.size()-1]);
-			swap(_roadsInJunction[0], _roadsInJunction[_roadsInJunction.size()-1]);
+			swap(_timeSlice[0], _timeSlice[(*_timeSlice).size()-1]);
+			swap(_roadsInJunction[0], _roadsInJunction[(*_roadsInJunction).size()-1]);
 		}
 }
 
@@ -85,13 +86,13 @@ void Junctions::advanceCarsInJunctions(){
 		4---reduce time slice for that road.
 		*/
 	int conterStasticCarPass=0;
-	if(_roadsInJunction.size()>0){
-		if(_timeSlice[0]<0 ){
+	if((*_roadsInJunction).size()>0){
+		if((*_timeSlice)[0]<0 ){
 			replaceRoadinJunction(conterStasticCarPass,global_maxTimeSlice,global_minTimeSlice);
 			conterStasticCarPass=0;
 		}
 		MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad();
-		--_timeSlice[0];
+		--(*_timeSlice)[0];
 		++conterStasticCarPass;	
 	}
 }

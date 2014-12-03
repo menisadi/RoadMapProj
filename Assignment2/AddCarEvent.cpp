@@ -17,13 +17,14 @@ AddCarEvent& AddCarEvent::operator=(const AddCarEvent& E){
 
 void AddCarEvent::performEvent()
 {
-	Car* newCar = new Car(Event::getCarId(), _routeToAdd, Event::getTime());
-	CarMap->insert(pair<string, Car*>(newCar->getID(), newCar));              //!!!!!!!!!!!!!!!!!!!! lost ptr
+	string currentCarIdStr = Event::getCarId();
+	CarMap->insert(pair<string, Car*>(currentCarIdStr,new Car(currentCarIdStr, _routeToAdd, Event::getTime())));
 	int sizeOfRouteVector = _routeToAdd->size();
-	newCar->setCurrentRoad((*_routeToAdd)[sizeOfRouteVector-1]->getId());
+	CarMap->find(currentCarIdStr)->second->setCurrentRoad((*_routeToAdd)[sizeOfRouteVector-1]->getId());
 	if (sizeOfRouteVector > 0)
 	{
-		(*_routeToAdd)[sizeOfRouteVector-1]->pushNewCarToRoad(*newCar);
+		(*_routeToAdd)[sizeOfRouteVector-1]->pushNewCarToRoad((CarMap->find(currentCarIdStr)->second));
+		//(*_routeToAdd)[sizeOfRouteVector-1]->pushNewCarToRoad(*newCar);
 		(*_routeToAdd)[sizeOfRouteVector-1]->updateNumOfCarInside();
 		_routeToAdd->pop_back();
 	}
