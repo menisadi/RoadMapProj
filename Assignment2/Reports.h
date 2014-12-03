@@ -4,12 +4,15 @@
 
 #include <vector>
 #include <string>
-#include "Commands.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+#include "GlobalVar.h"
+// #include "Commands.h"
 
 using namespace std;
 
 
-class Reports : public Commands
+class Reports // : public Commands
   {
   private:
 	string Id_;
@@ -20,7 +23,8 @@ class Reports : public Commands
 	Reports(string Id, int time);
 	Reports(Reports &other);
 	Reports& operator=(const Reports &R);
-	virtual void writeReport()=0;
+	virtual ~Reports();
+	virtual void writeReport(boost::property_tree::ptree &tree) = 0;
 
 	string getId();
 	int getTime();

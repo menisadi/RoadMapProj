@@ -15,7 +15,9 @@ RoadReport& RoadReport::operator=(const RoadReport &R)
 	return *this;
 }
 
-void RoadReport::writeReport()
+RoadReport::~RoadReport(){}
+
+void RoadReport::writeReport(boost::property_tree::ptree &tree)
 {
 
 }

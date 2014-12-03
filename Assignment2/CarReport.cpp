@@ -3,9 +3,9 @@
 CarReport::CarReport(){}
 
 CarReport::CarReport(string reportId, int time, string carId)
-	: Reports(reportId,time), carId_(carId) {}
+	: Reports(reportId, time), carId_(carId) {}
 
-CarReport::CarReport(CarReport &other):Reports(other),carId_(other.carId_){}
+CarReport::CarReport(CarReport &other) : Reports(other), carId_(other.carId_){}
 
 CarReport& CarReport::operator=(const CarReport &R)
 {
@@ -14,9 +14,19 @@ CarReport& CarReport::operator=(const CarReport &R)
 	return *this;
 }
 
-void CarReport::writeReport()
-{
+CarReport::~CarReport(){}
 
+void CarReport::writeReport(boost::property_tree::ptree &tree)
+{
+	// boost::property_tree::ptree pt;
+	//string reportId = Reports::getId();
+	// string check = Reports::getId();
+	tree.put(Reports::getId().append(".car ID"), carId_);
+	// Overwrites the value
+	tree.put(Reports::getId().append(".history"), global_SimulationTime);
+	// Adds a second node with the new value.
+	tree.put(Reports::getId().append(".fault time left"), global_SimulationTime);
+	// tree.put("a.try", 2);
 }
 
 string CarReport::getCarId(){ return carId_; }

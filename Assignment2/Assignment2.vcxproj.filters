@@ -11,6 +11,10 @@
     <ClCompile Include="AddCarEvent.cpp" />
     <ClCompile Include="ini.cpp" />
     <ClCompile Include="GlobalVar.cpp" />
+    <ClCompile Include="CarReport.cpp" />
+    <ClCompile Include="JunctionReport.cpp" />
+    <ClCompile Include="Reports.cpp" />
+    <ClCompile Include="RoadReport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddCarEvent.h" />
@@ -37,5 +41,6 @@
     <None Include="Configuration.ini" />
     <None Include="Events.ini" />
     <None Include="RoadMap.ini" />
+    <None Include="Commands.ini" />
   </ItemGroup>
 </Project>

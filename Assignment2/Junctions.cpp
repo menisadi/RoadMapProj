@@ -9,8 +9,10 @@ Junctions::Junctions(const Junctions& copyJunctions){
 	copy(copyJunctions);
 }
 Junctions:: ~Junctions(){
-	//for( vector<Roads*>::iterator ii=_roadsInJunction.begin(); ii!=_roadsInJunction.end(); ++ii)
-	//	delete (*ii);
+	for( vector<Roads*>::iterator ii=_roadsInJunction->begin(); ii!=_roadsInJunction->end(); ++ii)
+		delete (*ii);
+	for( vector<int>::iterator ix=_timeSlice->begin(); ix!=_timeSlice->end(); ++ix)
+		delete (*ix);
 }
 Junctions& Junctions::operator=(const Junctions &JunctionsRightArg){
   copy(JunctionsRightArg);

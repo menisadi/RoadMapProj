@@ -14,7 +14,12 @@ Roads::Roads(const Roads& copyRoad){
 	copy(copyRoad);
 }
 
-Roads:: ~Roads(){}
+Roads:: ~Roads(){
+	 for( vector<Car*> ::iterator ii=_carsInRoad->begin(); ii!=_carsInRoad->end(); ++ii)
+		delete (*ii);
+	 for( vector<Car*> ::iterator ix=_CemeteryOfcars->begin(); ix!=_CemeteryOfcars->end(); ++ix)
+		delete (*ix);
+}
 
 Roads& Roads::operator=(const Roads &RoadsRightArg){
   copy(RoadsRightArg);

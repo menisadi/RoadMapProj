@@ -14,7 +14,9 @@ JunctionReport& JunctionReport::operator=(const JunctionReport &R)
 	return *this;
 }
 
-void JunctionReport::writeReport()
+JunctionReport::~JunctionReport(){}
+
+void JunctionReport::writeReport(boost::property_tree::ptree &tree)
 {
 
 }
