@@ -19,6 +19,8 @@ Roads:: ~Roads(){
 		delete (*ii);
 	 for( vector<Car*> ::iterator ix=_CemeteryOfcars->begin(); ix!=_CemeteryOfcars->end(); ++ix)
 		delete (*ix);
+	 delete (_carsInRoad);
+	 delete (_CemeteryOfcars);
 }
 
 Roads& Roads::operator=(const Roads &RoadsRightArg){

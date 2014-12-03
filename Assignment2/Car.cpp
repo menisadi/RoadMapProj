@@ -12,8 +12,11 @@ Car::Car(const Car& other){
 }
 
 Car::~Car(){
-	for( vector<Roads*>::iterator ii=_route->begin(); ii!=_route->end(); ++ii)
-		delete (*ii);
+	if(_route==0){ ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		for( vector<Roads*>::iterator ii=_route->begin(); ii!=_route->end(); ++ii)
+			delete (*ii);
+	}
+	 delete (_route);
 }
 
 Car & Car::operator=(const Car& C){    

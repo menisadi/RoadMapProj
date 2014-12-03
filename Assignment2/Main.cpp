@@ -5,12 +5,10 @@ map<string, Roads*>* RoadsMap;
 map<string, Junctions*>* JunctionsMap;
 multimap<int, Event*>* eventsInTimeOrder;
 multimap<int, Reports*>* reportsInTimeOrder;
-map<string, Car*>* CarMap;
 boost::property_tree::ptree* pt = new boost::property_tree::ptree();
 
 void simulationInit()
 {
-	CarMap = new map<string, Car*>();
 	RoadsMap = new map<string, Roads*>();
 	JunctionsMap = new map<string, Junctions*>();
 	eventsInTimeOrder = new multimap<int, Event*>();
@@ -50,13 +48,19 @@ void simulationManagement()
 }
 
 void deleteSimulation(){
-	CarMap->erase( CarMap->begin(), CarMap->end());
-	RoadsMap->erase( RoadsMap->begin(), RoadsMap->end()); 
-	JunctionsMap->erase( JunctionsMap->begin(), JunctionsMap->end()); 
-	eventsInTimeOrder->erase( eventsInTimeOrder->begin(), eventsInTimeOrder->end()); 
-	reportsInTimeOrder->erase( reportsInTimeOrder->begin(), reportsInTimeOrder->end()); 
-	delete(CarMap);
+	for( map<string, Roads*>::iterator ii=RoadsMap->begin(); ii!=RoadsMap->end(); ++ii)
+		 delete (ii->second);
 	delete(RoadsMap);
+	for( map<string, Car*>::iterator iq=CarMap->begin(); iq!=CarMap->end(); ++iq)
+		 delete (iq->second);
+	delete(CarMap);
+	for( map<string, Junctions*>::iterator ii=JunctionsMap->begin(); ii!=JunctionsMap->end(); ++ii)
+		 delete (ii->second);
+	for( multimap<int, Event*>::iterator ii=eventsInTimeOrder->begin(); ii!=eventsInTimeOrder->end(); ++ii)
+		 delete (ii->second);
+	for( multimap<int, Reports*>::iterator ii=reportsInTimeOrder->begin(); ii!=reportsInTimeOrder->end(); ++ii)
+		 delete (ii->second);
+
 	delete(JunctionsMap);
 	delete(eventsInTimeOrder);
 	delete(reportsInTimeOrder);
@@ -74,6 +78,6 @@ int main(void)
 	for(global_SimulationTime = 1; global_SimulationTime <= global_inputSimulationTime ; ++global_SimulationTime )
 		simulationManagement();
 	write_ini("Reports.ini", *pt);
-	deleteSimulation();
+	//deleteSimulation();
 	return 0;
 }
