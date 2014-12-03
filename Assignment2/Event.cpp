@@ -12,7 +12,7 @@ Event & Event::operator=(const Event &eventRightArg){
 	return *this;
 }
 		
-void Event:: performEvent(){}
+//void Event:: performEvent(){}
 
 int Event::getType(){return _type;}
 int Event::getTime(){return _time;}

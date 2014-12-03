@@ -4,11 +4,11 @@
 map<string, Roads*>* RoadsMap;
 map<string, Junctions*>* JunctionsMap;
 map<int, Event*>* eventsInTimeOrder;
-//map<string, Car*>* CarMap;
+map<string, Car*>* CarMap;
 
 void simulationInit()
 {
-	//CarMap = new map<string, Car*>();
+	CarMap = new map<string, Car*>();
 	RoadsMap = new map<string, Roads*>();
 	JunctionsMap = new map<string, Junctions*>();
 	eventsInTimeOrder = new map<int, Event*>();

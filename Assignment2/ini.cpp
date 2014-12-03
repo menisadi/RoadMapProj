@@ -130,21 +130,19 @@ void IniClass::readRoadMap(map<string, Junctions*>*& junctions, map<string, Road
 		string endJunction = section->first;
 		string startJunction;
 		vector<Roads*>* roadsInJunction = new vector<Roads*>();
-		vector<int> timeSlices;
+		vector<int>* timeSlices = new vector<int>();
 		for (boost::property_tree::ptree::const_iterator property = section->second.begin(); property != section->second.end(); property++)
 		{
 			startJunction = property->first.data();
 			int length = boost::lexical_cast<int>(property->second.data());
 			string roadId = startJunction + "," + endJunction;
 			Roads* pointerToRoad = new Roads(roadId, startJunction, endJunction, length);
-			// Roads newRoad(roadId, startJunction, endJunction, length);
-			// Roads* pointerToRoad = &newRoad;
 			roads->insert(pair<string, Roads*>(roadId, pointerToRoad));
 			pointerToRoad = (roads->find(roadId))->second;
 			roadsInJunction->push_back(pointerToRoad);
-			timeSlices.push_back(global_defultTimeSlice);
+			timeSlices->push_back(global_defultTimeSlice);
 		}
-		Junctions* newJunction = new Junctions(endJunction, *roadsInJunction, timeSlices);
+		Junctions* newJunction = new Junctions(endJunction, roadsInJunction, timeSlices);
 		junctions->insert(pair<string, Junctions*>(endJunction,newJunction));
 		delete roadsInJunction;
 	}
