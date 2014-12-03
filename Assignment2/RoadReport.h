@@ -22,7 +22,7 @@ class RoadReport : public Reports
 	  RoadReport(RoadReport &other);
 	  virtual ~RoadReport();
 	  RoadReport & operator=(const RoadReport &R);
-	  virtual void writeReport();
+	  virtual void writeReport(boost::property_tree::ptree &tree);
 
 	  string getBeginJunc();
 	  string getEndJunc();

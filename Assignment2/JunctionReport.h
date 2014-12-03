@@ -21,7 +21,7 @@ class JunctionReport : public Reports
 	  JunctionReport(JunctionReport &other);
 	  virtual ~JunctionReport();
 	  JunctionReport & operator=(const JunctionReport &R);
-	  virtual void writeReport();
+	  virtual void writeReport(boost::property_tree::ptree &tree);
 
 	  string getIdJunction();
 	  void setIdJunction(string newIdJunction);

@@ -31,8 +31,8 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 	return splitted;
 }
 
-void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads) {
-	cout << "Starting to read events" << endl;
+void IniClass::readEvents(multimap<int, Event*>*& eventsInTimeOrder, map<string, Roads>*& allRoads) {
+	std::cout << "Starting to read events" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Events.ini", pt);
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++) 
@@ -52,9 +52,10 @@ void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Road
 			string carRoute = property->second.data();
 			//vector<Roads*> routeVector(split(carRoute,allRoads));
 			vector<Roads*>* routeVector=new vector<Roads*>(split(carRoute,allRoads));
-			AddCarEvent* tmp=new AddCarEvent(carName, routeVector, eventTime) ;
+			AddCarEvent* tmp = new AddCarEvent(carName, routeVector, eventTime) ;
 			//eventsInTimeOrder->push_back(tmp);
-			(*eventsInTimeOrder)[eventTime]=tmp;
+			//(*eventsInTimeOrder)[eventTime]=tmp;
+			eventsInTimeOrder->insert(pair<int, AddCarEvent*>(eventTime, tmp));
 
 			// cout << ""<<endl;
 		}
@@ -63,66 +64,75 @@ void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Road
 			typeNumber = 1;
 			int faultTime = boost::lexical_cast<int>(property->second.data());
 			//allEvents->push_back(new CarFaulttEvent(carName, faultTime, eventTime));
-			(*eventsInTimeOrder)[eventTime]=new CarFaulttEvent(carName, faultTime, eventTime);
+			CarFaulttEvent* newFaultEvent = new CarFaulttEvent(carName, faultTime, eventTime);
+			eventsInTimeOrder->insert(pair<int, CarFaulttEvent*>(eventTime, newFaultEvent));
 		}
 	}
-	cout << "Finished events" << endl;
+	std::cout << "Finished events" << endl;
 }
 
-/*
-void IniClass::readCommands(vector<Reports*>*& allReports)
+void IniClass::readCommands(multimap<int, Reports*>*& allReports)
 {
-	cout << "Starting to read Commands" << endl;
+	std::cout << "Starting to read Commands" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Commands.ini", pt);
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++)
 	{
 		string CommandsName = section->first;
 		boost::property_tree::ptree::const_iterator property = section->second.begin();
-		string CommandsType = property->second.data;
+		string CommandsType = property->second.data();
 		property++;
-		int CommandsTime = property->second.data;
+		int CommandsTime = boost::lexical_cast<int>(property->second.data());
 		int typeNumber;
 		if (CommandsType[0] == 't')
 		{
 			typeNumber = 0;
 			global_inputSimulationTime = CommandsTime;
 		}
+
 		else
 		{
 			property++;
-			string reportId = property->second.data;
+			string reportId = property->second.data();
 			property++;
-
 			if (CommandsType[0] == 'c')
 			{
 				typeNumber = 1;
-				string carId = property->second.data;
-				allReports->push_back(new CarReport(CommandsName, CommandsTime, carId));
+				string carId = property->second.data();
+				// (*allReports)[CommandsTime] = new CarReport(CommandsName, CommandsTime, carId);
+				CarReport* newCarReport = new CarReport(CommandsName, CommandsTime, carId);
+				allReports->insert(pair<int, CarReport*>(CommandsTime, newCarReport));
 			}
+			
 			else if (CommandsType[0] == 'r')
 			{
 				typeNumber = 2;
-				string startJunction = property->second.data;
+				string startJunction = property->second.data();
 				property++;
-				string endJunction = property->second.data;
-				allReports->push_back(new RoadReport(CommandsName,CommandsTime,startJunction,endJunction));
+				string endJunction = property->second.data();
+				// (*allReports)[CommandsTime] = new RoadReport(CommandsName, CommandsTime, startJunction, endJunction);
+				RoadReport* newRoadReport = new RoadReport(CommandsName, CommandsTime, startJunction, endJunction);
+				allReports->insert(pair<int, RoadReport*>(CommandsTime, newRoadReport));
 			}
 			else if (CommandsType[0] == 'j')
 			{
 				typeNumber = 3;
-				string junctionId = property->second.data;
-				allReports->push_back(new JunctionReport(CommandsName, CommandsTime, junctionId));
+				string junctionId = property->second.data();
+				// (*allReports)[CommandsTime] = new JunctionReport(CommandsName, CommandsTime, junctionId);
+				JunctionReport* newJunctionReport = new JunctionReport(CommandsName, CommandsTime, junctionId);
+				allReports->insert(pair<int, JunctionReport*>(CommandsTime, newJunctionReport));
 			}
-		}		
+			
+		}
+		
 	}
-	cout << "Finished Commands" << endl;
+	std::cout << "Finished Commands" << endl;
 }
-*/
+
 
 void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads)
 {
-	cout << "Starting to read road map" << endl;
+	std::cout << "Starting to read road map" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("RoadMap.ini", pt);
 	for (boost::property_tree::ptree::const_iterator section = pt.begin(); section != pt.end(); section++)
@@ -148,13 +158,13 @@ void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads
 		junctions->insert(pair<string, Junctions>(endJunction,newJunction));
 		delete roadsInJunction;
 	}
-	cout << "Finished to read road map" << endl;
+	std::cout << "Finished to read road map" << endl;
 }
 
 //void IniClass::readConfiguration(TrafficSimulation*& simulation)
 void IniClass::readConfiguration()
 {
-	cout << "Starting to read configuration" << endl;
+	std::cout << "Starting to read configuration" << endl;
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("Configuration.ini", pt);
 	
@@ -174,5 +184,5 @@ void IniClass::readConfiguration()
 	simulation->setMinTimeSlice(MIN_TIME_SLICE);
 	*/
 	
-	cout << "Finished to read configuration" << endl;
+	std::cout << "Finished to read configuration" << endl;
 }

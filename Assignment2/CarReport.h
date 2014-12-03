@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include "Reports.h"
 
 class Car;
@@ -19,9 +20,9 @@ class CarReport : public Reports
 	CarReport();
 	CarReport(string reportId, int time, string carId);
 	CarReport(CarReport &other);
-	virtual ~CarReport();
 	CarReport & operator=(const CarReport &R);
-	virtual void writeReport();
+	virtual ~CarReport();
+	virtual void writeReport(boost::property_tree::ptree &tree);
 
 	string getCarId();
 	void setCarId(string newCarId);
