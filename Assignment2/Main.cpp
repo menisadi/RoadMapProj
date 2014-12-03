@@ -44,6 +44,6 @@ int main(void)
 	simulationInit();
 	for(global_SimulationTime = 1; global_SimulationTime <= global_inputSimulationTime ; ++global_SimulationTime )
 		simulationManagement();
-	
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
