@@ -93,4 +93,6 @@ Roads* Car::popFirstRoadsInRoute(){
 }
 //void initRouteFromStringINI(string RouteStringINI){}
 //void updateMyRoad(){}
-//void updateHistory(){}
+void Car::updateHistory(){
+	_history=_history + "(" + to_string(global_SimulationTime) + "," + _currentRoad + "," + to_string(_locationInRoad )+ ")" ;
+}

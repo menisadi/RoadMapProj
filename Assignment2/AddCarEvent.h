@@ -2,6 +2,7 @@
 #define _ADDCAREVENT_H_
 #include "Event.h"
 #include "Car.h"
+#include "Main.h"
 
 
 class AddCarEvent : public Event

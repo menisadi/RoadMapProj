@@ -7,7 +7,8 @@
 #include "Car.h"
 #include "Junctions.h"
 #include "GlobalVar.h"
-
+#include <iostream>
+//#include "Main.h"
 
 using namespace std;
 
@@ -46,7 +47,7 @@ using namespace std;
      void pushNewCarToRoad(Car newCarVal); //meybe pointer*?
 	 void baseSpeedUpdate();
 	 void carSpeedUpdate();
-	 void killCarInTheEnd(Car& oldCarRef);
+	 void killCarInTheEnd(Car oldCarRef);
 	 void advanceCarsInRoad();
 	 
   private:

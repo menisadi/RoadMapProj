@@ -12,7 +12,11 @@
 #include "ini.h"
 
 class Event;
+//class Roads;
 using namespace std;
+
+
+extern map<string, Car*>* CarMap;
 
 void simulationManagement();
 void simulationInit();

@@ -82,6 +82,7 @@ void Roads::setBaseSpeed(int basespeedVal){
 Car Roads::popFirstCarInRoad(){
 	// std::vector<Car>::iterator it =_carsInRoad.back();
 	Car tmpCar = _carsInRoad.back();
+	//Car tmpCar = CarMaps
 	_carsInRoad.pop_back();
 	--_numOfCarInside;
 	return tmpCar;
@@ -91,7 +92,10 @@ void Roads::pushNewCarToRoad(Car newCarVal){
 	_carsInRoad.push_back(Car(newCarVal));
 	//~newCarVal();
 }
-//void Roads::killCarInTheEnd(Car& oldCarRef){}
+void Roads::killCarInTheEnd(Car oldCarRef){
+	cout <<"id="+oldCarRef.getID() + " " +  oldCarRef.getHistory() << endl;   ///for Test!
+	_CemeteryOfcars.push_back(Car(oldCarRef));
+}
 //void Roads::carSpeedUpdate(){}
 
 void Roads::baseSpeedUpdate(){
@@ -135,5 +139,6 @@ void Roads::advanceCarsInRoad(){
 				counterFaultyCarsInTheSameLine=1;
 			}
 		}
+		itCurrentCar->updateHistory();
 	}
 }

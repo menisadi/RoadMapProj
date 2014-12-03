@@ -27,9 +27,7 @@ vector<Roads*> IniClass::split(string toSplit, map<string, Roads>*& allRoads)
 		indexStart = indexMiddle;
 		indexMiddle = indexEnd;
 	}
-	std::rotate(splitted.begin(),
-            splitted.end()-1, // this will be the new first element
-            splitted.end());
+	reverse(splitted.begin(),splitted.end());
 	return splitted;
 }
 
@@ -71,7 +69,7 @@ void IniClass::readEvents(map<int, Event*>*& eventsInTimeOrder, map<string, Road
 	cout << "Finished events" << endl;
 }
 
-
+/*
 void IniClass::readCommands(vector<Reports*>*& allReports)
 {
 	cout << "Starting to read Commands" << endl;
@@ -120,7 +118,7 @@ void IniClass::readCommands(vector<Reports*>*& allReports)
 	}
 	cout << "Finished Commands" << endl;
 }
-
+*/
 
 void IniClass::readRoadMap(map<string, Junctions>*& junctions, map<string, Roads>*& roads)
 {
