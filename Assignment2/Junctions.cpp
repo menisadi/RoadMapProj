@@ -11,8 +11,6 @@ Junctions::Junctions(const Junctions& copyJunctions){
 Junctions:: ~Junctions(){
 	for( vector<Roads*>::iterator ii=_roadsInJunction->begin(); ii!=_roadsInJunction->end(); ++ii)
 		delete (*ii);
-	for( vector<int>::iterator ix=_timeSlice->begin(); ix!=_timeSlice->end(); ++ix)
-		delete (*ix);
 }
 Junctions& Junctions::operator=(const Junctions &JunctionsRightArg){
   copy(JunctionsRightArg);
@@ -63,7 +61,7 @@ void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad
 					(*_roadsInJunction)[0]->killCarInTheEnd(carGoesGreen);
 				}
 				//	delete all ptr!!
-				cout<< ""<<endl;
+				cout << "car moved road: " << carGoesGreen->getID() << endl;
 			}
 		}
 		
@@ -72,7 +70,7 @@ void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad
 
 void Junctions::replaceRoadinJunction(int conterStasticCarPass, int MaxTimeSlice, int MinTimeSlice){
 		if(conterStasticCarPass==0)
-			(*_timeSlice)[0]=max((*_timeSlice)[0]-1,MaxTimeSlice);
+			(*_timeSlice)[0]=max((*_timeSlice)[0]-1,MinTimeSlice);
 		else if (conterStasticCarPass==(*_roadsInJunction)[0]->getlength())
 			(*_timeSlice)[0]=min((*_timeSlice)[0]+1,MaxTimeSlice);
 		else{
