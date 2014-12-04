@@ -92,6 +92,7 @@ void Roads::setBaseSpeed(int basespeedVal){
 	 
 Car* Roads::popFirstCarInRoad(){
 	// std::vector<Car>::iterator it =_carsInRoad.back();
+	rotate(_carsInRoad->begin(), _carsInRoad->begin() + 1, _carsInRoad->end());
 	Car* tmpCar = _carsInRoad->back();
 	//Car tmpCar = CarMaps
 	_carsInRoad->pop_back();
@@ -129,6 +130,8 @@ void Roads::advanceCarsInRoad(){
 	int counterFaultyCarsInTheSameLine=0;
 
 	for(std::vector<Car*>::iterator itCurrentCar = _carsInRoad->begin(); itCurrentCar != _carsInRoad->end(); ++itCurrentCar){
+		(*itCurrentCar)->updateHistory();
+		cout << "start of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
 		if ((*itCurrentCar)->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
 		if ( (*itCurrentCar)->getCondition() == 0)
 		{
@@ -152,6 +155,7 @@ void Roads::advanceCarsInRoad(){
 				counterFaultyCarsInTheSameLine=1;
 			}
 		}
-		(*itCurrentCar)->updateHistory();
+		cout <<"end of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
+		// (*itCurrentCar)->updateHistory();
 	}
 }
