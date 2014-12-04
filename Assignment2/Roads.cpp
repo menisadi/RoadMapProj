@@ -147,15 +147,16 @@ void Roads::advanceCarsInRoad(){
 		else
 		{
 			++counterFaultyCars;
+			(*itCurrentCar)->setCondition((*itCurrentCar)->getCondition()-1);
 			if ((*itCurrentCar)->getLocation()==TheLastFaultyCarLocation)
 				++counterFaultyCarsInTheSameLine;
 			else
 			{
-				(*itCurrentCar)->setLocation(TheLastFaultyCarLocation);
+				//(*itCurrentCar)->setLocation(TheLastFaultyCarLocation);
+				TheLastFaultyCarLocation= (*itCurrentCar)->getLocation();
 				counterFaultyCarsInTheSameLine=1;
 			}
 		}
 		cout <<"end of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
-		// (*itCurrentCar)->updateHistory();
 	}
 }

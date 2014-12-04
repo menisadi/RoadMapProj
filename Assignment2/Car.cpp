@@ -35,7 +35,7 @@ string Car::getID() const{
 	return _ID;
 }
 vector<Roads*>* Car::getRoute() const{
-	return _route;						//meybe return *??
+	return _route;						
 }
 int Car::getArrival() const{
 	return _arrival;

@@ -19,6 +19,8 @@ void CarFaulttEvent::performEvent()
 {
 	// find car
 	// change his condition to be _timeOfFault
+	string currentCarIdStr = Event::getCarId();
+	CarMap->find(currentCarIdStr)->second->setCondition(_timeOfFault);
 }
 	
 //getters

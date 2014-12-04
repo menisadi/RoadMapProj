@@ -27,7 +27,6 @@ void simulationManagement()
 		multimap<int, Event*>::iterator itEvents = eventsInTimeOrder->begin(); 
 		while( (!(eventsInTimeOrder->empty())) && ((*itEvents).first == global_SimulationTime )){
 				((*itEvents).second)->performEvent();
-				//delete((*itEvents).second);
 				eventsInTimeOrder->erase(itEvents);
 				itEvents = eventsInTimeOrder->begin();
 			}
