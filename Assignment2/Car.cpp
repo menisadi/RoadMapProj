@@ -2,9 +2,7 @@
 
 Car::Car(){}
 Car::Car(const string& idVal, vector<Roads*>* routeVal, int arrivalVal,int conditionVal,int locationInRoadVal,int speedVal,const string& currentRoadVal,const string& historyVal):_ID(idVal),_route(routeVal),_arrival(arrivalVal),_condition(conditionVal),_locationInRoad(locationInRoadVal),_speed(speedVal),_currentRoad(currentRoadVal),_history(historyVal){	}
-Car::Car(const string& idVal, vector<Roads*>* routeVal, int arrivalVal):_ID(idVal),_route(routeVal),_arrival(arrivalVal),_condition(0),_locationInRoad(0),_speed(0){
-	//_currentRoad=Roads::(*ii)->getId();
-}
+Car::Car(const string& idVal, vector<Roads*>* routeVal, int arrivalVal):_ID(idVal),_route(routeVal),_arrival(arrivalVal),_condition(0),_locationInRoad(0),_speed(0){}
 Car::Car(const string& idVal, int arrivalVal):_ID(idVal),_arrival(arrivalVal){	}
 
 Car::Car(const Car& other){
@@ -12,10 +10,8 @@ Car::Car(const Car& other){
 }
 
 Car::~Car(){
-	if(_route==0){ ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		for( vector<Roads*>::iterator ii=_route->begin(); ii!=_route->end(); ++ii)
 			delete (*ii);
-	}
 	 delete (_route);
 }
 

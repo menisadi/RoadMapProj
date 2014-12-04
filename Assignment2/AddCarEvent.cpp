@@ -7,8 +7,14 @@ AddCarEvent::AddCarEvent(AddCarEvent &other) :Event(other)
 	_routeToAdd = other._routeToAdd;
 }
 
-AddCarEvent::AddCarEvent(const string& carId, vector<Roads*>* routeToAdd, int startTime) : Event(0, startTime, carId), _routeToAdd(routeToAdd){}
-AddCarEvent::~AddCarEvent(){}
+AddCarEvent::AddCarEvent(const string& carId, vector<Roads*>* routeToAdd, int startTime) : Event(0, startTime, carId), _routeToAdd(routeToAdd){
+//_routeToAdd = new vector<Roads*>();
+}
+AddCarEvent::~AddCarEvent(){
+	//for( vector<Roads*>::iterator ii=_routeToAdd->begin(); ii!=_routeToAdd->end(); ++ii)
+		//	delete (*ii);
+	 delete (_routeToAdd);
+}
 AddCarEvent& AddCarEvent::operator=(const AddCarEvent& E){
 	Event::operator=(E);
 	_routeToAdd = E._routeToAdd;

@@ -1,16 +1,16 @@
 #include "Main.h"
 
 //Global var
-map<string, Roads*>* RoadsMap;
-map<string, Junctions*>* JunctionsMap;
+//map<string, Roads*>* RoadsMap;
+//map<string, Junctions*>* JunctionsMap;
 multimap<int, Event*>* eventsInTimeOrder;
 multimap<int, Reports*>* reportsInTimeOrder;
 boost::property_tree::ptree* pt = new boost::property_tree::ptree();
 
 void simulationInit()
 {
-	RoadsMap = new map<string, Roads*>();
-	JunctionsMap = new map<string, Junctions*>();
+	//RoadsMap = new map<string, Roads*>();
+	//JunctionsMap = new map<string, Junctions*>();
 	eventsInTimeOrder = new multimap<int, Event*>();
 	reportsInTimeOrder = new multimap<int, Reports*>();
 	IniClass ic;
@@ -27,6 +27,7 @@ void simulationManagement()
 		multimap<int, Event*>::iterator itEvents = eventsInTimeOrder->begin(); 
 		while( (!(eventsInTimeOrder->empty())) && ((*itEvents).first == global_SimulationTime )){
 				((*itEvents).second)->performEvent();
+				//delete((*itEvents).second);
 				eventsInTimeOrder->erase(itEvents);
 				itEvents = eventsInTimeOrder->begin();
 			}
@@ -48,21 +49,16 @@ void simulationManagement()
 }
 
 void deleteSimulation(){
-	for( map<string, Roads*>::iterator ii=RoadsMap->begin(); ii!=RoadsMap->end(); ++ii)
-		 delete (ii->second);
-	delete(RoadsMap);
-	for( map<string, Car*>::iterator iq=CarMap->begin(); iq!=CarMap->end(); ++iq)
-		 delete (iq->second);
-	delete(CarMap);
 	for( map<string, Junctions*>::iterator ii=JunctionsMap->begin(); ii!=JunctionsMap->end(); ++ii)
 		 delete (ii->second);
+	delete(JunctionsMap);
+	delete(RoadsMap);
+	delete(CarMap);
 	for( multimap<int, Event*>::iterator ii=eventsInTimeOrder->begin(); ii!=eventsInTimeOrder->end(); ++ii)
 		 delete (ii->second);
+	delete(eventsInTimeOrder);
 	for( multimap<int, Reports*>::iterator ii=reportsInTimeOrder->begin(); ii!=reportsInTimeOrder->end(); ++ii)
 		 delete (ii->second);
-
-	delete(JunctionsMap);
-	delete(eventsInTimeOrder);
 	delete(reportsInTimeOrder);
 
 	delete(pt);
@@ -78,6 +74,6 @@ int main(void)
 	for(global_SimulationTime = 1; global_SimulationTime <= global_inputSimulationTime ; ++global_SimulationTime )
 		simulationManagement();
 	write_ini("Reports.ini", *pt);
-	//deleteSimulation();
+	deleteSimulation();
 	return 0;
 }

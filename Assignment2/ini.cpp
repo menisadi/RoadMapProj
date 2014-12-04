@@ -50,13 +50,10 @@ void IniClass::readEvents(multimap<int, Event*>*& eventsInTimeOrder, map<string,
 		{
 			typeNumber = 0;
 			string carRoute = property->second.data();
-			//vector<Roads*> routeVector(split(carRoute,allRoads));
 			vector<Roads*>* routeVector=new vector<Roads*>(split(carRoute,allRoads));
 			AddCarEvent* tmp = new AddCarEvent(carName, routeVector, eventTime) ;
-			//eventsInTimeOrder->push_back(tmp);
 			eventsInTimeOrder->insert(pair<int, AddCarEvent*>(eventTime, tmp));
 			// cout << ""<<endl;
-
 		}
 		else
 		{

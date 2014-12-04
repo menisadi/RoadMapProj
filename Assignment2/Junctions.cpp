@@ -50,7 +50,6 @@ void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad
 	if(((*_roadsInJunction)[0]->getCarsInRoad()->size() > 0)){													//if there is cars in this road?
 			if((*(*_roadsInJunction)[0]->getCarsInRoad())[0]->getLocation()==(*_roadsInJunction)[0]->getlength()){  //there is cars wait for pass?
 				std::vector<Roads*>::iterator itsourceRoad =(*_roadsInJunction).begin();
-				//Car *carGoesGreen = new Car(_roadsInJunction[0]->popFirstCarInRoad());
 				Car *carGoesGreen =(*_roadsInJunction)[0]->popFirstCarInRoad();
 				carGoesGreen->setLocation(0);
 				if(carGoesGreen->getRoute()->size()>0){

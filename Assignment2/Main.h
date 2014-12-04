@@ -21,7 +21,7 @@ class Event;
 using namespace std;
 
 
-extern map<string, Car*>* CarMap;
+//extern map<string, Car*>* CarMap;
 
 void simulationManagement();
 void simulationInit();
