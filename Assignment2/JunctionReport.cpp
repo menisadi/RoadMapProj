@@ -26,16 +26,21 @@ void JunctionReport::writeReport(boost::property_tree::ptree &tree)
 			.append(",").append(boost::lexical_cast<string>(t)).append(")");
 
 	tree.put(Reports::getId().append(".time slices"), slicesWithBrackets);
-	/*
-	string roadsWithBrackets = "";
+	
+	//	1 iterate roads in junction
+	//		1.1 iterate cars in road
+	//			1.1.1 append (car) to stringRoad_i 
+	//		1.2	tree.put(Reports::getId().append("road_i"), stringRoad_i )
+	string roadsDivided = "";
 	vector<Roads*>* roadIn = JunctionsMap->find(getIdJunction())->second->getRoadsInJunction();
 	for (int r = 0; r < roadIn->size(); r = r + 1)
-		roadsWithBrackets.append("(").append(boost::lexical_cast<string>((*timeSlices)[t]))
-		.append(",").append(boost::lexical_cast<string>(t)).append(")");
-
-	tree.put(Reports::getId().append(".time slices"), roadsWithBrackets);
-	*/
-	//<incomingJunctionId >= (<carId>)*
+	{
+		vector<Car*>* carsIn = (*roadIn)[r]->getCarsInRoad();
+		string stringOfCars = "";
+		for (int c = 0; c < carsIn->size(); c = c + 1)
+			stringOfCars.append("(").append((*carsIn)[c]->getID()).append(")");
+		tree.put(Reports::getId().append(".").append((*roadIn)[r]->getBaginJnc()), stringOfCars);
+	}
 }
 
 string JunctionReport::getIdJunction(){ return idJunction_; }
