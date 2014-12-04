@@ -91,6 +91,7 @@
     <ClInclude Include="JunctionReport.h" />
     <ClInclude Include="Junctions.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Printer.h" />
     <ClInclude Include="Reports.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RoadReport.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="JunctionReport.cpp" />
     <ClCompile Include="Junctions.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Printer.cpp" />
     <ClCompile Include="Reports.cpp" />
     <ClCompile Include="RoadReport.cpp" />
     <ClCompile Include="Roads.cpp" />

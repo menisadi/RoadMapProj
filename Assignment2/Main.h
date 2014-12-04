@@ -10,6 +10,7 @@
 // #include "Roads.h"
 #include "TrafficSimulation.h"
 #include "ini.h"
+#include "Printer.h"
 
 //for memory leak
 #define CRTDBG_MAP_ALLOC

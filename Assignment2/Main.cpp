@@ -1,16 +1,13 @@
 #include "Main.h"
 
 //Global var
-//map<string, Roads*>* RoadsMap;
-//map<string, Junctions*>* JunctionsMap;
 multimap<int, Event*>* eventsInTimeOrder;
 multimap<int, Reports*>* reportsInTimeOrder;
 boost::property_tree::ptree* pt = new boost::property_tree::ptree();
+Printer printerSim;
 
 void simulationInit()
 {
-	//RoadsMap = new map<string, Roads*>();
-	//JunctionsMap = new map<string, Junctions*>();
 	eventsInTimeOrder = new multimap<int, Event*>();
 	reportsInTimeOrder = new multimap<int, Reports*>();
 	IniClass ic;
@@ -18,6 +15,8 @@ void simulationInit()
 	ic.readRoadMap(JunctionsMap, RoadsMap); 
 	ic.readEvents(eventsInTimeOrder,RoadsMap);
 	ic.readCommands(reportsInTimeOrder);
+
+
 	cout << "just a bbreakpoint" << endl;
 }
 
@@ -37,6 +36,8 @@ void simulationManagement()
 			reportsInTimeOrder->erase(itReports);
 			itReports = reportsInTimeOrder->begin();
 		}
+	//print all
+		printerSim.print(global_defultTimeSlice);
 	//1.2 Update car History
 	//2. Execute Commands
 	//3. Advance cars in roads

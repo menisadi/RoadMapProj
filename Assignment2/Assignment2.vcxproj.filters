@@ -15,6 +15,7 @@
     <ClCompile Include="JunctionReport.cpp" />
     <ClCompile Include="Reports.cpp" />
     <ClCompile Include="RoadReport.cpp" />
+    <ClCompile Include="Printer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddCarEvent.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="ini.h" />
     <ClInclude Include="GlobalVar.h" />
+    <ClInclude Include="Printer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assignment2.rc" />
