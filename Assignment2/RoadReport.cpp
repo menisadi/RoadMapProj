@@ -19,7 +19,22 @@ RoadReport::~RoadReport(){}
 
 void RoadReport::writeReport(boost::property_tree::ptree &tree)
 {
-
+	tree.put(Reports::getId().append(".start Junction"), getBeginJunc());
+	tree.put(Reports::getId().append(".end JunctionId"), getEndJunc());
+	string carWithBrackets = "";
+	string thisRoadId = beginJnc_.append(",").append(endJnc_);
+	//Roads* thisRoad = RoadsMap->find(thisRoadId)->second;
+	vector<Car*>* carsInRoad = RoadsMap->find(thisRoadId)->second->getCarsInRoad();
+	for (int c = 0; c < carsInRoad->size(); c = c + 1)
+	{
+		carWithBrackets.append("(");
+		carWithBrackets.append((*carsInRoad)[c]->getID());
+		carWithBrackets.append(",");
+		string location = boost::lexical_cast<string>((*carsInRoad)[c]->getLocation());
+		carWithBrackets.append(location);
+		carWithBrackets.append(")");
+	}
+	tree.put(Reports::getId().append(".cars"), carWithBrackets);
 }
 
 string RoadReport::getBeginJunc(){ return beginJnc_; }

@@ -4,8 +4,10 @@
 
 #include <vector>
 #include <string>
+#include "Junctions.h"
 #include "Reports.h"
-
+#include "GlobalVar.h"
+#include <boost/lexical_cast.hpp>
 //class Car;
 
 using namespace std;

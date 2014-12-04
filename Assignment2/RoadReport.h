@@ -5,8 +5,10 @@
 #include <vector>
 #include <string>
 #include "Reports.h"
-class Car;
-
+#include "Roads.h"
+#include "GlobalVar.h"
+#include "Car.h"
+#include <boost/lexical_cast.hpp>
 using namespace std;
 
 
