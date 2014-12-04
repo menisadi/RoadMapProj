@@ -6,8 +6,8 @@
 #include <string>
 #include <iostream>
 #include "Reports.h"
-
-class Car;
+#include "Car.h"
+//class Car;
 
 using namespace std;
 
