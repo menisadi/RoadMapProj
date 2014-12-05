@@ -90,13 +90,13 @@ void Roads::setBaseSpeed(int basespeedVal){
 }
 
  void Roads::popFirstCarInRoad(){
-	rotate(_carsInRoad->begin(), _carsInRoad->begin(), _carsInRoad->end());
+	rotate(_carsInRoad->begin(), _carsInRoad->begin()+1, _carsInRoad->end());
 	_carsInRoad->pop_back();
 	--_numOfCarInside;
 }	
 
 Car* Roads::returnFirstCarInRoad(){
-	return _carsInRoad->back();
+	return (*_carsInRoad)[0];
 }					
 void Roads::pushNewCarToRoad(Car* newCarVal){
 	++_numOfCarInside;
@@ -125,11 +125,8 @@ void Roads::advanceCarsInRoad(){
 	int TheLastFaultyCarLocation=-1;
 	int counterFaultyCarsInTheSameLine=0;
 	
-	//for(std::vector<Car*>::iterator itCurrentCar = _carsInRoad->begin(); itCurrentCar != _carsInRoad->end(); ++itCurrentCar){
 	for(int z=0; z <_carsInRoad->size() ; ++z){
 		(*_carsInRoad)[z]->updateHistory();
-		//(*itCurrentCar)->updateHistory();
-		//cout << "start of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
 		if ((*_carsInRoad)[z]->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
 		if ( (*_carsInRoad)[z]->getCondition() == 0)
 		{
@@ -144,10 +141,10 @@ void Roads::advanceCarsInRoad(){
 				if((*_carsInRoad)[z]->getRoute()->empty()) {
 					killCarInTheEnd((*_carsInRoad)[z]); 
 					popFirstCarInRoad();
+					--z;
 				}
 			}
 		}
-		//if( ((*_carsInRoad)[z]->getCondition()) > 0){ //else not work - if car is faulty
 		else{
 			++counterFaultyCars;
 			(*_carsInRoad)[z]->setCondition((*_carsInRoad)[z]->getCondition()-1);
@@ -155,11 +152,9 @@ void Roads::advanceCarsInRoad(){
 				{++counterFaultyCarsInTheSameLine;}
 			else
 			{
-				//(*itCurrentCar)->setLocation(TheLastFaultyCarLocation);
 				TheLastFaultyCarLocation= (*_carsInRoad)[z]->getLocation();
 				counterFaultyCarsInTheSameLine=1;
 			}
 		}
-		//cout <<"end of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
 	}
 }

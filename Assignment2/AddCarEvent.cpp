@@ -30,7 +30,6 @@ void AddCarEvent::performEvent()
 	if (sizeOfRouteVector > 0)
 	{
 		(*_routeToAdd)[sizeOfRouteVector-1]->pushNewCarToRoad((CarMap->find(currentCarIdStr)->second));
-		//(*_routeToAdd)[sizeOfRouteVector-1]->pushNewCarToRoad(*newCar);
 		(*_routeToAdd)[sizeOfRouteVector-1]->updateNumOfCarInside();
 		_routeToAdd->pop_back();
 	}

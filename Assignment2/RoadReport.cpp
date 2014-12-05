@@ -23,7 +23,6 @@ void RoadReport::writeReport(boost::property_tree::ptree &tree)
 	tree.put(Reports::getId().append(".end JunctionId"), getEndJunc());
 	string carWithBrackets = "";
 	string thisRoadId = beginJnc_.append(",").append(endJnc_);
-	//Roads* thisRoad = RoadsMap->find(thisRoadId)->second;
 	vector<Car*>* carsInRoad = RoadsMap->find(thisRoadId)->second->getCarsInRoad();
 	for (unsigned int c = 0; c < (carsInRoad->size()); c = c + 1)
 	{
@@ -35,6 +34,8 @@ void RoadReport::writeReport(boost::property_tree::ptree &tree)
 		carWithBrackets.append(")");
 	}
 	tree.put(Reports::getId().append(".cars"), carWithBrackets);
+
+	///you need to del all the ptr!!!
 }
 
 string RoadReport::getBeginJunc(){ return beginJnc_; }

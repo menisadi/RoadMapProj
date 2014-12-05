@@ -2,7 +2,7 @@
 
 Junctions::Junctions(){}
 Junctions:: Junctions(const string& idJunctionVal):_idJunction(idJunctionVal){}
-Junctions:: Junctions(const string& idJunctionVal, vector<Roads*>* roadsInJunctionVal,vector<int>* timeSliceVal,vector<int>* timeSliceBeforeTheGreenLight):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal),_currentlyGreenLightRoadIndex(0),_timeSliceBeforeTheGreenLight(timeSliceBeforeTheGreenLight), _conterStasticCarPass(0), _noCarPassInThisTime(0){
+Junctions:: Junctions(const string& idJunctionVal, vector<Roads*>* roadsInJunctionVal,vector<int>* timeSliceVal,vector<int>* timeSliceBeforeTheGreenLight):_idJunction(idJunctionVal),_roadsInJunction(roadsInJunctionVal),_timeSlice(timeSliceVal),_currentlyGreenLightRoadIndex(0),_timeSliceBeforeTheGreenLight(timeSliceBeforeTheGreenLight), _conterStasticCarPass(0), _noCarPassInThisTime(0),_forPrinterNumTimesAppeared(0){
 }
 
 Junctions::Junctions(const Junctions& copyJunctions){
@@ -10,7 +10,7 @@ Junctions::Junctions(const Junctions& copyJunctions){
 }
 Junctions:: ~Junctions(){
 	for( vector<Roads*>::iterator ii=_roadsInJunction->begin(); ii!=_roadsInJunction->end(); ++ii)
-		//delete (*ii);																						//!!!!!!!!!!!!!!!!not work
+		delete (*ii);													
 	delete (_timeSliceBeforeTheGreenLight);  
 	delete (_roadsInJunction);
 	delete (_timeSlice);
@@ -39,6 +39,9 @@ return _roadsInJunction;								 //meybe return *??
 vector<int>* Junctions::getTimeSlice() const{
 	return _timeSlice;
 }
+int Junctions::getTimeSliceByAppeared() const{
+	return (*_timeSlice)[_forPrinterNumTimesAppeared];
+}
 vector<int>* Junctions::getTimeSliceBeforeTheGreenLight() const{
 	return _timeSliceBeforeTheGreenLight;
 }
@@ -51,6 +54,9 @@ int Junctions::getConterStasticCarPass() const{
 }
 int Junctions::getNoCarPassInThisTime() const{
 	return _noCarPassInThisTime;
+}
+int Junctions::getForPrinterNumTimesAppeared() const{
+	return _forPrinterNumTimesAppeared;
 }
      
 void Junctions::setID(const string& idJunctionVal){
@@ -66,6 +72,7 @@ void Junctions::setRoadsInJunction(vector<Roads*>* roadsInJunction){
 	_roadsInJunction=roadsInJunction;
 }
 
+
 void Junctions::setCurrentlyGreenLightRoadIndex(int index){  
 	_currentlyGreenLightRoadIndex=index;
 }
@@ -76,7 +83,12 @@ void Junctions::setConterStasticCarPass(int statstic){
 void Junctions::setNoCarPassInThisTime(int boolPass){  
 	_noCarPassInThisTime=boolPass;
 }
-
+void Junctions::setForPrinterNumTimesAppearedPlusOne(){  
+	++_forPrinterNumTimesAppeared;
+}
+void Junctions::setForPrinterNumTimesAppearedZero(){
+	_forPrinterNumTimesAppeared=0;
+}
 
 void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad(int i){
 	if(((*_roadsInJunction)[i]->getCarsInRoad()->size() > 0)){													//if there is cars in this road?
@@ -87,7 +99,6 @@ void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad
 			carGoesGreen->setLocation(0);
 			theNextRoad->pushNewCarToRoad(carGoesGreen);
 			(*_roadsInJunction)[i]->popFirstCarInRoad();
-			//_noCarPassInThisTime=0;
 			++_conterStasticCarPass;
 			}
 		}
@@ -95,18 +106,13 @@ void Junctions::MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad
 
 void Junctions::replaceRoadinJunction(int MaxTimeSlice, int MinTimeSlice,int i){
 		if(_conterStasticCarPass==0){
-			(*_timeSlice)[i]=max((*_timeSliceBeforeTheGreenLight)[i]-1,MinTimeSlice);
-			(*_timeSliceBeforeTheGreenLight)[i]=(*_timeSlice)[i];
+			(*_timeSliceBeforeTheGreenLight)[i]=max((*_timeSliceBeforeTheGreenLight)[i]-1,MinTimeSlice);
 		}
-		else if (_conterStasticCarPass==(*_timeSliceBeforeTheGreenLight)[i]){
-			(*_timeSlice)[i]=min((*_timeSliceBeforeTheGreenLight)[i]+1,MaxTimeSlice);
-			(*_timeSliceBeforeTheGreenLight)[i]=(*_timeSlice)[i];
+		else if (_conterStasticCarPass>=(*_timeSliceBeforeTheGreenLight)[i]){
+			(*_timeSliceBeforeTheGreenLight)[i]=min((*_timeSliceBeforeTheGreenLight)[i]+1,MaxTimeSlice);
 		}
-		else
-			(*_timeSlice)[i]=(*_timeSliceBeforeTheGreenLight)[i];
 		
-
-		//conterStasticCarPass=0;
+		(*_timeSlice)[i]=-1;
 		++_currentlyGreenLightRoadIndex;
 		if(_currentlyGreenLightRoadIndex >= _roadsInJunction->size())
 			_currentlyGreenLightRoadIndex=0;//only when the all circle of Roads was over
@@ -119,21 +125,19 @@ void Junctions::advanceCarsInJunctions(){
 		3---if car found push it.
 		4---reduce time slice for that road.
 		*/
-	//conterStasticCarPass=0;
 	int sizeOfRoadsInJunction=(*_roadsInJunction).size();
-	//_noCarPassInThisTime=1;
+	
 
 	if(sizeOfRoadsInJunction>0){
 		if((*_timeSlice)[_currentlyGreenLightRoadIndex]>0 ){
-			//if(_noCarPassInThisTime){
 			MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad(_currentlyGreenLightRoadIndex);
-			//}
 			--(*_timeSlice)[_currentlyGreenLightRoadIndex];
 		}
 		else{
+			MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad(_currentlyGreenLightRoadIndex);
 			replaceRoadinJunction(global_maxTimeSlice,global_minTimeSlice,_currentlyGreenLightRoadIndex);
 			_conterStasticCarPass=0;
-			//_noCarPassInThisTime=1;
+			(*_timeSlice)[_currentlyGreenLightRoadIndex]=(*_timeSliceBeforeTheGreenLight)[_currentlyGreenLightRoadIndex];
 			}	
 	}
 }

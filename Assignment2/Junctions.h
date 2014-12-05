@@ -26,18 +26,22 @@ using namespace std;
      string getIdJunction() const;
 	 vector<Roads*>* getRoadsInJunction() const;
      vector<int>* getTimeSlice() const;
+	 int Junctions::getTimeSliceByAppeared() const;
 	 vector<int>* getTimeSliceBeforeTheGreenLight() const;
 	 int getCurrentlyGreenLightRoadIndex() const;
 	 int getConterStasticCarPass() const;
 	 int getNoCarPassInThisTime() const;
+	 int getForPrinterNumTimesAppeared() const;
      
 	 void setID(const string& idJunctionVal);
      void setTimeSlice(vector<int>* timeSliceVal);
 	 void setTimeSliceBeforeTheGreenLight(vector<int>* timeSliceVal);
 	 void setRoadsInJunction(vector<Roads*>* roadsInJunction); 
 	 void setCurrentlyGreenLightRoadIndex(int index);
-	  void setConterStasticCarPass(int statstic);
-	  void setNoCarPassInThisTime(int boolPass);
+	 void setConterStasticCarPass(int statstic);
+	 void setNoCarPassInThisTime(int boolPass);
+	 void setForPrinterNumTimesAppearedPlusOne();
+	 void setForPrinterNumTimesAppearedZero();
 
 	 void advanceCarsInJunctions();
 	 void MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad(int i);
@@ -51,6 +55,7 @@ using namespace std;
 	 vector<int>* _timeSliceBeforeTheGreenLight;
 	 int _conterStasticCarPass;
 	 int _noCarPassInThisTime;
+	 int _forPrinterNumTimesAppeared;
 	 
   };   
   

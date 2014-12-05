@@ -15,9 +15,6 @@ void simulationInit()
 	ic.readRoadMap(JunctionsMap, RoadsMap); 
 	ic.readEvents(eventsInTimeOrder,RoadsMap);
 	ic.readCommands(reportsInTimeOrder);
-
-
-	//cout << "just a bbreakpoint" << endl;
 }
 
 void simulationManagement()
@@ -30,6 +27,7 @@ void simulationManagement()
 				itEvents = eventsInTimeOrder->begin();
 			}
 	//1.1 Output reports
+	//2. Execute Commands
 		multimap<int, Reports*>::iterator itReports = reportsInTimeOrder->begin();
 		while ((!(reportsInTimeOrder->empty())) && ((*itReports).first == global_SimulationTime)){
 			((*itReports).second)->writeReport(*pt);
@@ -38,8 +36,7 @@ void simulationManagement()
 		}
 	//print all
 		printerSim.print(global_defultTimeSlice);
-	//1.2 Update car History
-	//2. Execute Commands
+	//3. Update car History
 	//3. Advance cars in roads
 		for( map<string, Roads*>::iterator itRoads=RoadsMap->begin(); itRoads!=RoadsMap->end(); ++itRoads)  
 			(*itRoads).second->advanceCarsInRoad();
