@@ -24,7 +24,7 @@ Printer::~Printer() {
 }
 
 void Printer::print(int currentTimeSlice) {
-	int maxNumOfCars = 10;
+	int maxNumOfCars = 5;
 	Car* car = NULL;
 	string temp;
 	ostringstream streamTemp;
@@ -65,7 +65,7 @@ void Printer::print(int currentTimeSlice) {
 		//temp = it->second->getEndJunction()->getId();
 		printf("%-11s", temp.c_str());
 
-		maxNumOfCars =  min(maxNumOfCars,it->second->getNumOfCarInside());
+		maxNumOfCars =  max(maxNumOfCars,it->second->getNumOfCarInside());
 		//maxNumOfCars = max(maxNumOfCars, it->second->getNumOfCars());
 	}
 
@@ -75,18 +75,20 @@ void Printer::print(int currentTimeSlice) {
 		printf("%-18s", "Cars:");
 
 		for(it = RoadsMap->begin(); it != RoadsMap->end(); it++) {
-			car = (*(it->second->getCarsInRoad()))[i];
-			//car = it->second->getCar(i);
+			if(  !(it->second->getCarsInRoad()->empty()) && (it->second->getCarsInRoad()->size() > i)  ) {
+				car = (*(it->second->getCarsInRoad()))[i];
 
-			streamTemp.str("");
-			if(car != NULL)
-				streamTemp << car->getID() << "(" << car->getLocation() << "," << car->getCondition() << ")";
-				//streamTemp << car->getId() << "(" << car->getDistance() << "," << car->getFaultyTimeLeft() << ")";
-			else
-				streamTemp << "^";
+				streamTemp.str("");
+				if(car != NULL)
+					streamTemp << car->getID() << "(" << car->getLocation() << "," << car->getCondition() << ")";
+					//streamTemp << car->getId() << "(" << car->getDistance() << "," << car->getFaultyTimeLeft() << ")";
+				else
+					streamTemp << "^";
 
-			printf("%-11s", streamTemp.str().c_str());
-			//printf("%-11s", streamTemp.str().c_str());
+				printf("%-11s", streamTemp.str().c_str());
+				//printf("%-11s", streamTemp.str().c_str());
+			}
+			else{printf("%-11s","");}
 		}
 
 		printf("\n");
@@ -99,6 +101,6 @@ void Printer::print(int currentTimeSlice) {
 		//temp = it->second->getStartJunction()->getId();
 		printf("%-11s", temp.c_str());
 	}
-	for(int i = 0; i < 1; i++)
+	for(int i = 0; i < 2; i++)
 		cout << '\n';
 }

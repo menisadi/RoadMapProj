@@ -43,7 +43,8 @@ using namespace std;
 	 void setCemeteryOfcars(vector<Car*>* CemeteryOfcarsVal);
 	 void setBaseSpeed(int basespeedVal);
 
-	 Car* popFirstCarInRoad();
+	 Car* returnFirstCarInRoad();
+	 void popFirstCarInRoad();
      void pushNewCarToRoad(Car* newCarVal); //meybe pointer*?
 	 void baseSpeedUpdate();
 	 void carSpeedUpdate();

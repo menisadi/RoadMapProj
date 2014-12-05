@@ -12,12 +12,11 @@
 using namespace std;
 
   class Junctions{
-  	
 
   public:
      Junctions();
 	 Junctions(const string& idJunctionVal);
-     Junctions(const string& idJunctionVal, vector<Roads*>* roadsInJunctionVal,vector<int>* timeSliceVal);
+     Junctions(const string& idJunctionVal, vector<Roads*>* roadsInJunctionVal,vector<int>* timeSliceVal ,vector<int>* timeSliceBeforeTheGreenLight);
      Junctions(const Junctions& copyJunctions);
      virtual ~Junctions();
      Junctions& operator=(const Junctions &JunctionsRightArg);
@@ -25,21 +24,33 @@ using namespace std;
 	void Junctions::copy(const Junctions& copyJunctions);
      
      string getIdJunction() const;
-	 vector<Roads*>* getRoadsInJunction() const; //meybe Roads& ?
+	 vector<Roads*>* getRoadsInJunction() const;
      vector<int>* getTimeSlice() const;
+	 vector<int>* getTimeSliceBeforeTheGreenLight() const;
+	 int getCurrentlyGreenLightRoadIndex() const;
+	 int getConterStasticCarPass() const;
+	 int getNoCarPassInThisTime() const;
      
 	 void setID(const string& idJunctionVal);
      void setTimeSlice(vector<int>* timeSliceVal);
+	 void setTimeSliceBeforeTheGreenLight(vector<int>* timeSliceVal);
 	 void setRoadsInJunction(vector<Roads*>* roadsInJunction); 
+	 void setCurrentlyGreenLightRoadIndex(int index);
+	  void setConterStasticCarPass(int statstic);
+	  void setNoCarPassInThisTime(int boolPass);
 
 	 void advanceCarsInJunctions();
-	 void MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad();
-	 void replaceRoadinJunction(int conterStasticCarPass, int MaxTimeSlice,int MinTimeSlice);
+	 void MoveCarFirstOnVectorFromSourceRoadFirstOnVectorToDestinationRoad(int i);
+	 void replaceRoadinJunction(int MaxTimeSlice,int MinTimeSlice,int i);
 
 	 private:
      string _idJunction;
      vector<Roads*>* _roadsInJunction; 
 	 vector<int>* _timeSlice;
+	 unsigned int _currentlyGreenLightRoadIndex;
+	 vector<int>* _timeSliceBeforeTheGreenLight;
+	 int _conterStasticCarPass;
+	 int _noCarPassInThisTime;
 	 
   };   
   

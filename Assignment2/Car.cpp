@@ -85,13 +85,11 @@ void Car::setHistory(const string& history){
 	_history=history;
 }
 Roads* Car::popFirstRoadsInRoute(){
-	// std::vector<Roads*>::iterator it =_route->end();	
 	Roads* tmpRoad = (_route->back());
 	_route->pop_back();
 	return  tmpRoad;
 }
-//void initRouteFromStringINI(string RouteStringINI){}
-//void updateMyRoad(){}
+
 void Car::updateHistory(){
 	_history=_history + "(" + to_string(global_SimulationTime) + "," + _currentRoad + "," + to_string(_locationInRoad )+ ")" ;
 }

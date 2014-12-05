@@ -25,7 +25,7 @@ void RoadReport::writeReport(boost::property_tree::ptree &tree)
 	string thisRoadId = beginJnc_.append(",").append(endJnc_);
 	//Roads* thisRoad = RoadsMap->find(thisRoadId)->second;
 	vector<Car*>* carsInRoad = RoadsMap->find(thisRoadId)->second->getCarsInRoad();
-	for (int c = 0; c < carsInRoad->size(); c = c + 1)
+	for (unsigned int c = 0; c < (carsInRoad->size()); c = c + 1)
 	{
 		carWithBrackets.append("(");
 		carWithBrackets.append((*carsInRoad)[c]->getID());

@@ -89,28 +89,24 @@ void Roads::setBaseSpeed(int basespeedVal){
 	_baseSpeed=basespeedVal;
 }
 
-	 
-Car* Roads::popFirstCarInRoad(){
-	// std::vector<Car>::iterator it =_carsInRoad.back();
-	rotate(_carsInRoad->begin(), _carsInRoad->begin() + 1, _carsInRoad->end());
-	Car* tmpCar = _carsInRoad->back();
-	//Car tmpCar = CarMaps
+ void Roads::popFirstCarInRoad(){
+	rotate(_carsInRoad->begin(), _carsInRoad->begin(), _carsInRoad->end());
 	_carsInRoad->pop_back();
 	--_numOfCarInside;
-	return tmpCar;
+}	
+
+Car* Roads::returnFirstCarInRoad(){
+	return _carsInRoad->back();
 }					
 void Roads::pushNewCarToRoad(Car* newCarVal){
 	++_numOfCarInside;
-	_carsInRoad->push_back(newCarVal);  //it's copy!!!!!!!!!!!!???? not good
-	cout<<  "" <<endl;
-	//~newCarVal();
+	_carsInRoad->push_back(newCarVal);
 }
 void Roads::killCarInTheEnd(Car* oldCarRef){
-	cout <<"id="+oldCarRef->getID() + " " +  oldCarRef->getHistory() << endl;   ///for Test!
-	//_CemeteryOfcars->push_back(oldCarRef);
+	oldCarRef->setLocation(0);
+	oldCarRef->setCurrentRoad("END");
 	_CemeteryOfcars->push_back(oldCarRef);
 }
-//void Roads::carSpeedUpdate(){}
 
 void Roads::baseSpeedUpdate(){
 	if(_numOfCarInside>0)
@@ -128,35 +124,42 @@ void Roads::advanceCarsInRoad(){
 	int counterFaultyCars = 0;
 	int TheLastFaultyCarLocation=-1;
 	int counterFaultyCarsInTheSameLine=0;
-
-	for(std::vector<Car*>::iterator itCurrentCar = _carsInRoad->begin(); itCurrentCar != _carsInRoad->end(); ++itCurrentCar){
-		(*itCurrentCar)->updateHistory();
-		cout << "start of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
-		if ((*itCurrentCar)->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
-		if ( (*itCurrentCar)->getCondition() == 0)
+	
+	//for(std::vector<Car*>::iterator itCurrentCar = _carsInRoad->begin(); itCurrentCar != _carsInRoad->end(); ++itCurrentCar){
+	for(int z=0; z <_carsInRoad->size() ; ++z){
+		(*_carsInRoad)[z]->updateHistory();
+		//(*itCurrentCar)->updateHistory();
+		//cout << "start of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
+		if ((*_carsInRoad)[z]->getLocation() != TheLastFaultyCarLocation){counterFaultyCarsInTheSameLine=0;}
+		if ( (*_carsInRoad)[z]->getCondition() == 0)
 		{
 			int speedCalculation = int(ceil((_baseSpeed)/(pow(2,(counterFaultyCars-counterFaultyCarsInTheSameLine)))));
-			(*itCurrentCar)->setspeed(speedCalculation);
+			(*_carsInRoad)[z]->setspeed(speedCalculation);
 
-			int locationCalculation = (*itCurrentCar)->getLocation() + speedCalculation;
-			if (locationCalculation <= _length)
-				(*itCurrentCar)->setLocation(locationCalculation);
-			else
-				(*itCurrentCar)->setLocation(_length);
+			int locationCalculation = (*_carsInRoad)[z]->getLocation() + speedCalculation;
+			if (locationCalculation < _length)
+				{(*_carsInRoad)[z]->setLocation(locationCalculation);}
+			else{
+				(*_carsInRoad)[z]->setLocation(_length);
+				if((*_carsInRoad)[z]->getRoute()->empty()) {
+					killCarInTheEnd((*_carsInRoad)[z]); 
+					popFirstCarInRoad();
+				}
+			}
 		}
-		else
-		{
+		//if( ((*_carsInRoad)[z]->getCondition()) > 0){ //else not work - if car is faulty
+		else{
 			++counterFaultyCars;
-			(*itCurrentCar)->setCondition((*itCurrentCar)->getCondition()-1);
-			if ((*itCurrentCar)->getLocation()==TheLastFaultyCarLocation)
-				++counterFaultyCarsInTheSameLine;
+			(*_carsInRoad)[z]->setCondition((*_carsInRoad)[z]->getCondition()-1);
+			if ((*_carsInRoad)[z]->getLocation()==TheLastFaultyCarLocation)
+				{++counterFaultyCarsInTheSameLine;}
 			else
 			{
 				//(*itCurrentCar)->setLocation(TheLastFaultyCarLocation);
-				TheLastFaultyCarLocation= (*itCurrentCar)->getLocation();
+				TheLastFaultyCarLocation= (*_carsInRoad)[z]->getLocation();
 				counterFaultyCarsInTheSameLine=1;
 			}
 		}
-		cout <<"end of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
+		//cout <<"end of step:	" << global_SimulationTime << " car: " << (*itCurrentCar)->getID() << " || location: " << (*itCurrentCar)->getLocation() << " || in road: " << (*itCurrentCar)->getCurrentRoad() << endl;
 	}
 }
