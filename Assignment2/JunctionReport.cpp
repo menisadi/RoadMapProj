@@ -21,10 +21,10 @@ void JunctionReport::writeReport(boost::property_tree::ptree &tree)
 	tree.put(Reports::getId().append(".junction Id"), getIdJunction());
 	string slicesWithBrackets = "";
 	vector<int>* timeSlices = JunctionsMap->find(getIdJunction())->second->getTimeSlice();
+	vector<int>* timeSlicesBeforeGreen = JunctionsMap->find(getIdJunction())->second->getTimeSliceBeforeTheGreenLight();
 	for (int t = 0; t < timeSlices->size(); t = t + 1)
 		slicesWithBrackets.append("(").append(boost::lexical_cast<string>((*timeSlices)[t]))
-			.append(",").append(boost::lexical_cast<string>(t)).append(")");
-
+		.append(",").append(boost::lexical_cast<string>((*timeSlicesBeforeGreen)[t])).append(")");	
 	tree.put(Reports::getId().append(".time slices"), slicesWithBrackets);
 	
 	//	1 iterate roads in junction
